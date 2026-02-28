@@ -103,7 +103,8 @@
   white-space: nowrap;
 }
 .vault-dropdown-manage { cursor: pointer; color: var(--text-norma); }
-.vault-dropdown-manage:hover { background: var(--bg-hover); color: var(--text-normal); border-radius: var(--radius-sm);: }
+.vault-dropdown-manage:hover { background: var(--bg-hover); color: var(--text-normal); border-radius: var(--radius-sm); }
+.vault-dropdown-manage[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 .vault-dropdown-current { justify-content: space-between; padding-left: var(--sp-4) }
 .vault-dropdown-check { color: var(--text-normal); flex-shrink: 0; }
 

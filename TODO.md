@@ -5,3 +5,4 @@ need to fix: highlightjs not change all background of codeblock
 - changes categories page to show categories in tree view like the sidebar
 - action buttons functionality
 - activity bar buttons functionality
+- change manage vaults icon

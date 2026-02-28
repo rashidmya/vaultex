@@ -131,7 +131,7 @@
 /* Buttons */
 .hm-btn {
   flex-shrink: 0;
-  padding: 6px 18px;
+  padding: 4px 12px;
   border-radius: 5px;
   border: none;
   font-size: 13px;
@@ -142,7 +142,8 @@
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  transition: background var(--t-fast), color var(--t-fast);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: background var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
 }
 .hm-btn-accent {
   background: var(--accent-color);
@@ -152,6 +153,5 @@
 .hm-btn-gray {
   background: var(--bg-secondary-alt);
   color: var(--text-normal);
-  border: 1px solid var(--border-color);
 }
-.hm-btn-gray:hover { background: var(--bg-hover); }
+.hm-btn-gray:hover { background: #4a4a4a; border-color: #5a5a5a; color: var(--text-normal); }
