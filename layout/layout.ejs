@@ -15,7 +15,7 @@
 
       <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
       <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
-        <button class="sidebar-toggle-btn btn-icon" id="toggle-left" aria-label="Toggle file explorer" title="Toggle file explorer">
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-left" aria-label="Toggle file explorer" title="Toggle file explorer" data-tooltip-pos="right">
           <%- partial('_partial/icon', {name: 'panel-left', size: 20}) %>
         </button>
         <button class="sidebar-view-btn btn-icon" data-tab="folder" aria-label="Files" title="Files">
@@ -37,7 +37,7 @@
 
       <div class="tab-bar-actions">
         <% if (page.layout === 'post' || page.layout === 'page') { %>
-        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle outline" title="Toggle outline">
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle outline" title="Toggle outline" data-tooltip-pos="left">
           <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
         </button>
         <% } %>

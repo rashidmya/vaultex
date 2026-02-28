@@ -14,7 +14,7 @@ var activityButtons = [
 ];
 %>
 <% activityButtons.forEach(function(btn) { %>
-<button class="activity-btn btn-icon" id="<%= btn.id %>" title="<%= btn.title %>" aria-label="<%= btn.title %>">
+<button class="activity-btn btn-icon" id="<%= btn.id %>" title="<%= btn.title %>" aria-label="<%= btn.title %>" data-tooltip-pos="right">
   <%- partial('_partial/icon', {name: btn.icon, size: 18, sw: 1.7}) %>
 </button>
 <% }) %>

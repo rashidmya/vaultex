@@ -191,8 +191,7 @@
   color: var(--text-normal);
   white-space: nowrap;
   overflow: hidden;
-  min-width: 180px;
-  max-width: 200px;
+  width: 200px;
   position: relative;
   margin-bottom: -1px;
   z-index: 2;
