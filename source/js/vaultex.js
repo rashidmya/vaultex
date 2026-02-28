@@ -284,6 +284,11 @@
         store('section-' + sectionId, '0');
       }
     });
+    $$('.nav-tree-parent').forEach(function (parent) {
+      parent.dataset.treeOpen = expanding ? 'true' : 'false';
+      try { localStorage.setItem('obs-' + parent.dataset.treeId, expanding ? '1' : '0'); } catch (_) {}
+    });
+    updateCatVisibility();
     btn.classList.toggle('is-expanded', !expanding);
     var label = expanding ? 'Collapse all' : 'Expand all';
     btn.title = label;
