@@ -23,6 +23,32 @@
   transform: translateX(-50%);
 }
 .vault-tooltip.is-visible { opacity: 1; }
+.vault-tooltip::before {
+  content: '';
+  position: absolute;
+  border: 5px solid transparent;
+}
+/* arrow up — tooltip below element */
+.vault-tooltip[data-dir="bottom"]::before {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: #000000;
+}
+/* arrow left — tooltip to the right of element */
+.vault-tooltip[data-dir="right"]::before {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: #000000;
+}
+/* arrow right — tooltip to the left of element */
+.vault-tooltip[data-dir="left"]::before {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: #000000;
+}
 
 /* --- Tag pills --- */
 .tag-pill {
