@@ -1,0 +1,127 @@
+/* ==========================================================================
+   VAULTEX — Quick Switcher Modal
+   ========================================================================== */
+
+.qs-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.55);
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+}
+.qs-backdrop.qs-open {
+  display: flex;
+}
+
+.qs-modal {
+  width: 100%;
+  max-width: 760px;
+  background: #262626;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Input --- */
+.qs-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+}
+
+.qs-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-normal);
+  font-size: 16px;
+  font-family: var(--font-ui);
+  padding: 14px 44px 14px 16px;
+  caret-color: var(--accent-color);
+}
+
+.qs-input::placeholder { color: var(--text-faint); }
+
+.qs-clear-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  transition: color var(--t-fast);
+}
+.qs-clear-btn:hover { color: var(--text-normal); }
+
+/* --- Results list --- */
+.qs-results {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: 540px;
+  overflow-y: auto;
+}
+
+.qs-results:empty { display: none; }
+
+.qs-item {
+  padding: 7px 16px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-ui);
+  color: var(--text-normal);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0;
+  transition: background var(--t-fast);
+}
+
+.qs-item.qs-selected,
+.qs-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.qs-item strong {
+  font-weight: 700;
+  color: var(--text-normal);
+}
+
+/* --- Footer hints --- */
+.qs-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 8px 16px;
+  border-top: 1px solid var(--divider);
+  flex-wrap: wrap;
+}
+
+.qs-hint {
+  font-size: 11px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.qs-hint kbd {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-right: 2px;
+}

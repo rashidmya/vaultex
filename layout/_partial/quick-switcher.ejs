@@ -1,0 +1,32 @@
+<div class="qs-backdrop" id="quick-switcher" role="dialog" aria-modal="true" aria-label="Quick switcher">
+  <div class="qs-modal">
+
+    <div class="qs-input-wrap">
+      <input
+        type="text"
+        class="qs-input"
+        id="qs-input"
+        placeholder="Find or create a note..."
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search notes"
+        aria-autocomplete="list"
+        aria-controls="qs-results"
+      >
+      <button class="qs-clear-btn" id="qs-clear" aria-label="Clear">
+        <%- partial('_partial/icon', {name: 'circle-x', size: 18, sw: 2}) %>
+      </button>
+    </div>
+
+    <ul class="qs-results" id="qs-results" role="listbox" aria-label="Search results"></ul>
+
+    <div class="qs-footer">
+      <span class="qs-hint"><kbd>↑↓</kbd> to navigate</span>
+      <span class="qs-hint"><kbd>↵</kbd> to open</span>
+      <span class="qs-hint"><kbd>ctrl ↵</kbd> to open in new tab</span>
+      <span class="qs-hint"><kbd>ctrl alt ↵</kbd> to open to the right</span>
+      <span class="qs-hint"><kbd>esc</kbd> to dismiss</span>
+    </div>
+
+  </div>
+</div>
