@@ -1,0 +1,88 @@
+<div class="hm-backdrop" id="help-modal" hidden role="dialog" aria-modal="true" aria-labelledby="hm-title">
+  <div class="hm-window">
+
+    <!-- Window chrome -->
+    <div class="hm-chrome">
+      <button class="hm-chrome-btn" id="hm-minimize" aria-label="Minimize">&#x2212;</button>
+      <button class="hm-chrome-btn" id="hm-close" aria-label="Close">&#x2715;</button>
+    </div>
+
+    <!-- Hero: gem logo + title -->
+    <div class="hm-hero">
+      <svg class="hm-gem" width="76" height="92" viewBox="0 0 56 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="hm-grad-main" x1="4" y1="4" x2="52" y2="66" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#cbbcff"/>
+            <stop offset="100%" stop-color="#4a2d8c"/>
+          </linearGradient>
+          <linearGradient id="hm-grad-right" x1="52" y1="4" x2="28" y2="66" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#a888f8"/>
+            <stop offset="100%" stop-color="#5c3da8"/>
+          </linearGradient>
+        </defs>
+        <!-- Left face -->
+        <path d="M28 66 L4 26 L18 4 L28 16 Z"   fill="url(#hm-grad-main)"/>
+        <!-- Right face -->
+        <path d="M28 66 L52 26 L38 4 L28 16 Z"  fill="url(#hm-grad-right)"/>
+        <!-- Top-left facet -->
+        <path d="M4 26 L18 4 L28 16 Z"           fill="#c4b0ff" opacity="0.55"/>
+        <!-- Top-right facet -->
+        <path d="M52 26 L38 4 L28 16 Z"          fill="#9878e8" opacity="0.6"/>
+        <!-- Top highlight -->
+        <path d="M18 4 L38 4 L28 16 Z"           fill="#e2d6ff" opacity="0.75"/>
+        <!-- Inner shadow -->
+        <path d="M4 26 L28 16 L28 66 Z"          fill="#000"    opacity="0.12"/>
+      </svg>
+      <h2 class="hm-title" id="hm-title">Vaultex</h2>
+      <p class="hm-version">Version 1.0</p>
+    </div>
+
+    <!-- Resource rows panel -->
+    <div class="hm-panel">
+
+      <div class="hm-row">
+        <div class="hm-row-icon"><%- partial('_partial/icon', {name: 'github', size: 34, sw: 1.5}) %></div>
+        <div class="hm-row-body">
+          <div class="hm-row-title">Theme repository</div>
+          <div class="hm-row-desc">View the source code, report issues, and contribute to the theme on GitHub.</div>
+        </div>
+        <a href="https://github.com/username/repo" target="_blank" rel="noopener noreferrer" class="hm-btn hm-btn-accent">Visit</a>
+      </div>
+
+      <div class="hm-row-sep"></div>
+
+      <div class="hm-row">
+        <div class="hm-row-icon"><%- partial('_partial/icon', {name: 'link', size: 34, sw: 1.5}) %></div>
+        <div class="hm-row-body">
+          <div class="hm-row-title">Hexo framework</div>
+          <div class="hm-row-desc">Hexo is a fast, simple, and powerful blog framework that powers this site.</div>
+        </div>
+        <a href="https://hexo.io" target="_blank" rel="noopener noreferrer" class="hm-btn hm-btn-gray">Visit</a>
+      </div>
+
+      <div class="hm-row-sep"></div>
+
+      <div class="hm-row">
+        <div class="hm-row-icon"><%- partial('_partial/icon', {name: 'list', size: 34, sw: 1.5}) %></div>
+        <div class="hm-row-body">
+          <div class="hm-row-title">Discussions</div>
+          <div class="hm-row-desc">Ask questions, share ideas, and have in-depth discussions about the theme on GitHub.</div>
+        </div>
+        <a href="https://github.com/username/repo/discussions" target="_blank" rel="noopener noreferrer" class="hm-btn hm-btn-gray">Join</a>
+      </div>
+
+      <div class="hm-row-sep"></div>
+
+      <div class="hm-row">
+        <div class="hm-row-icon"><%- partial('_partial/icon', {name: 'terminal', size: 34, sw: 1.5}) %></div>
+        <div class="hm-row-body">
+          <div class="hm-row-title">Sandbox vault</div>
+          <div class="hm-row-desc">Play around and experiment with various features. Please note your changes will <strong>not</strong> be saved.</div>
+        </div>
+        <button class="hm-btn hm-btn-gray">Open</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,97 @@
+/* ==========================================================================
+   VAULTEX THEME — Code Blocks (Solar-style)
+   Inline code, fenced code blocks, Hexo .highlight wrapper.
+   Token colors are provided by the selected highlight theme CSS.
+   ========================================================================== */
+
+/* --- Inline code --- */
+code {
+  font-family: var(--font-mono);
+  color: var(--text-accent);
+  padding: 0;
+}
+
+/* --- Standalone pre (outside .highlight wrapper) --- */
+pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 10px 15px;
+  padding-bottom: 0;
+  line-height: 22px;
+  border-radius: 4px;
+  border: 1px dotted var(--border-strong);
+  overflow-x: auto;
+}
+
+pre code {
+  border: none;
+  display: block;
+  padding: 0;
+}
+
+/* --- Hexo .highlight wrapper --- */
+.highlight {
+  background: var(--bg-code);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin: 1.2em 0;
+  overflow: hidden;
+}
+.highlight table { border: none; margin: 0; }
+.highlight table td { border: none; padding: 0; }
+.highlight .gutter {
+  background: rgba(255,255,255,0.02);
+  border-right: 1px solid var(--divider);
+  user-select: none;
+  min-width: 40px;
+}
+.highlight .gutter pre {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: var(--sp-4) var(--sp-3);
+  font-size: var(--font-size-code);
+  color: var(--text-faint);
+  text-align: right;
+  line-height: var(--line-height-code);
+  margin: 0;
+}
+.highlight .code pre {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: var(--sp-4) var(--sp-5);
+  font-size: var(--font-size-code);
+  line-height: var(--line-height-code);
+  margin: 0;
+  overflow-x: auto;
+}
+/* Code block filename/language badge */
+.highlight .caption,
+figcaption {
+  padding: var(--sp-2) var(--sp-4);
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--divider);
+  font-size: var(--font-size-xs);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+
+
+/* Ensure the hljs background fills the whole Hexo wrapper */
+.highlight,
+.highlight table,
+.highlight td,
+.highlight .gutter,
+.highlight .code,
+.highlight pre {
+  background: var(--bg-code);
+}
+
+/* Make sure code stretches */
+.highlight code,
+.highlight code.hljs {
+  display: block;
+  width: 100%;
+  background: transparent; /* wrapper controls bg */
+}

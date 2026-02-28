@@ -1,0 +1,39 @@
+<% if (page.total > 1) { %>
+<nav class="pagination" aria-label="Page navigation">
+  <% if (page.prev) { %>
+  <a href="<%- url_for(page.prev_link) %>" class="pagination-btn pagination-prev" rel="prev">
+    <%- partial('_partial/icon', {name: 'chevron-left', size: 14}) %>
+    Newer
+  </a>
+  <% } else { %>
+  <span class="pagination-btn pagination-prev disabled">
+    <%- partial('_partial/icon', {name: 'chevron-left', size: 14}) %>
+    Newer
+  </span>
+  <% } %>
+
+  <div class="pagination-pages">
+    <% for (var i = 1; i <= page.total; i++) { %>
+      <% if (i === page.current) { %>
+      <span class="pagination-page active"><%= i %></span>
+      <% } else if (i === 1 || i === page.total || Math.abs(i - page.current) <= 2) { %>
+      <a href="<%- url_for(i === 1 ? page.base : (page.base + 'page/' + i + '/')) %>" class="pagination-page"><%= i %></a>
+      <% } else if (Math.abs(i - page.current) === 3) { %>
+      <span class="pagination-ellipsis">…</span>
+      <% } %>
+    <% } %>
+  </div>
+
+  <% if (page.next) { %>
+  <a href="<%- url_for(page.next_link) %>" class="pagination-btn pagination-next" rel="next">
+    Older
+    <%- partial('_partial/icon', {name: 'chevron-right', size: 14}) %>
+  </a>
+  <% } else { %>
+  <span class="pagination-btn pagination-next disabled">
+    Older
+    <%- partial('_partial/icon', {name: 'chevron-right', size: 14}) %>
+  </span>
+  <% } %>
+</nav>
+<% } %>

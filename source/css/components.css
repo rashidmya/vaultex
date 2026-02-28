@@ -1,0 +1,123 @@
+/* ==========================================================================
+   VAULTEX THEME — Shared UI Components
+   Tag pills, pagination, callouts/admonitions.
+   ========================================================================== */
+
+/* --- Tag pills --- */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--sp-2);
+  background: var(--bg-tag);
+  color: var(--text-accent);
+  border: 1px solid rgba(127, 109, 242, 0.22);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  white-space: nowrap;
+}
+.tag-pill:hover {
+  background: rgba(127, 109, 242, 0.25);
+  color: var(--text-accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-10);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--divider);
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--bg-primary-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+.pagination-btn:hover:not(.disabled) {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--text-normal);
+}
+.pagination-btn.disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+
+.pagination-pages { display: flex; align-items: center; gap: var(--sp-1); }
+
+.pagination-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.pagination-page:hover { background: var(--bg-hover); color: var(--text-normal); }
+.pagination-page.active {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+  font-weight: 600;
+}
+.pagination-ellipsis { color: var(--text-faint); width: 24px; text-align: center; }
+
+/* --- Callouts / Admonitions ---
+   Usage: <div class="callout callout-note">
+            <div class="callout-title">NOTE</div>
+            <p>...</p>
+          </div>
+   ----------------------------------------------------------------- */
+.callout {
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent-color);
+  background: var(--bg-callout-note);
+  padding: var(--sp-4) var(--sp-5);
+  margin: 1.2em 0;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--text-accent);
+  margin-bottom: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+.callout-tip     { border-left-color: var(--text-success); background: var(--bg-callout-tip); }
+.callout-tip     .callout-title { color: var(--text-success); }
+.callout-warning { border-left-color: var(--text-warning); background: var(--bg-callout-warn); }
+.callout-warning .callout-title { color: var(--text-warning); }
+.callout-danger  { border-left-color: var(--text-danger);  background: var(--bg-callout-danger); }
+.callout-danger  .callout-title { color: var(--text-danger); }
+.callout-info    { border-left-color: var(--text-link);    background: rgba(127, 142, 242, 0.08); }
+.callout-info    .callout-title { color: var(--text-link); }
+
+/* Obsidian-style blockquote callout */
+.markdown-body blockquote.callout-note {
+  border-left-color: var(--accent-color);
+  background: var(--bg-callout-note);
+}

@@ -1,0 +1,216 @@
+<%
+var currentPath = page.path || '';
+var explorerStyle = theme.sidebar_explorer_style || 2;
+var explorerNumbers = theme.sidebar_explorer_numbers !== false;
+function isActive(navPath) {
+  var p = navPath.replace(/^\/|\/$/g, '');
+  var c = currentPath.replace(/^\/|\/$/g, '').replace(/index\.html$/, '');
+  if (p === '' && c === '') return true;
+  if (p !== '' && c.startsWith(p)) return true;
+  return false;
+}
+%>
+
+<div class="sidebar-left-inner">
+
+  <!-- ============ FOLDER TAB ============ -->
+  <div class="sidebar-tab-content<% if (explorerStyle === 1) { %> explorer-style-1<% } %>" data-tab="folder">
+
+    <% if (theme.vault_title_position !== 2) { %>
+    <!-- Vault Header (vault_title_position: 1 or unset) -->
+    <div class="vault vault-header">
+      <%- partial('_partial/vault') %>
+    </div>
+    <% } %>
+
+    <!-- Explorer action bar -->
+    <div class="explorer-actions">
+      <button class="explorer-action-btn" id="explorer-collapse-all" title="Collapse all" aria-label="Collapse all">
+        <%- partial('_partial/icon', {name: 'gallery-vertical', size: 18}) %>
+      </button>
+      <button class="explorer-action-btn" id="explorer-collapse" title="Collapse all" aria-label="Collapse all">
+        <%- partial('_partial/icon', {name: 'chevrons-down-up', size: 18}) %>
+      </button>
+    </div>
+
+    <!-- Navigation (driven by theme.nav_items in _config.yml) -->
+    <% if (theme.nav_items && theme.nav_items.length) { %>
+    <div class="explorer-section">
+      <div class="explorer-section-header" data-section="nav">
+        <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'chevron', sw: 2.5}) %>
+        <span><%= explorerStyle === 1 ? 'NAVIGATION' : (explorerNumbers ? '00 Navigation' : 'Navigation') %></span>
+      </div>
+      <nav class="nav-tree" id="nav-nav">
+        <% theme.nav_items.forEach(function(item) { %>
+        <a href="<%- url_for(item.path) %>" class="nav-item<% if (isActive(item.path)) { %> active<% } %>">
+          <%- partial('_partial/icon', {name: item.icon || 'file', size: 14, cls: 'nav-icon-svg'}) %>
+          <span class="nav-label"><%= item.label %></span>
+        </a>
+        <% }) %>
+      </nav>
+    </div>
+    <% } %>
+
+    <!-- Categories tree -->
+    <% if (site.categories.length > 0) { %>
+    <div class="explorer-section">
+      <div class="explorer-section-header" data-section="categories">
+        <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'chevron', sw: 2.5}) %>
+        <span><%= explorerStyle === 1 ? 'CATEGORIES' : (explorerNumbers ? '10 Categories' : 'Categories') %></span>
+      </div>
+      <div class="nav-tree" id="nav-categories">
+        <%
+          var allCats = site.categories.toArray();
+          function getCatChildren(pid) {
+            return allCats
+              .filter(function(c) { return c.parent && String(c.parent) === String(pid); })
+              .sort(function(a, b) { return a.name.localeCompare(b.name); });
+          }
+          var catRoots = allCats
+            .filter(function(c) { return !c.parent; })
+            .sort(function(a, b) { return a.name.localeCompare(b.name); });
+          var treeItems = [];
+          function flattenCatTree(cats, depth) {
+            cats.forEach(function(cat) {
+              var children = getCatChildren(cat._id);
+              treeItems.push({ cat: cat, depth: depth, hasChildren: children.length > 0 });
+              flattenCatTree(children, depth + 1);
+            });
+          }
+          flattenCatTree(catRoots, 0);
+        %>
+        <% treeItems.forEach(function(item) { %>
+        <%
+          var cat = item.cat;
+          var depth = item.depth;
+          var indent = 32 + depth * 16;
+          var tid = 'ct-' + cat._id;
+          var pid = cat.parent ? 'ct-' + cat.parent : '';
+        %>
+        <% if (item.hasChildren) { %>
+        <div class="nav-item nav-tree-parent"
+             data-tree-id="<%= tid %>"
+             data-parent-tree-id="<%= pid %>"
+             data-depth="<%= depth %>"
+             data-tree-open="true"
+             style="padding-left:<%= indent %>px">
+          <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
+          <%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %>
+          <span class="nav-label"><%= cat.name %></span>
+          <span class="nav-count"><%= cat.posts.length %></span>
+        </div>
+        <% } else { %>
+        <a href="<%- url_for(cat.path) %>"
+           class="nav-item nav-tree-leaf<% if (isActive('/' + cat.path)) { %> active<% } %>"
+           data-tree-id="<%= tid %>"
+           data-parent-tree-id="<%= pid %>"
+           data-depth="<%= depth %>"
+           style="padding-left:<%= indent %>px">
+          <%- partial('_partial/icon', {name: 'file-text', size: 14, cls: 'nav-icon-svg nav-leaf-icon'}) %>
+          <span class="nav-label"><%= cat.name %></span>
+          <span class="nav-count"><%= cat.posts.length %></span>
+        </a>
+        <% } %>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Recent posts -->
+    <div class="explorer-section">
+      <div class="explorer-section-header" data-section="recent">
+        <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'chevron', sw: 2.5}) %>
+        <span><%= explorerStyle === 1 ? 'RECENT NOTES' : (explorerNumbers ? '20 Recent Notes' : 'Recent Notes') %></span>
+      </div>
+      <div class="nav-tree" id="nav-recent">
+        <% var recentPosts = site.posts.sort('-date').limit(12).toArray(); %>
+        <% recentPosts.forEach(function(post) { %>
+        <a href="<%- url_for(post.path) %>" class="nav-item nav-file<% if (currentPath === post.path) { %> active<% } %>">
+          <%- partial('_partial/icon', {name: 'file', size: 13, cls: 'nav-icon-svg'}) %>
+          <span class="nav-label nav-file-label"><%= post.title %></span>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Social links -->
+    <% if (theme.social_links && theme.social_links.length) { %>
+    <div class="explorer-section">
+      <div class="explorer-section-header" data-section="social">
+        <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'chevron', sw: 2.5}) %>
+        <span><%= explorerStyle === 1 ? 'LINKS' : (explorerNumbers ? '30 Links' : 'Links') %></span>
+      </div>
+      <div class="nav-tree" id="nav-social">
+        <% theme.social_links.forEach(function(link) { %>
+        <a href="<%= link.url %>" class="nav-item" target="_blank" rel="noopener noreferrer">
+          <%- partial('_partial/icon', {name: link.icon || 'link', size: 14, cls: 'nav-icon-svg'}) %>
+          <span class="nav-label"><%= link.label %></span>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+
+  </div><!-- /.sidebar-tab-content[folder] -->
+
+  <!-- ============ SEARCH TAB ============ -->
+  <div class="sidebar-tab-content sidebar-tab-hidden" data-tab="search">
+    <div class="sidebar-search-panel">
+
+      <!-- SearchHeader: rounded input + filter button outside -->
+      <div class="search-input-row">
+        <div class="sidebar-search-box">
+          <%- partial('_partial/icon', {name: 'search', size: 18, cls: 'search-icon-svg'}) %>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="<%= theme.search_placeholder || 'Search...' %>"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search notes"
+          >
+          <button class="search-btn-aa" id="search-match-case" title="Match case" aria-label="Match case" aria-pressed="false">Aa</button>
+          <button class="search-btn-clear" id="search-clear" title="Clear search" aria-label="Clear search" hidden>
+            <%- partial('_partial/icon', {name: 'circle-x', size: 14, sw: 2}) %>
+          </button>
+        </div>
+        <button class="search-btn-filter" title="Filter options" aria-label="Filter options">
+          <%- partial('_partial/icon', {name: 'sliders-horizontal', size: 18, sw: 1.875}) %>
+        </button>
+      </div>
+
+      <!-- SearchToolbar: count + sort (hidden until there are results) -->
+      <div class="search-toolbar" id="search-toolbar" hidden>
+        <span class="search-count-label" id="search-results-count"></span>
+        <div class="search-sort-wrap">
+          <select class="search-sort-select" id="search-sort" aria-label="Sort results">
+            <option value="name-asc">File name (A to Z)</option>
+            <option value="name-desc">File name (Z to A)</option>
+            <option value="modified-desc">Modified time (new to old)</option>
+            <option value="modified-asc">Modified time (old to new)</option>
+            <option value="created-desc">Created time (new to old)</option>
+            <option value="created-asc">Created time (old to new)</option>
+          </select>
+          <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 14, cls: 'sort-chevron-svg', sw: 2.2}) %>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="sidebar-search-results">
+        <div id="search-results" role="list"></div>
+        <div id="search-no-results">
+          <p>No matches found.</p>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.sidebar-tab-content[search] -->
+
+  <% if (theme.vault_title_position === 2) { %>
+  <!-- Vault Footer (vault_title_position: 2) — persists across folder/search tabs -->
+  <div class="vault vault-footer">
+    <%- partial('_partial/vault') %>
+  </div>
+  <% } %>
+
+</div>

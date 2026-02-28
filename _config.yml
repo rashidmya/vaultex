@@ -1,0 +1,66 @@
+# ============================================================
+# Vaultex Theme Configuration
+# ============================================================
+
+vault_name: blog
+
+# Accent color (CSS hex)
+accent_color: '#7f6df2'   # Obsidian purple — override here or via CSS variable
+
+# Typography
+font_size: 16             # Base font size (px)
+code_font_size: 14        # Code block font size (px)
+max_content_width: 720    # Note content max-width (px)
+
+# Code highlight theme
+highlight: obsidian
+
+# Vault title position: 1 = top (header), 2 = bottom (footer, Obsidian-style)
+vault_title_position: 2
+
+# Left sidebar explorer section style:
+#   1 = classic  (NAVIGATION / CATEGORIES / RECENT NOTES / LINKS — uppercase, bold, dividers)
+#   2 = modern   (Navigation / Categories / Recent Notes / Links — no dividers)
+sidebar_explorer_style: 2
+sidebar_explorer_numbers: true  # style 2 only — prefix labels with 00 / 10 / 20 / 30
+
+# Right sidebar settings
+sidebar_right:
+  toc: true                 # Generate TOC from post headings in right panel
+  toc_depth: 3              # Max heading depth (1=h1 only, 3=h1-h3, etc.)
+  show_related: true        # Related posts in right panel
+  show_tags_panel: true     # Tag cloud in right panel
+
+# Post list settings
+posts_per_row: 1        # 1 = list, 2 = card grid
+show_date: true           # Show post date in list
+show_tags: true           # Show tags in post list items
+max_tags: 6               # Show tags in post list items
+show_excerpt: true        # Show post excerpt in list
+
+# Navigation items shown in left sidebar
+nav_items:
+  - label: Home
+    path: /
+    icon: home
+  - label: Archive
+    path: /archives/
+    icon: archive
+  - label: Categories
+    path: /categories/
+    icon: folder
+  - label: Tags
+    path: /tags/
+    icon: tags    # Tag cloud in right panel
+
+# Vercel Analytics (set to true when deployed on Vercel)
+vercel_analytics: false
+
+# Search (requires hexo-generator-search)
+search_placeholder: Search...
+
+# Socials
+social_links:
+  - label: GitHub
+    url: https://github.com/username
+    icon: github

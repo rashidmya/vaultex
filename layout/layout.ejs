@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'en' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> has-right-sidebar<% } %><% if (theme.posts_per_row >= 2) { %> posts-grid<% } %>">
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-container" id="app-container">
+
+    <!-- ======= TAB BAR (full width, never resizes) ======= -->
+    <div class="tab-bar" role="tablist">
+
+      <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
+      <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-left" aria-label="Toggle file explorer" title="Toggle file explorer">
+          <%- partial('_partial/icon', {name: 'panel-left', size: 20}) %>
+        </button>
+        <button class="sidebar-view-btn btn-icon" data-tab="folder" aria-label="Files" title="Files">
+          <%- partial('_partial/icon', {name: 'folder-closed', size: 18}) %>
+        </button>
+        <button class="sidebar-view-btn btn-icon" data-tab="search" aria-label="Search" title="Search">
+          <%- partial('_partial/icon', {name: 'search', size: 18, cls: 'sidebar-view-btn-svg'}) %>
+        </button>
+      </div>
+
+      <div class="tab-strip">
+        <div class="tab tab-active" role="tab" aria-selected="true">
+          <span class="tab-title"><%= page.title || config.title %></span>
+          <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
+            <%- partial('_partial/icon', {name: 'close', size: 18, sw: 2}) %>
+          </a>
+        </div>
+      </div>
+
+      <div class="tab-bar-actions">
+        <% if (page.layout === 'post' || page.layout === 'page') { %>
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle outline" title="Toggle outline">
+          <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
+        </button>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- ======= WORKSPACE ROW (sidebars + content, below tab bar) ======= -->
+    <div class="workspace-row">
+
+      <!-- Activity bar (always visible) -->
+      <div class="activity-bar" id="activity-bar">
+        <%- partial('_partial/activity-bar') %>
+      </div>
+
+      <!-- Left sidebar (file explorer) -->
+      <aside class="sidebar-left" id="sidebar-left" aria-label="File explorer">
+        <%- partial('_partial/sidebar-left') %>
+      </aside>
+
+      <!-- Main Note/Content Area -->
+      <main class="note-view" id="note-view" role="main">
+        <%- body %>
+      </main>
+
+      <!-- ======= RIGHT SIDEBAR (Outline + Tags) ======= -->
+      <% if (page.layout === 'post' || page.layout === 'page') { %>
+      <aside class="sidebar-right" id="sidebar-right" aria-label="Outline">
+        <%- partial('_partial/sidebar-right') %>
+      </aside>
+      <% } %>
+
+    </div><!-- /.workspace-row -->
+
+  </div><!-- /.app-container -->
+
+  <%- partial('_partial/help-modal') %>
+  <%- partial('_partial/scripts') %>
+</body>
+</html>

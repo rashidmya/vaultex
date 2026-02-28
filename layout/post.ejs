@@ -1,0 +1,72 @@
+<article class="note-article" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <!-- Note title header -->
+  <header class="note-header">
+    <h1 class="note-title" itemprop="headline"><%= page.title %></h1>
+
+    <div class="note-meta">
+      <span class="note-meta-item">
+        <%- partial('_partial/icon', {name: 'calendar', size: 13}) %>
+        <time datetime="<%= page.date.toISOString() %>" itemprop="datePublished">
+          <%= page.date.format(config.date_format || 'DD-MM-YYYY') %>
+        </time>
+      </span>
+
+      <% if (page.updated && page.updated.valueOf() !== page.date.valueOf()) { %>
+      <span class="note-meta-item note-meta-updated">
+        <%- partial('_partial/icon', {name: 'refresh', size: 13}) %>
+        Updated <%= page.updated.format(config.date_format || 'DD-MM-YYYY') %>
+      </span>
+      <% } %>
+
+      <% if (page.categories && page.categories.length > 0) { %>
+      <span class="note-meta-item">
+        <%- partial('_partial/icon', {name: 'folder', size: 13}) %>
+        <% page.categories.each(function(cat) { %>
+        <a href="<%- url_for(cat.path) %>" class="note-category"><%= cat.name %></a>
+        <% }) %>
+      </span>
+      <% } %>
+    </div>
+
+    <!-- Tags row -->
+    <% if (page.tags && page.tags.length > 0) { %>
+    <div class="note-tags">
+      <% page.tags.each(function(tag) { %>
+      <a href="<%- url_for(tag.path) %>" class="tag-pill">#<%= tag.name %></a>
+      <% }) %>
+    </div>
+    <% } %>
+  </header>
+
+  <hr class="note-divider">
+
+  <!-- Note content (markdown rendered) -->
+  <div class="markdown-body" id="markdown-body" itemprop="articleBody">
+    <%- page.content %>
+  </div>
+
+  <!-- Post navigation -->
+  <nav class="post-nav" aria-label="Post navigation">
+    <% if (page.prev) { %>
+    <a href="<%- url_for(page.prev.path) %>" class="post-nav-item post-nav-prev">
+      <div class="post-nav-label">
+        <%- partial('_partial/icon', {name: 'chevron-left', size: 13}) %>
+        Previous
+      </div>
+      <div class="post-nav-title"><%= page.prev.title %></div>
+    </a>
+    <% } else { %><div class="post-nav-item"></div><% } %>
+
+    <% if (page.next) { %>
+    <a href="<%- url_for(page.next.path) %>" class="post-nav-item post-nav-next">
+      <div class="post-nav-label">
+        Next
+        <%- partial('_partial/icon', {name: 'chevron-right', size: 13}) %>
+      </div>
+      <div class="post-nav-title"><%= page.next.title %></div>
+    </a>
+    <% } else { %><div class="post-nav-item"></div><% } %>
+  </nav>
+
+</article>

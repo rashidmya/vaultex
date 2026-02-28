@@ -1,0 +1,22 @@
+<div class="vault-switcher-wrap">
+  <button class="vault-switcher" id="vault-switcher" aria-haspopup="true" aria-expanded="false">
+    <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 16, cls: 'vault-switcher-icon', sw: 1.6}) %>
+    <span class="vault-switcher-name"><%= theme.vault_name || config.title %></span>
+  </button>
+  <div class="vault-dropdown" id="vault-dropdown" hidden>
+    <div class="vault-dropdown-item vault-dropdown-manage vault-dropdown-current">
+      <span><%= theme.vault_name || config.title %></span>
+      <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'vault-dropdown-check'}) %>
+    </div>
+    <div class="vault-dropdown-sep"></div>
+    <span class="vault-dropdown-item vault-dropdown-manage">
+      <%- partial('_partial/icon', {name: 'vault', size: 18}) %>
+      <span>Manage vaults...</span>
+    </a>
+  </div>
+</div>
+<div class="vault-actions">
+  <button class="vault-btn" id="vault-help-btn" title="Help" aria-label="Help">
+    <%- partial('_partial/icon', {name: 'circle-help', size: 18}) %>
+  </button>
+</div>

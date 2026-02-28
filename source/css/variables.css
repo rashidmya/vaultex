@@ -1,0 +1,102 @@
+/* ==========================================================================
+   VAULTEX THEME — Design Tokens
+   All CSS custom properties. Edit here to retheme everything.
+   ========================================================================== */
+
+:root {
+  /* --- Background layers (deepest → elevated) --- */
+  --bg-base:           #0d0d0d;
+  --bg-secondary:      #202020; /* sidebar bg */
+  --bg-secondary-alt:  #333333; /* top bar bg */
+  --bg-primary:        #1a1a1a; /* main workspace */
+  --bg-primary-alt:    #161616; /* slightly lighter panels */
+  --bg-hover:          rgba(255, 255, 255, 0.055);
+  --bg-active:         rgba(255, 255, 255, 0.09);
+  --bg-selected:       rgba(127, 109, 242, 0.18);
+  --bg-code:           #181818;
+  --bg-code-inline:    rgba(127, 109, 242, 0.12);
+  --bg-tag:            rgba(127, 109, 242, 0.14);
+  --bg-table-header:   rgba(255, 255, 255, 0.06);
+  --bg-table-alt:      rgba(255, 255, 255, 0.02);
+  --bg-callout-note:   rgba(127, 109, 242, 0.08);
+  --bg-callout-tip:    rgba(34, 197, 94, 0.08);
+  --bg-callout-warn:   rgba(234, 179, 8, 0.08);
+  --bg-callout-danger: rgba(239, 68, 68, 0.08);
+
+  /* --- Text --- */
+  --text-normal:       #dcddde;
+  --text-muted:        #999999;
+  --text-faint:        #666666;
+  --text-on-accent:    #ffffff;
+  --text-accent:       #7f6df2;
+  --text-accent-hover: #8875ff;
+  --text-success:      #4caf76;
+  --text-warning:      #e3a84a;
+  --text-danger:       #e06c75;
+  --text-link:         #7f8ef2;
+
+  /* --- Accent (Obsidian purple) --- */
+  --accent-color:      #7f6df2;
+  --accent-hover:      #8875ff;
+  --accent-active:     #6050d4;
+
+  /* --- Borders & dividers --- */
+  --border-color:      rgba(255, 255, 255, 0.09);
+  --border-strong:     rgba(255, 255, 255, 0.16);
+  --divider:           rgba(255, 255, 255, 0.06);
+  --tree-guide:        rgba(255, 255, 255, 0.22);
+
+  /* --- Interactive states --- */
+  --interactive-normal: rgba(255, 255, 255, 0.04);
+  --interactive-hover:  rgba(255, 255, 255, 0.07);
+  --interactive-active: rgba(255, 255, 255, 0.12);
+
+  /* --- Typography --- */
+  --font-ui:        "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+  --font-text:      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+  --font-mono:      "Source Code Pro", monospace;
+
+  --font-size-base: 16px;
+  --font-size-sm:   13px;
+  --font-size-xs:   12px;
+  --font-size-code: 14px;
+
+  --line-height-normal: 1.7;
+  --line-height-tight:  1.4;
+  --line-height-code:   1.6;
+
+  /* --- Spacing --- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* --- Layout --- */
+  --activity-bar-width:  44px;
+  --sidebar-left-width:  260px;
+  --sidebar-right-width: 240px;
+  --tab-bar-height:      38px;
+  --content-max-width:   720px;
+
+  /* --- Radius --- */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   10px;
+  --radius-pill: 100px;
+
+  /* --- Shadows --- */
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md:    0 2px 8px rgba(0, 0, 0, 0.45);
+  --shadow-lg:    0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* --- Transitions --- */
+  --t-fast:   80ms ease;
+  --t-normal: 150ms ease;
+  --t-slow:   250ms ease;
+}

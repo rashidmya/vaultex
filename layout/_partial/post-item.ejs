@@ -1,0 +1,56 @@
+<%
+// Accepts: post (post object)
+var p = post || page;
+var excerpt = p.excerpt || (p.content ? p.content.replace(/<[^>]+>/g, '').substring(0, 180) + '…' : '');
+%>
+<article class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="post-item-inner">
+
+    <!-- Post meta row -->
+    <div class="post-item-meta">
+      <time class="post-date" datetime="<%= p.date.toISOString() %>" itemprop="datePublished">
+        <%- partial('_partial/icon', {name: 'calendar', size: 12}) %>
+        <%= p.date.format(config.date_format || 'DD-MM-YYYY') %>
+      </time>
+      <% if (p.categories && p.categories.length > 0) { %>
+      <span class="post-category-sep">/</span>
+      <% p.categories.each(function(cat) { %>
+      <a href="<%- url_for(cat.path) %>" class="post-category">
+        <%- partial('_partial/icon', {name: 'folder', size: 12}) %>
+        <%= cat.name %>
+      </a>
+      <% }) %>
+      <% } %>
+    </div>
+
+    <!-- Post title -->
+    <h2 class="post-item-title" itemprop="headline">
+      <a href="<%- url_for(p.path) %>" itemprop="url"><%= p.title %></a>
+    </h2>
+
+    <!-- Excerpt -->
+    <% if (theme.show_excerpt !== false && excerpt) { %>
+    <p class="post-item-excerpt"><%- excerpt %></p>
+    <% } %>
+
+    <!-- Footer: tags + read more -->
+    <div class="post-item-footer">
+      <% if (theme.show_tags !== false && p.tags && p.tags.length > 0) { %>
+      <% var maxTags = theme.max_tags; var tagList = p.tags.toArray(); var extra = tagList.length - maxTags; %>
+      <div class="post-item-tags">
+        <% tagList.slice(0, maxTags).forEach(function(tag) { %>
+        <a href="<%- url_for(tag.path) %>" class="tag-pill">#<%= tag.name %></a>
+        <% }) %>
+        <% if (extra > 0) { %><span class="tag-pill tag-extra">+<%= extra %></span><% } %>
+      </div>
+      <% } else { %>
+      <span></span>
+      <% } %>
+      <a href="<%- url_for(p.path) %>" class="read-more-link">
+        Read note
+        <%- partial('_partial/icon', {name: 'arrow-right', size: 13}) %>
+      </a>
+    </div>
+
+  </div>
+</article>

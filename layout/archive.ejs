@@ -1,0 +1,51 @@
+<div class="note-header">
+  <h1 class="note-title page-title">
+    <%- partial('_partial/icon', {name: 'archive', size: 22}) %>
+    Archive
+    <span class="page-title-count"><%= site.posts.length %> notes</span>
+  </h1>
+</div>
+
+<%
+// Build year-keyed structure
+var postsByYear = {};
+var yearOrder = [];
+page.posts.each(function(post) {
+  var y = post.date.year();
+  if (!postsByYear[y]) {
+    postsByYear[y] = [];
+    yearOrder.push(y);
+  }
+  postsByYear[y].push(post);
+});
+yearOrder.sort(function(a, b) { return b - a; });
+%>
+
+<div class="archive-list">
+  <% yearOrder.forEach(function(year) { %>
+  <div class="archive-year-group">
+    <h2 class="archive-year">
+      <%- partial('_partial/icon', {name: 'calendar', size: 16}) %>
+      <%= year %>
+      <span class="archive-year-count"><%= postsByYear[year].length %></span>
+    </h2>
+
+    <% postsByYear[year].forEach(function(post) { %>
+    <a href="<%- url_for(post.path) %>" class="archive-item">
+      <span class="archive-item-date"><%= post.date.format('MMM DD') %></span>
+      <span class="archive-item-title"><%= post.title %></span>
+      <% if (post.categories && post.categories.length > 0) { %>
+      <span class="archive-item-cats">
+        <% post.categories.each(function(cat) { %>
+        <span class="archive-cat-badge"><%= cat.name %></span>
+        <% }) %>
+      </span>
+      <% } %>
+    </a>
+    <% }) %>
+
+  </div>
+  <% }) %>
+</div>
+
+<%- partial('_partial/pagination') %>

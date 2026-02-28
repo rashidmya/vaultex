@@ -1,0 +1,14 @@
+<%
+/*
+ * icon.ejs — thin wrapper around the theme_icon() Hexo helper.
+ *
+ * Usage (unchanged):
+ *   partial('_partial/icon', { name: 'home' })
+ *   partial('_partial/icon', { name: 'folder', size: 16, cls: 'nav-icon-svg', sw: 1.5 })
+ *
+ * Icon loading logic lives in themes/vaultex/scripts/icons.js.
+ */
+var _size = typeof size !== 'undefined' ? size : 16;
+var _cls  = typeof cls  !== 'undefined' ? cls  : '';
+var _sw   = typeof sw   !== 'undefined' ? sw   : 2;
+%><%- theme_icon(name, {size: _size, cls: _cls, sw: _sw}) %>

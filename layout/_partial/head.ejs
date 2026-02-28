@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title><% if (page.title) { %><%= page.title %> | <%= config.title %><% } else { %><%= config.title %><% } %></title>
+
+<% if (config.description) { %>
+<meta name="description" content="<%= config.description %>">
+<% } %>
+<% if (config.keywords) { %>
+<meta name="keywords" content="<%= config.keywords %>">
+<% } %>
+<meta name="author" content="<%= config.author %>">
+
+<!-- Open Graph -->
+<meta property="og:title" content="<% if (page.title) { %><%= page.title %><% } else { %><%= config.title %><% } %>">
+<meta property="og:type" content="<% if (page.layout === 'post') { %>article<% } else { %>website<% } %>">
+<meta property="og:url" content="<%- page.permalink || config.url %>">
+<meta property="og:site_name" content="<%= config.title %>">
+<% if (config.description) { %><meta property="og:description" content="<%= config.description %>"><% } %>
+
+<!-- Canonical -->
+<link rel="canonical" href="<%- page.permalink || config.url %>">
+
+<!-- RSS Feed -->
+<% if (config.feed && config.feed.path) { %>
+<link rel="alternate" type="application/atom+xml" title="<%= config.title %>" href="<%- url_for(config.feed.path) %>">
+<% } %>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="<%- url_for('/favicon.ico') %>">
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+
+<!-- Highlight theme -->
+<% if (theme.highlight) { %>
+<link rel="stylesheet" href="<%- url_for('/css/highlight/' + theme.highlight + '.css') %>">
+<% } %>
+
+<!-- Accent color override from theme config -->
+<% if (theme.accent_color) { %>
+<style>:root { --accent-color: <%= theme.accent_color %>; --interactive-accent: <%= theme.accent_color %>; }</style>
+<% } %>
+<% if (theme.font_size) { %>
+<style>:root { --font-size-base: <%= theme.font_size %>px; }</style>
+<% } %>
+<% if (theme.code_font_size) { %>
+<style>:root { --font-size-code: <%= theme.code_font_size %>px; }</style>
+<% } %>
+<% if (theme.max_content_width) { %>
+<style>:root { --content-max-width: <%= theme.max_content_width %>px; }</style>
+<% } %>
+<script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %> };</script>

@@ -1,0 +1,15 @@
+<div class="note-header">
+  <h1 class="note-title page-title">
+    <%- partial('_partial/icon', {name: 'home', size: 22}) %>
+    Recent Notes
+  </h1>
+  <p class="note-subtitle"><%= config.description %></p>
+</div>
+
+<div class="post-list" id="post-list">
+  <% page.posts.each(function(post) { %>
+  <%- partial('_partial/post-item', { post: post }) %>
+  <% }) %>
+</div>
+
+<%- partial('_partial/pagination') %>

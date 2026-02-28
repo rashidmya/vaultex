@@ -1,0 +1,217 @@
+/* ==========================================================================
+   VAULTEX THEME — Markdown Body (Note Reading View)
+   Headings, paragraphs, links, lists, blockquotes, tables, images.
+   ========================================================================== */
+
+   .markdown-body {
+    color: var(--text-normal);
+    line-height: var(--line-height-normal);
+    font-size: var(--font-size-base);
+  }
+  
+  /* --- Headings --- */
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4,
+  .markdown-body h5,
+  .markdown-body h6 {
+    color: var(--text-normal);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    scroll-margin-top: 20px;
+  }
+  .markdown-body h1 { font-size: 1.75rem; }
+  .markdown-body h2 {
+    font-size: 1.4rem;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--divider);
+  }
+  .markdown-body h3 { font-size: 1.2rem; font-weight: 600; }
+  .markdown-body h4 { font-size: 1.05rem; font-weight: 600; }
+  .markdown-body h5 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .markdown-body h6 { font-size: 0.85rem; font-weight: 600; color: var(--text-faint); }
+  
+  /* Heading anchor links */
+  .markdown-body h1 a,
+  .markdown-body h2 a,
+  .markdown-body h3 a,
+  .markdown-body h4 a,
+  .markdown-body h5 a,
+  .markdown-body h6 a { color: inherit; }
+  
+  /* --- Paragraphs & text --- */
+  .markdown-body p { margin-bottom: 1em; }
+  .markdown-body strong { font-weight: 700; color: var(--text-normal); }
+  .markdown-body em { font-style: italic; }
+  .markdown-body del { text-decoration: line-through; color: var(--text-muted); }
+  .markdown-body mark {
+    background: rgba(127, 109, 242, 0.3);
+    color: var(--text-normal);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+  
+  /* --- Links --- */
+  .markdown-body a {
+    color: var(--text-link);
+    text-decoration: underline;
+    text-decoration-color: rgba(127, 142, 242, 0.35);
+    text-underline-offset: 2px;
+    transition: color var(--t-fast), text-decoration-color var(--t-fast);
+  }
+  .markdown-body a:hover {
+    color: var(--text-accent-hover);
+    text-decoration-color: var(--text-accent-hover);
+  }
+  /* External link indicator */
+  .markdown-body a[target="_blank"]::after {
+    content: '↗';
+    font-size: 0.7em;
+    margin-left: 2px;
+    vertical-align: super;
+    opacity: 0.6;
+  }
+  
+  /* Internal/wiki-link style */
+  .markdown-body a.internal-link {
+    color: var(--text-accent);
+    text-decoration-color: rgba(127, 109, 242, 0.4);
+    background: rgba(127, 109, 242, 0.06);
+    border-radius: 3px;
+    padding: 0 2px;
+  }
+  .markdown-body a.internal-link:hover {
+    background: rgba(127, 109, 242, 0.14);
+  }
+  
+  /* --- Horizontal rule --- */
+  .markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--sp-8) 0;
+  }
+  
+  /* --- Lists --- */
+  .markdown-body ul,
+  .markdown-body ol {
+    padding-left: 1.6em;
+    margin-bottom: 1em;
+    list-style: revert;
+  }
+  .markdown-body li { margin-bottom: 0.25em; }
+  .markdown-body li > ul,
+  .markdown-body li > ol { margin-top: 0.25em; margin-bottom: 0.25em; }
+  
+  .markdown-body ul { list-style-type: disc; }
+  .markdown-body ul ul { list-style-type: circle; }
+  .markdown-body ul ul ul { list-style-type: square; }
+  
+  /* Task lists */
+  .markdown-body input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--text-faint);
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    cursor: default;
+    flex-shrink: 0;
+    transition: background var(--t-fast), border-color var(--t-fast);
+  }
+  .markdown-body input[type="checkbox"]:checked {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  .markdown-body input[type="checkbox"]:checked::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: 1.5px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+  .markdown-body li.task-list-item {
+    list-style: none;
+    margin-left: -1.6em;
+    padding-left: 1.6em;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+  }
+  
+  /* --- Blockquotes --- */
+  .markdown-body blockquote {
+    margin: 1.2em 0;
+    padding: 0.6em var(--sp-5);
+    border-left: 3px solid var(--accent-color);
+    background: rgba(127, 109, 242, 0.05);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: var(--text-muted);
+  }
+  .markdown-body blockquote p { margin-bottom: 0; }
+  .markdown-body blockquote > :last-child { margin-bottom: 0; }
+  
+  /* --- Tables --- */
+  .markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2em 0;
+    font-size: var(--font-size-sm);
+    overflow-x: auto;
+    display: block;
+  }
+  .markdown-body thead th {
+    background: var(--bg-table-header);
+    color: var(--text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: var(--sp-2) var(--sp-4);
+    border: 1px solid var(--border-color);
+    text-align: left;
+  }
+  .markdown-body tbody td {
+    padding: var(--sp-2) var(--sp-4);
+    border: 1px solid var(--border-color);
+    color: var(--text-normal);
+    vertical-align: top;
+  }
+  
+  .markdown-body tbody tr:nth-child(even) { background: var(--bg-table-alt); }
+  
+  /* --- Images --- */
+  .markdown-body img {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    margin: 1em auto;
+  }
+  .markdown-body figure {
+    margin: 1.5em 0;
+  }
+  
+  .markdown-body figcaption {
+    font-size: var(--font-size-xs);
+    color: var(--text-faint);
+    margin-top: var(--sp-2);
+    font-style: italic;
+  }
+  
