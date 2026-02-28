@@ -183,15 +183,15 @@
   align-items: center;
   justify-content: center;
   gap: var(--sp-1);
-  padding: var(--sp-3) var(--sp-2);
+  padding: var(--sp-2) var(--sp-2);
   flex-shrink: 0;
 }
 .explorer-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 22px;
+  width: 30px;
+  height: 26px;
   background: none;
   border: none;
   color: var(--text-muted);
@@ -202,6 +202,9 @@
   transition: color var(--t-fast), background var(--t-fast);
 }
 .explorer-action-btn:hover { color: var(--text-normal); background: var(--bg-hover); }
+.explorer-action-btn .icon-expand-svg { display: none; }
+.explorer-action-btn.is-expanded .icon-collapse-svg { display: none; }
+.explorer-action-btn.is-expanded .icon-expand-svg { display: block; }
 
 /* --- Explorer style 1: classic (uppercase, bold, dividers) --- */
 .explorer-style-1 .explorer-section { margin-bottom: var(--sp-2); }

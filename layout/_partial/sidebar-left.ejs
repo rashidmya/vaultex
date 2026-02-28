@@ -25,11 +25,12 @@ function isActive(navPath) {
 
     <!-- Explorer action bar -->
     <div class="explorer-actions">
-      <button class="explorer-action-btn" id="explorer-collapse-all" title="Collapse all" aria-label="Collapse all">
+      <button class="explorer-action-btn" id="explorer-auto-reveal" title="Auto-reveal current file" aria-label="Auto-reveal current file">
         <%- partial('_partial/icon', {name: 'gallery-vertical', size: 18}) %>
       </button>
-      <button class="explorer-action-btn" id="explorer-collapse" title="Collapse all" aria-label="Collapse all">
-        <%- partial('_partial/icon', {name: 'chevrons-down-up', size: 18}) %>
+      <button class="explorer-action-btn is-expanded" id="explorer-collapse-all" title="Expand all" aria-label="Expand all">
+        <%- partial('_partial/icon', {name: 'chevrons-down-up', size: 18, cls: 'icon-collapse-svg'}) %>
+        <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 18, cls: 'icon-expand-svg'}) %>
       </button>
     </div>
 

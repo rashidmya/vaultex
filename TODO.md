@@ -6,3 +6,4 @@ need to fix: highlightjs not change all background of codeblock
 - action buttons functionality
 - activity bar buttons functionality
 - change manage vaults icon
+- change colors in archive posts list (text in pills are barely visible)

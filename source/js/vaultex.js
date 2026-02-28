@@ -254,6 +254,14 @@
       var isCollapsed = header.classList.toggle('collapsed');
       if (tree) tree.classList.toggle('section-hidden', isCollapsed);
       store(key, isCollapsed ? '0' : '1');
+      if (!isCollapsed) {
+        var btn = $('#explorer-collapse-all');
+        if (btn) {
+          btn.classList.remove('is-expanded');
+          btn.title = 'Collapse all';
+          btn.setAttribute('aria-label', 'Collapse all');
+        }
+      }
     });
   });
 
@@ -261,13 +269,25 @@
      4.5. EXPLORER ACTION BAR
   ----------------------------------------------------------------------- */
   on($('#explorer-collapse-all'), 'click', function () {
+    var btn = this;
+    var expanding = btn.classList.contains('is-expanded');
     $$('.explorer-section-header').forEach(function (header) {
       var sectionId = header.dataset.section;
       var tree = $('#nav-' + sectionId);
-      header.classList.add('collapsed');
-      if (tree) tree.classList.add('section-hidden');
-      store('section-' + sectionId, '0');
+      if (expanding) {
+        header.classList.remove('collapsed');
+        if (tree) tree.classList.remove('section-hidden');
+        store('section-' + sectionId, '1');
+      } else {
+        header.classList.add('collapsed');
+        if (tree) tree.classList.add('section-hidden');
+        store('section-' + sectionId, '0');
+      }
     });
+    btn.classList.toggle('is-expanded', !expanding);
+    var label = expanding ? 'Collapse all' : 'Expand all';
+    btn.title = label;
+    btn.setAttribute('aria-label', label);
   });
 
   on($('#explorer-close'), 'click', closeLeft);
