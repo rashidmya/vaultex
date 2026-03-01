@@ -46,12 +46,12 @@ nav_items:
   - label: Archive
     path: /archives/
     icon: archive
-  - label: Categories
-    path: /categories/
-    icon: folder
   - label: Tags
     path: /tags/
-    icon: tags    # Tag cloud in right panel
+    icon: tags
+  - label: RSS
+    path: /atom.xml
+    icon: rss
 
 # Vercel Analytics (set to true when deployed on Vercel)
 vercel_analytics: false
