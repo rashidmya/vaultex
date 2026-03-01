@@ -2,6 +2,10 @@
 var currentPath = page.path || '';
 var explorerStyle = theme.sidebar_explorer_style || 2;
 var explorerNumbers = theme.sidebar_explorer_numbers !== false;
+var navIcons = theme.nav_icons !== false;
+var categoryIcons = theme.category_icons !== false;
+var recentNotesIcons = theme.recent_notes_icons !== false;
+var linksIcons = theme.links_icons !== false;
 function isActive(navPath) {
   var p = navPath.replace(/^\/|\/$/g, '');
   var c = currentPath.replace(/^\/|\/$/g, '').replace(/index\.html$/, '');
@@ -44,7 +48,7 @@ function isActive(navPath) {
       <nav class="nav-tree" id="nav-nav">
         <% theme.nav_items.forEach(function(item) { %>
         <a href="<%- url_for(item.path) %>" class="nav-item<% if (isActive(item.path)) { %> active<% } %>">
-          <%- partial('_partial/icon', {name: item.icon || 'file', size: 14, cls: 'nav-icon-svg'}) %>
+          <% if (navIcons) { %><%- partial('_partial/icon', {name: item.icon || 'file', size: 14, cls: 'nav-icon-svg'}) %><% } %>
           <span class="nav-label"><%= item.label %></span>
         </a>
         <% }) %>
@@ -96,7 +100,7 @@ function isActive(navPath) {
              data-tree-open="true"
              style="padding-left:<%= indent %>px">
           <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
-          <%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %>
+          <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %><% } %>
           <span class="nav-label"><%= cat.name %></span>
           <span class="nav-count"><%= cat.posts.length %></span>
         </div>
@@ -107,7 +111,7 @@ function isActive(navPath) {
            data-parent-tree-id="<%= pid %>"
            data-depth="<%= depth %>"
            style="padding-left:<%= indent %>px">
-          <%- partial('_partial/icon', {name: 'file-text', size: 14, cls: 'nav-icon-svg nav-leaf-icon'}) %>
+          <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'file-text', size: 14, cls: 'nav-icon-svg nav-leaf-icon'}) %><% } else { %><span style="width:14px;flex-shrink:0"></span><% } %>
           <span class="nav-label"><%= cat.name %></span>
           <span class="nav-count"><%= cat.posts.length %></span>
         </a>
@@ -127,7 +131,7 @@ function isActive(navPath) {
         <% var recentPosts = site.posts.sort('-date').limit(12).toArray(); %>
         <% recentPosts.forEach(function(post) { %>
         <a href="<%- url_for(post.path) %>" class="nav-item nav-file<% if (currentPath === post.path) { %> active<% } %>">
-          <%- partial('_partial/icon', {name: 'file', size: 13, cls: 'nav-icon-svg'}) %>
+          <% if (recentNotesIcons) { %><%- partial('_partial/icon', {name: 'file', size: 13, cls: 'nav-icon-svg'}) %><% } %>
           <span class="nav-label nav-file-label"><%= post.title %></span>
         </a>
         <% }) %>
@@ -144,7 +148,7 @@ function isActive(navPath) {
       <div class="nav-tree" id="nav-social">
         <% theme.social_links.forEach(function(link) { %>
         <a href="<%= link.url %>" class="nav-item" target="_blank" rel="noopener noreferrer">
-          <%- partial('_partial/icon', {name: link.icon || 'link', size: 14, cls: 'nav-icon-svg'}) %>
+          <% if (linksIcons) { %><%- partial('_partial/icon', {name: link.icon || 'link', size: 14, cls: 'nav-icon-svg'}) %><% } %>
           <span class="nav-label"><%= link.label %></span>
         </a>
         <% }) %>
@@ -165,7 +169,7 @@ function isActive(navPath) {
           <input
             type="search"
             id="search-input"
-            placeholder="<%= theme.search_placeholder || 'Search...' %>"
+            placeholder="<%= 'Search...' %>"
             autocomplete="off"
             spellcheck="false"
             aria-label="Search notes"
