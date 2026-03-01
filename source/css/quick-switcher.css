@@ -104,7 +104,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--sp-4);
-  padding: 0px 16px;
+  padding: 6px 16px;
   border-top: 1px solid var(--divider);
   flex-wrap: wrap;
 }
@@ -113,6 +113,9 @@
   font-size: 11px;
   color: var(--text-muted);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .qs-hint kbd {
@@ -123,8 +126,14 @@
   border-radius: 3px;
 }
 
-.qs-hint kbd span{
+.qs-hint kbd {
+  display: inline-flex;
+  align-items: center;
+}
 
+.qs-hint kbd span {
   font-size: 18px;
   font-weight: 100;
+  line-height: 1;
+  padding-left: 2px;
 }
