@@ -924,9 +924,9 @@
    * return at most maxN trimmed excerpts with leading/trailing ellipsis.
    */
   function extractExcerpts(plain, terms, cs, maxN) {
-    var CTX = filterMoreCtx ? 260 : 60;
+    var CTX = filterMoreCtx ? 260 : 50;
     var re  = makeRe(terms, cs);
-    if (!re) return [plain.slice(0, 260)];
+    if (!re) return [plain.slice(0, 150)];
 
     /* collect positions */
     var hits = [], m;
@@ -935,15 +935,15 @@
       hits.push(m.index);
       if (hits.length > 300) break; /* safety cap */
     }
-    if (!hits.length) return [plain.slice(0, 260)];
+    if (!hits.length) return [plain.slice(0, 150)];
 
-    /* merge nearby positions into windows */
+    /* split into new card only when windows have no overlap */
     var windows = [];
     var wS = Math.max(0, hits[0] - CTX);
     var wE = Math.min(plain.length, hits[0] + CTX);
     for (var i = 1; i < hits.length; i++) {
       var nS = Math.max(0, hits[i] - CTX);
-      if (nS <= wE + 30) {
+      if (nS <= wE) {
         wE = Math.min(plain.length, hits[i] + CTX);
       } else {
         windows.push([wS, wE]);
