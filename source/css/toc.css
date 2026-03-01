@@ -141,6 +141,9 @@
 .related-item:hover { background: var(--bg-hover); color: var(--text-normal); }
 .related-item svg { flex-shrink: 0; margin-top: 2px; opacity: 0.6; }
 
+/* Tags sort dropdown: nudge left so it doesn't clip the right edge */
+#tags-sort-dropdown { left: -65px; }
+
 /* --- Tags list (Obsidian flat list style) --- */
 .tags-list {
   flex: 1;
