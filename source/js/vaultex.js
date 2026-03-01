@@ -227,28 +227,28 @@
     }
   });
 
+  /* On post pages default to toc; elsewhere fall back to stored tab or first available */
+  var hasTocTab = $$('.right-tab-content[data-rtab="toc"]').length > 0;
+  function defaultRightTab() {
+    if (hasTocTab) return 'toc';
+    var s = recall('right-tab');
+    if (s && $$('.right-tab-content[data-rtab="' + s + '"]').length > 0) return s;
+    return rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null;
+  }
+
   /* Restore right sidebar state (HTML default is collapsed) */
   if (!isTablet()) {
     if (recall('right-open') === '1') {
-      /* Activate last tab before opening so panel isn't blank */
-      var rStored = recall('right-tab');
-      var rTabOk  = rStored && $$('.right-tab-content[data-rtab="' + rStored + '"]').length > 0;
-      var rTab    = rTabOk ? rStored : (rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null);
+      var rTab = defaultRightTab();
       if (rTab) activateRightTab(rTab);
       openRight();
     } else {
-      /* Still activate a tab (hidden) so the panel shows content when opened */
-      var rDefault = recall('right-tab');
-      var rDefaultOk = rDefault && $$('.right-tab-content[data-rtab="' + rDefault + '"]').length > 0;
-      if (!rDefaultOk && rightActivityBtns.length) rDefault = rightActivityBtns[0].dataset.rtab;
-      if (rDefault) activateRightTab(rDefault);
+      var rTab = defaultRightTab();
+      if (rTab) activateRightTab(rTab);
     }
   } else {
-    /* Tablet/mobile: activate default tab but keep panel closed */
-    var rMob = recall('right-tab');
-    var rMobOk = rMob && $$('.right-tab-content[data-rtab="' + rMob + '"]').length > 0;
-    if (!rMobOk && rightActivityBtns.length) rMob = rightActivityBtns[0].dataset.rtab;
-    if (rMob) activateRightTab(rMob);
+    var rTab = defaultRightTab();
+    if (rTab) activateRightTab(rTab);
   }
 
   /* Tags filter */
@@ -567,6 +567,9 @@
       tocNav.innerHTML = ''; /* clear empty placeholder */
 
       /* --- Pass 1: create link elements --- */
+      var minLevel = headings.reduce(function (m, h) {
+        return Math.min(m, parseInt(h.tagName[1], 10));
+      }, 6);
       var tocLinkEls = [];
       headings.forEach(function (h, idx) {
         if (!h.id) {
@@ -576,7 +579,7 @@
             .replace(/-+/g, '-')
             .substring(0, 50);
         }
-        var level = parseInt(h.tagName[1], 10);
+        var level = parseInt(h.tagName[1], 10) - minLevel + 1;
         var link = document.createElement('a');
         link.href = '#' + h.id;
         link.className = 'toc-item';

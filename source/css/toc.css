@@ -88,13 +88,10 @@
   background: var(--tree-guide);
 }
 .toc-item[data-level="2"]::after { left: 15px; }
-.toc-item[data-level="3"]::after { left: 27px; }
+.toc-item[data-level="3"]::after { left: 27px; box-shadow: -12px 0 0 var(--tree-guide); }
 .toc-item[data-level="4"]::after { left: 39px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide); }
 .toc-item[data-level="5"]::after { left: 51px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide); }
 .toc-item[data-level="6"]::after { left: 63px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide), -48px 0 0 var(--tree-guide); }
-/* Hide the line on the parent row itself — it starts below the chevron */
-.toc-item.toc-parent::after { display: none; }
-
 /* Chevron uses shared .tree-chevron from navigation.css; TOC-specific overrides */
 .toc-nav .tree-chevron { color: var(--text-faint); }
 .toc-parent[data-toc-open="false"] .tree-chevron { transform: rotate(-90deg); }
