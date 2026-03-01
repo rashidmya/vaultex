@@ -68,7 +68,7 @@ var isPost = page.layout === 'post' || page.layout === 'page';
     <div class="tags-list" id="tags-list">
       <% site.tags.toArray().sort(function(a,b){ return b.posts.length - a.posts.length; }).forEach(function(tag) { %>
       <a href="<%- url_for(tag.path) %>" class="tags-list-item">
-        <span class="tags-list-name">#<%= tag.name %></span>
+        <span class="tags-list-name"><%= tag.name %></span>
         <span class="tags-list-count"><%= tag.posts.length %></span>
       </a>
       <% }) %>

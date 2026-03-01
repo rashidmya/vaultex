@@ -253,9 +253,9 @@
 
   /* Tags filter */
   on($('#tags-filter-input'), 'input', function () {
-    var q = this.value.toLowerCase().replace(/^#/, '');
+    var q = this.value.toLowerCase();
     $$('.tags-list-item').forEach(function (item) {
-      var name = item.querySelector('.tags-list-name').textContent.toLowerCase().replace(/^#/, '');
+      var name = item.querySelector('.tags-list-name').textContent.toLowerCase();
       item.style.display = name.includes(q) ? '' : 'none';
     });
   });

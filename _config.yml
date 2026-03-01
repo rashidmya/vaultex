@@ -20,9 +20,6 @@ nav_items:
   - label: Archive
     path: /archives/
     icon: archive
-  - label: Tags
-    path: /tags/
-    icon: tags
   - label: RSS
     path: /atom.xml
     icon: rss
