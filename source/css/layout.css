@@ -172,6 +172,14 @@
 }
 .sidebar-toggle-btn:hover { background: var(--bg-hover); color: var(--text-normal); }
 
+/* Sidebar toggles: swap icon based on open/closed state */
+#toggle-left .icon-sidebar-close,
+#toggle-right .icon-sidebar-close { display: none; }
+#toggle-left.active .icon-sidebar-open,
+#toggle-right.active .icon-sidebar-open { display: none; }
+#toggle-left.active .icon-sidebar-close,
+#toggle-right.active .icon-sidebar-close { display: block; }
+
 .tab-strip {
   flex: 1;
   align-self: stretch;

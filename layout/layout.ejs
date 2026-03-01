@@ -16,7 +16,8 @@
       <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
       <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
         <button class="sidebar-toggle-btn btn-icon" id="toggle-left" aria-label="Toggle file explorer" title="Toggle file explorer" data-tooltip-pos="right">
-          <%- partial('_partial/icon', {name: 'panel-left', size: 20}) %>
+          <%- partial('_partial/icon', {name: 'panel-left', size: 20, cls: 'icon-sidebar-open'}) %>
+          <%- partial('_partial/icon', {name: 'panel-left-filled', size: 20, cls: 'icon-sidebar-close'}) %>
         </button>
         <button class="sidebar-view-btn btn-icon" data-tab="folder" aria-label="Files" title="Files">
           <%- partial('_partial/icon', {name: 'folder-closed', size: 18}) %>
@@ -37,7 +38,8 @@
 
       <!-- Toggle lives outside the sidebar zone (always at the content/sidebar boundary) -->
       <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle right panel" title="Toggle right panel" data-tooltip-pos="left">
-        <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
+        <%- partial('_partial/icon', {name: 'panel-right', size: 20, cls: 'icon-sidebar-open'}) %>
+        <%- partial('_partial/icon', {name: 'panel-right-filled', size: 20, cls: 'icon-sidebar-close'}) %>
       </button>
       <!-- Right spacer: mirrors sidebar-right width; contains only tab buttons -->
       <div class="tab-bar-right-spacer spacer-collapsed" id="tab-bar-right-spacer">

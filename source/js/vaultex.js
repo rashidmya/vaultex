@@ -76,6 +76,8 @@
       sidebarLeft && sidebarLeft.classList.add('collapsed');
       tabBarSpacer && tabBarSpacer.classList.add('spacer-collapsed');
       activityBar && activityBar.classList.add('sidebar-collapsed');
+    } else {
+      toggleLeftBtn && toggleLeftBtn.classList.add('active');
     }
   } else {
     /* Always collapsed on mobile by default */
