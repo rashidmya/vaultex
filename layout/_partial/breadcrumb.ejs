@@ -7,13 +7,13 @@
  */
 var crumbs = [];
 if (page.layout === 'post') {
-  /* ── Post: Category hierarchy + post title ── */
+  /* ── Post: Category hierarchy + filename ── */
   if (page.categories && page.categories.length > 0) {
     page.categories.toArray().forEach(function (cat) {
       crumbs.push({ label: cat.name, url: url_for('/' + cat.path) });
     });
   }
-  crumbs.push({ label: page.title, url: null });
+  crumbs.push({ label: page.name || page.title, url: null });
 
 } else if (page.archive) {
   /* ── Archive ── */
