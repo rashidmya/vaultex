@@ -48,7 +48,7 @@
 }
 
 .btn-icon {
-  width: 32px;
+  width: 30px;
   height: 27px;
 }
 
@@ -191,7 +191,8 @@
   color: var(--text-normal);
   white-space: nowrap;
   overflow: hidden;
-  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
   position: relative;
   margin-bottom: -1px;
   z-index: 2;
