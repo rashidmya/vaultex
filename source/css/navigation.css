@@ -565,7 +565,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.file-group-name:hover { color: var(--text-accent-hover); }
+.file-group-name:hover { color: var(--text-normal); }
 
 .file-group-count {
   font-size: 11px;
