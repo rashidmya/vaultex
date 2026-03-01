@@ -238,16 +238,6 @@
 }
 .nav-item:hover { background: var(--bg-hover); color: var(--text-normal); }
 .nav-item.active { background: var(--bg-selected); color: var(--text-accent); }
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--accent-color);
-  border-radius: 0 2px 2px 0;
-}
 
 .nav-icon-svg { flex-shrink: 0; color: inherit; opacity: 0.7; }
 .nav-item.active .nav-icon-svg { opacity: 1; }
@@ -297,10 +287,10 @@
   pointer-events: none;
   background: var(--tree-guide);
 }
-.nav-item[data-depth="0"]::after { left: 22px; }
-.nav-item[data-depth="1"]::after { left: 38px; box-shadow: -16px 0 0 var(--tree-guide); }
-.nav-item[data-depth="2"]::after { left: 54px; box-shadow: -32px 0 0 var(--tree-guide), -16px 0 0 var(--tree-guide); }
-.nav-item[data-depth="3"]::after { left: 70px; box-shadow: -48px 0 0 var(--tree-guide), -32px 0 0 var(--tree-guide), -16px 0 0 var(--tree-guide); }
+.nav-item[data-depth="0"]::after { left: 23px; }
+.nav-item[data-depth="1"]::after { left: 39px; box-shadow: -16px 0 0 var(--tree-guide); }
+.nav-item[data-depth="2"]::after { left: 55px; box-shadow: -32px 0 0 var(--tree-guide), -16px 0 0 var(--tree-guide); }
+.nav-item[data-depth="3"]::after { left: 71px; box-shadow: -48px 0 0 var(--tree-guide), -32px 0 0 var(--tree-guide), -16px 0 0 var(--tree-guide); }
 
 /* --- Guide lines for flat section items (direct children of section headers)
    Indent to 48px (depth-1 equivalent) so items align with category children.
@@ -313,7 +303,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 38px;
+  left: 40px;
   width: 1px;
   pointer-events: none;
   box-shadow: -16px 0 0 var(--tree-guide);
