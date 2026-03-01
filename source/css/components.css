@@ -39,7 +39,6 @@
   transition: background var(--t-fast), color var(--t-fast);
 }
 .dropdown-item:hover { background: var(--bg-hover); color: var(--text-normal); }
-.dropdown-item.active { color: var(--text-accent); }
 .dropdown-check { visibility: hidden; flex-shrink: 0; }
 .dropdown-item.active .dropdown-check { visibility: visible; }
 .dropdown-sep { height: 1px; background: var(--divider); margin: var(--sp-1) 0; }
