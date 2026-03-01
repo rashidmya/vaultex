@@ -51,7 +51,6 @@
   font-size: 12.5px;
   color: var(--text-muted);
   text-decoration: none;
-  border-left: 2px solid transparent;
   transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
   line-height: 1.5;
   position: relative;
@@ -75,12 +74,12 @@
 .toc-item.active::before { background: var(--bg-selected); }
 
 /* Indentation: 12 px steps. Chevron center = padding-left + 6 */
-.toc-item[data-level="1"] { padding-left: 8px;  font-weight: 600; }
-.toc-item[data-level="2"] { padding-left: 20px; }
-.toc-item[data-level="3"] { padding-left: 32px; font-size: 12px; }
-.toc-item[data-level="4"] { padding-left: 44px; font-size: 11.5px; color: var(--text-faint); }
-.toc-item[data-level="5"] { padding-left: 56px; font-size: 11px;  color: var(--text-faint); }
-.toc-item[data-level="6"] { padding-left: 68px; font-size: 11px;  color: var(--text-faint); }
+.toc-item[data-level="1"] { padding-left: 12px;  font-weight: 600; }
+.toc-item[data-level="2"] { padding-left: 24px; }
+.toc-item[data-level="3"] { padding-left: 36px; font-size: 12px; }
+.toc-item[data-level="4"] { padding-left: 48px; font-size: 11.5px; color: var(--text-faint); }
+.toc-item[data-level="5"] { padding-left: 60px; font-size: 11px;  color: var(--text-faint); }
+.toc-item[data-level="6"] { padding-left: 72px; font-size: 11px;  color: var(--text-faint); }
 
 /* Vertical guide lines: drawn on child rows at the parent's chevron center.
    Chevron is 15px wide → center = padding-left + 7; step = 12px.
@@ -97,11 +96,11 @@
   pointer-events: none;
   background: var(--tree-guide);
 }
-.toc-item[data-level="2"]::after { left: 15px; }
-.toc-item[data-level="3"]::after { left: 27px; box-shadow: -12px 0 0 var(--tree-guide); }
-.toc-item[data-level="4"]::after { left: 39px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide); }
-.toc-item[data-level="5"]::after { left: 51px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide); }
-.toc-item[data-level="6"]::after { left: 63px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide), -48px 0 0 var(--tree-guide); }
+.toc-item[data-level="2"]::after { left: 19px; }
+.toc-item[data-level="3"]::after { left: 31px; box-shadow: -12px 0 0 var(--tree-guide); }
+.toc-item[data-level="4"]::after { left: 43px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide); }
+.toc-item[data-level="5"]::after { left: 55px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide); }
+.toc-item[data-level="6"]::after { left: 68px; box-shadow: -12px 0 0 var(--tree-guide), -24px 0 0 var(--tree-guide), -36px 0 0 var(--tree-guide), -48px 0 0 var(--tree-guide); }
 /* Chevron uses shared .tree-chevron from navigation.css; TOC-specific overrides */
 .toc-nav .tree-chevron { color: var(--text-faint); }
 .toc-parent[data-toc-open="false"] .tree-chevron { transform: rotate(-90deg); }
