@@ -1,5 +1,7 @@
 # Vaultex
 
+![index](/source/images/showcase.png)
+
 A dark Hexo theme inspired by the Obsidian.md UI/UX. Features a two-sidebar app shell with a file explorer, table of contents, full-text search, and a self-hosted font stack — all with zero external dependencies at runtime.
 
 ---
