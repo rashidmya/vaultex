@@ -152,6 +152,11 @@
   margin-left: 2px;
 }
 
+#toggle-right {
+  margin-right: var(--sp-2);
+  flex-shrink: 0;
+}
+
 .sidebar-toggle-btn {
   display: flex;
   align-items: center;
@@ -216,9 +221,9 @@
 }
 .tab-close:hover { background: var(--bg-hover); color: var(--text-normal); }
 
-/* Right sidebar zone: mirrors sidebar-right width, collapses when panel is closed.
-   Toggle is the leftmost child → it sits at the content/sidebar boundary when open,
-   and near (but not at) the right edge of the window when closed. */
+/* Right sidebar zone: mirrors sidebar-right width.
+   Sits to the right of #toggle-right so the toggle is always just outside
+   the sidebar boundary. Collapses to 0 when the panel is closed. */
 .tab-bar-right-spacer {
   width: var(--sidebar-right-width);
   min-width: var(--sidebar-right-width);
@@ -231,8 +236,9 @@
   transition: width var(--t-slow), min-width var(--t-slow);
 }
 .tab-bar-right-spacer.spacer-collapsed {
-  width: var(--activity-bar-width);
-  min-width: var(--activity-bar-width);
+  width: 0;
+  min-width: 0;
+  padding: 0;
 }
 
 /* --- Main note view --- */
@@ -284,7 +290,7 @@
 /* --- Right panel tab buttons (in tab-bar-actions, siblings of #toggle-right) --- */
 /* Hidden by default; shown via sibling rule when toggle-right is active (panel open) */
 .right-tab-btn {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   background: none;
@@ -297,5 +303,3 @@
 .right-tab-btn:hover { background: var(--bg-hover); color: var(--text-normal); }
 .right-tab-btn.active { background: var(--bg-hover); color: var(--text-normal); }
 
-/* Show tab buttons only while the panel is open */
-#toggle-right.active ~ .right-tab-btn { display: flex; }

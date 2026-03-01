@@ -35,12 +35,12 @@
         </div>
       </div>
 
-      <!-- Right spacer: mirrors sidebar-right width, collapses when panel is closed -->
+      <!-- Toggle lives outside the sidebar zone (always at the content/sidebar boundary) -->
+      <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle right panel" title="Toggle right panel" data-tooltip-pos="left">
+        <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
+      </button>
+      <!-- Right spacer: mirrors sidebar-right width; contains only tab buttons -->
       <div class="tab-bar-right-spacer spacer-collapsed" id="tab-bar-right-spacer">
-        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle right panel" title="Toggle right panel" data-tooltip-pos="left">
-          <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
-        </button>
-        <!-- Tab buttons: hidden via CSS sibling rule + clipped by spacer overflow when closed -->
         <% if (page.layout === 'post' || page.layout === 'page') { %>
         <button class="right-tab-btn btn-icon" data-rtab="toc" id="rtab-btn-toc" title="Outline" aria-label="Outline" data-tooltip-pos="left">
           <%- partial('_partial/icon', {name: 'list', size: 18, sw: 1.7}) %>
