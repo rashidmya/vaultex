@@ -36,9 +36,11 @@
   --text-link:         #7f8ef2;
 
   /* --- Accent (Obsidian purple) --- */
-  --accent-color:      #7f6df2;
-  --accent-hover:      #8875ff;
-  --accent-active:     #6050d4;
+  --accent-color:              #7f6df2;
+  --accent-hover:              #8875ff;
+  --accent-active:             #6050d4;
+  --accent-interactive:        #483699;
+  --accent-interactive-hover:  #4d3ca6;
 
   /* --- Borders & dividers --- */
   --border-color:      rgba(255, 255, 255, 0.09);
