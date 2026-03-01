@@ -185,6 +185,7 @@
     store('right-open', '0');
   }
 
+  var activeRightTab = null;
   function activateRightTab(tabName) {
     rightActivityBtns.forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.rtab === tabName);
@@ -192,20 +193,18 @@
     rightTabContents.forEach(function (panel) {
       panel.classList.toggle('right-tab-hidden', panel.dataset.rtab !== tabName);
     });
-    store('right-tab', tabName);
+    activeRightTab = tabName;
+    store(rightTabKey, tabName);
   }
 
   /* Right activity bar: click to open/switch/close */
   rightActivityBtns.forEach(function (btn) {
     on(btn, 'click', function () {
       var tabName = btn.dataset.rtab;
-      var currentTab = recall('right-tab');
       var isCollapsed = sidebarRight && sidebarRight.classList.contains('collapsed');
       if (isCollapsed) {
         activateRightTab(tabName);
         openRight();
-      } else if (currentTab === tabName) {
-        closeRight();
       } else {
         activateRightTab(tabName);
       }
@@ -227,11 +226,23 @@
     }
   });
 
-  /* On post pages default to toc; elsewhere fall back to stored tab or first available */
+  /* Restore stored tab; fall back to toc on post pages, then first available.
+     On post pages, only restore stored tab on page refresh — navigating to a
+     post always defaults to toc. Non-post pages always restore stored tab. */
   var hasTocTab = $$('.right-tab-content[data-rtab="toc"]').length > 0;
+  var rightTabKey = hasTocTab ? 'right-tab-post' : 'right-tab';
+  var isReload = (function () {
+    try { return performance.getEntriesByType('navigation')[0].type === 'reload'; } catch (_) { return false; }
+  }());
   function defaultRightTab() {
-    if (hasTocTab) return 'toc';
-    var s = recall('right-tab');
+    if (hasTocTab) {
+      if (isReload) {
+        var s = recall(rightTabKey);
+        if (s && $$('.right-tab-content[data-rtab="' + s + '"]').length > 0) return s;
+      }
+      return 'toc';
+    }
+    var s = recall(rightTabKey);
     if (s && $$('.right-tab-content[data-rtab="' + s + '"]').length > 0) return s;
     return rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null;
   }
