@@ -223,6 +223,21 @@ Drop any compatible SVG file into `themes/vaultex/source/icons/` and reference i
 
 ---
 
+## Scripts
+
+Hexo scripts in `themes/vaultex/scripts/` run at build time. Each file has a single responsibility:
+
+| File | Type | What it does |
+|---|---|---|
+| `icons.js` | Helper | Registers `theme_icon(name, opts)` — reads an SVG from `source/icons/<name>.svg`, strips the `<svg>` wrapper, and inlines the inner markup with configurable `size`, `stroke-width`, and CSS class. Results are cached per build. |
+| `page-name.js` | Filter (`before_post_render`) | Sets `page.name` to the post's source filename without its extension (e.g. `my-post` for `my-post.md`). Used in breadcrumbs and the tab title. |
+| `permalink-sanitizer.js` | Filter (`before_post_render` + `post_permalink`) | Normalises `data.slug` to lowercase kebab-case before Hexo builds the URL, then does a final pass on the generated permalink to strip any remaining unsafe characters or capital letters. |
+| `index-co-located-assets.js` | Generator | Serves images and other local files that are referenced inside a post but stored in a shared `assets/` folder next to it, rather than the post-specific asset directory Hexo expects by default. |
+| `meta.js` | Helper | Registers `meta(post)` — converts a post's `meta` front-matter array (key=value pairs) into `<meta>` HTML tags for the `<head>`. |
+| `thumbnail.js` | Helper | Registers `thumbnail(post)` — returns the post's `thumbnail` or `banner` front-matter value, or an empty string if neither is set. |
+
+---
+
 ## License
 
 MIT — see [LICENSE.MD](LICENSE.MD).
