@@ -322,7 +322,7 @@
   pointer-events: none;
   z-index: 0;
 }
-.file-group-header:hover { background: none; }
+.file-group-header:hover { background: none;  }
 .file-group-header > * { position: relative; z-index: 1; }
 
 .file-group-chevron {
@@ -341,6 +341,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.file-group-name:hover { color: var(--text-normal); }
 
 .file-group-count {
   font-size: 11px;
@@ -380,7 +381,7 @@
   transition: background var(--t-fast), color var(--t-fast);
 }
 .match-card-link:hover {
-  background: var(--bg-hover);
+  background: var(--accent-interactive-hover);
   color: var(--text-normal);
 }
 

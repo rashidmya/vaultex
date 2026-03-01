@@ -264,7 +264,6 @@
   align-items: center;
   height: 32px;
   padding: 0 var(--sp-2);
-  border-bottom: 1px solid var(--divider);
   flex-shrink: 0;
 }
 
