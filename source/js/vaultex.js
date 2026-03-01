@@ -319,15 +319,15 @@
     });
   });
 
-  /* Sync collapse-all button to reflect actual expanded state on page load */
+  /* Sync collapse-all button: show "Collapse all" if anything is open, "Expand all" if all closed */
   function syncCollapseBtn() {
     var btn = $('#explorer-collapse-all');
     if (!btn) return;
-    var allExpanded =
-      !$$('.explorer-section-header').some(function (h) { return h.classList.contains('collapsed'); }) &&
-      !$$('.nav-tree-parent').some(function (p) { return p.dataset.treeOpen === 'false'; });
-    btn.classList.toggle('is-expanded', !allExpanded);
-    var label = allExpanded ? 'Collapse all' : 'Expand all';
+    var anyOpen =
+      $$('.explorer-section-header').some(function (h) { return !h.classList.contains('collapsed'); }) ||
+      $$('.nav-tree-parent').some(function (p) { return p.dataset.treeOpen !== 'false'; });
+    btn.classList.toggle('is-expanded', !anyOpen);
+    var label = anyOpen ? 'Collapse all' : 'Expand all';
     btn.title = label;
     btn.setAttribute('aria-label', label);
   }
@@ -658,11 +658,11 @@
       function syncTocCollapseBtn() {
         var btn = $('#toc-collapse-all');
         if (!btn) return;
-        var allExpanded = !$$('.toc-parent', tocNav).some(function (p) {
-          return p.dataset.tocOpen === 'false';
+        var anyOpen = $$('.toc-parent', tocNav).some(function (p) {
+          return p.dataset.tocOpen !== 'false';
         });
-        btn.classList.toggle('is-expanded', !allExpanded);
-        var label = allExpanded ? 'Collapse all' : 'Expand all';
+        btn.classList.toggle('is-expanded', !anyOpen);
+        var label = anyOpen ? 'Collapse all' : 'Expand all';
         btn.title = label;
         btn.setAttribute('aria-label', label);
       }
