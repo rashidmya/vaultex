@@ -37,7 +37,7 @@ A dark Hexo theme inspired by the Obsidian.md UI/UX. Features a two-sidebar app 
 1. Clone or download this theme into your Hexo blog's `themes/` directory:
 
 ```bash
-git clone https://github.com/rashidmya/vaultex themes/vaultex
+git clone https://github.com/rashidmya/vaultex themes
 ```
 
 2. Set the theme in your root `_config.yml`:
