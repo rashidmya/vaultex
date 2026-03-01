@@ -851,15 +851,12 @@
   var filterPanel        = $('#search-filter-panel');
   var filterCollapseEl   = $('#filter-collapse-results');
   var filterMoreCtxEl    = $('#filter-more-context');
-  var filterExplainEl    = $('#filter-explain-terms');
-  var explainBlock       = $('#search-explain');
   var searchSortValue   = 'name-asc';
   var searchData        = null;
   var searchTimeout = null;
   var matchCase          = false;
   var filterCollapse     = false;
   var filterMoreCtx      = false;
-  var filterExplain      = false;
 
   /* --- Load search.xml once --- */
   fetch('/search.xml')
@@ -1003,8 +1000,6 @@
     };
     if (sortFns[sv]) groups.sort(sortFns[sv]);
 
-    /* Explain block — updated by updateExplain() */
-
     /* SearchToolbar */
     var total = groups.reduce(function (s, g) { return s + g.count; }, 0);
     if (resultsCount) resultsCount.textContent = groups.length === 0 ? '0 results' : total + ' result' + (total !== 1 ? 's' : '');
@@ -1048,7 +1043,6 @@
   /* --- SearchHeader interactions --- */
   on(searchInput, 'input', function () {
     if (clearBtn) clearBtn.hidden = !searchInput.value;
-    updateExplain();
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(function () { doSearch(searchInput.value); }, 200);
   });
@@ -1060,7 +1054,6 @@
     if (resultsCount)  resultsCount.textContent = '';
     if (noResults)     noResults.hidden = false;
     if (searchToolbar) searchToolbar.hidden = true;
-    updateExplain();
   });
 
   on(matchCaseBtn, 'click', function () {
@@ -1089,22 +1082,6 @@
     if (searchInput && searchInput.value) doSearch(searchInput.value);
   });
 
-  on(filterExplainEl, 'change', function () {
-    filterExplain = filterExplainEl.checked;
-    updateExplain();
-    if (searchInput && searchInput.value) doSearch(searchInput.value);
-  });
-
-  function updateExplain() {
-    if (!explainBlock) return;
-    var q = searchInput ? searchInput.value.trim() : '';
-    if (filterExplain && q) {
-      explainBlock.textContent = 'Matches text: \u201c' + q + '\u201d';
-      explainBlock.hidden = false;
-    } else {
-      explainBlock.hidden = true;
-    }
-  }
 
   on(searchSortBtn, 'click', function (e) {
     e.stopPropagation();
