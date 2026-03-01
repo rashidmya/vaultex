@@ -11,18 +11,15 @@
 
 /* --- Breakpoint: 900px (tablet) --- */
 @media (max-width: 900px) {
-  /* Right sidebar: always rendered, slides in/out with transform */
+  /* Right sidebar: slides in as a fixed drawer from the right */
   .sidebar-right {
     position: fixed;
     right: 0;
     top: var(--tab-bar-height);
     bottom: 0;
     z-index: 100;
-    display: flex;
-    align-items: flex-start;
     width: var(--sidebar-right-width) !important;
     min-width: var(--sidebar-right-width) !important;
-    overflow-y: auto !important;
     box-shadow: var(--shadow-lg);
     transform: translateX(110%);
     visibility: hidden;

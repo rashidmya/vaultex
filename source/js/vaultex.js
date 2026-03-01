@@ -30,7 +30,8 @@
   var tabBarSpacer = $('#tab-bar-left-spacer');
   var activityBar = $('#activity-bar');
   var overlay = $('#sidebar-overlay');
-  var isMobile = function () { return window.innerWidth <= 768; };
+  var isMobile  = function () { return window.innerWidth <= 768; };
+  var isTablet  = function () { return window.innerWidth <= 900; }; /* matches right-sidebar fixed breakpoint */
 
   function openLeft() {
     if (!sidebarLeft) return;
@@ -148,16 +149,21 @@
   if (lastLeftTab) { activateSidebarTab(lastLeftTab); }
 
   /* -----------------------------------------------------------------------
-     2. RIGHT SIDEBAR TOGGLE
+     2. RIGHT SIDEBAR TOGGLE + TABS
   ----------------------------------------------------------------------- */
-  var sidebarRight = $('#sidebar-right');
-  var toggleRightBtn = $('#toggle-right');
+  var sidebarRight       = $('#sidebar-right');
+  var toggleRightBtn     = $('#toggle-right');
+  var tabBarRightSpacer  = $('#tab-bar-right-spacer');
+  var rightActivityBtns  = $$('.right-tab-btn');
+  var rightTabContents   = $$('.right-tab-content');
 
   function openRight() {
     if (!sidebarRight) return;
     sidebarRight.classList.remove('collapsed');
-    sidebarRight.classList.remove('mobile-open'); // reset
-    if (isMobile()) {
+    sidebarRight.classList.remove('mobile-open');
+    if (tabBarRightSpacer) tabBarRightSpacer.classList.remove('spacer-collapsed');
+    if (isTablet()) {
+      /* At ≤900px the sidebar is position:fixed; mobile-open slides it in */
       sidebarRight.classList.add('mobile-open');
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -170,7 +176,8 @@
     if (!sidebarRight) return;
     sidebarRight.classList.add('collapsed');
     sidebarRight.classList.remove('mobile-open');
-    if (isMobile()) {
+    if (tabBarRightSpacer) tabBarRightSpacer.classList.add('spacer-collapsed');
+    if (isTablet()) {
       overlay.classList.remove('active');
       document.body.style.overflow = '';
     }
@@ -178,27 +185,80 @@
     store('right-open', '0');
   }
 
-  function toggleRight() {
+  function activateRightTab(tabName) {
+    rightActivityBtns.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.rtab === tabName);
+    });
+    rightTabContents.forEach(function (panel) {
+      panel.classList.toggle('right-tab-hidden', panel.dataset.rtab !== tabName);
+    });
+    store('right-tab', tabName);
+  }
+
+  /* Right activity bar: click to open/switch/close */
+  rightActivityBtns.forEach(function (btn) {
+    on(btn, 'click', function () {
+      var tabName = btn.dataset.rtab;
+      var currentTab = recall('right-tab');
+      var isCollapsed = sidebarRight && sidebarRight.classList.contains('collapsed');
+      if (isCollapsed) {
+        activateRightTab(tabName);
+        openRight();
+      } else if (currentTab === tabName) {
+        closeRight();
+      } else {
+        activateRightTab(tabName);
+      }
+    });
+  });
+
+  /* Tab-bar toggle: open with last/default tab, or close */
+  on(toggleRightBtn, 'click', function () {
     if (!sidebarRight) return;
-    if (sidebarRight.classList.contains('collapsed') || sidebarRight.classList.contains('mobile-open') === false && isMobile()) {
+    if (sidebarRight.classList.contains('collapsed')) {
+      /* Ensure a tab is active before opening */
+      var stored = recall('right-tab');
+      var tabOk  = stored && $$('.right-tab-content[data-rtab="' + stored + '"]').length > 0;
+      var tab    = tabOk ? stored : (rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null);
+      if (tab) activateRightTab(tab);
       openRight();
     } else {
       closeRight();
     }
+  });
+
+  /* Restore right sidebar state (HTML default is collapsed) */
+  if (!isTablet()) {
+    if (recall('right-open') === '1') {
+      /* Activate last tab before opening so panel isn't blank */
+      var rStored = recall('right-tab');
+      var rTabOk  = rStored && $$('.right-tab-content[data-rtab="' + rStored + '"]').length > 0;
+      var rTab    = rTabOk ? rStored : (rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null);
+      if (rTab) activateRightTab(rTab);
+      openRight();
+    } else {
+      /* Still activate a tab (hidden) so the panel shows content when opened */
+      var rDefault = recall('right-tab');
+      var rDefaultOk = rDefault && $$('.right-tab-content[data-rtab="' + rDefault + '"]').length > 0;
+      if (!rDefaultOk && rightActivityBtns.length) rDefault = rightActivityBtns[0].dataset.rtab;
+      if (rDefault) activateRightTab(rDefault);
+    }
+  } else {
+    /* Tablet/mobile: activate default tab but keep panel closed */
+    var rMob = recall('right-tab');
+    var rMobOk = rMob && $$('.right-tab-content[data-rtab="' + rMob + '"]').length > 0;
+    if (!rMobOk && rightActivityBtns.length) rMob = rightActivityBtns[0].dataset.rtab;
+    if (rMob) activateRightTab(rMob);
   }
 
-  on(toggleRightBtn, 'click', toggleRight);
-
-  /* Restore right sidebar state */
-  if (sidebarRight) {
-    var rightState = recall('right-open');
-    if (rightState === '0') {
-      sidebarRight.classList.add('collapsed');
-    }
-    if (isMobile()) {
-      sidebarRight.classList.add('collapsed');
-    }
-  }
+  /* Tags filter */
+  on($('#tags-filter-input'), 'input', function () {
+    var q = this.value.toLowerCase().replace(/^#/, '');
+    $$('.tags-list-item').forEach(function (item) {
+      var name = item.querySelector('.tags-list-name').textContent.toLowerCase().replace(/^#/, '');
+      item.style.display = name.includes(q) ? '' : 'none';
+    });
+  });
 
   /* -----------------------------------------------------------------------
      3. CATEGORY TREE TOGGLE
@@ -826,18 +886,22 @@
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-      if (!isMobile()) {
-        /* On desktop: restore stored state */
+      if (isTablet()) {
+        /* Tablet/mobile: collapse both sidebars */
+        closeRight();
+      }
+      if (isMobile()) {
+        closeLeft();
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        /* Desktop: restore left sidebar stored state */
         if (recall('left-open') !== '0') {
           sidebarLeft && sidebarLeft.classList.remove('collapsed');
           toggleLeftBtn && toggleLeftBtn.classList.add('active');
         }
         overlay.classList.remove('active');
         document.body.style.overflow = '';
-      } else {
-        /* On mobile: always collapse sidebars */
-        closeLeft();
-        closeRight();
       }
     }, 150);
   });

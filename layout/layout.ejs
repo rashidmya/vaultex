@@ -3,7 +3,7 @@
 <head>
   <%- partial('_partial/head') %>
 </head>
-<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> has-right-sidebar<% } %><% if (theme.posts_per_row >= 2) { %> posts-grid<% } %>">
+<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> is-post<% } %><% if (theme.posts_per_row >= 2) { %> posts-grid<% } %>">
 
   <!-- Mobile sidebar overlay -->
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -35,12 +35,20 @@
         </div>
       </div>
 
-      <div class="tab-bar-actions">
-        <% if (page.layout === 'post' || page.layout === 'page') { %>
-        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle outline" title="Toggle outline" data-tooltip-pos="left">
+      <!-- Right spacer: mirrors sidebar-right width, collapses when panel is closed -->
+      <div class="tab-bar-right-spacer spacer-collapsed" id="tab-bar-right-spacer">
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle right panel" title="Toggle right panel" data-tooltip-pos="left">
           <%- partial('_partial/icon', {name: 'panel-right', size: 20}) %>
         </button>
+        <!-- Tab buttons: hidden via CSS sibling rule + clipped by spacer overflow when closed -->
+        <% if (page.layout === 'post' || page.layout === 'page') { %>
+        <button class="right-tab-btn btn-icon" data-rtab="toc" id="rtab-btn-toc" title="Outline" aria-label="Outline" data-tooltip-pos="left">
+          <%- partial('_partial/icon', {name: 'list', size: 18, sw: 1.7}) %>
+        </button>
         <% } %>
+        <button class="right-tab-btn btn-icon" data-rtab="tags" id="rtab-btn-tags" title="Tags" aria-label="Tags" data-tooltip-pos="left">
+          <%- partial('_partial/icon', {name: 'tags', size: 18, sw: 1.7}) %>
+        </button>
       </div>
     </div>
 
@@ -62,12 +70,10 @@
         <%- body %>
       </main>
 
-      <!-- ======= RIGHT SIDEBAR (Outline + Tags) ======= -->
-      <% if (page.layout === 'post' || page.layout === 'page') { %>
-      <aside class="sidebar-right" id="sidebar-right" aria-label="Outline">
+      <!-- ======= RIGHT SIDEBAR ======= -->
+      <aside class="sidebar-right collapsed" id="sidebar-right" aria-label="Right panel">
         <%- partial('_partial/sidebar-right') %>
       </aside>
-      <% } %>
 
     </div><!-- /.workspace-row -->
 

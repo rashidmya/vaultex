@@ -1,65 +1,80 @@
+<%
+var isPost = page.layout === 'post' || page.layout === 'page';
+%>
 <div class="sidebar-right-inner">
 
-  <!-- Outline / TOC (only for posts/pages, when toc is enabled) -->
-  <% if ((page.layout === 'post' || page.layout === 'page') && (!theme.sidebar_right || theme.sidebar_right.toc !== false)) { %>
-  <div class="right-section" id="toc-section">
-    <div class="right-section-header">
-      <%- partial('_partial/icon', {name: 'list', size: 13}) %>
-      <span>OUTLINE</span>
-    </div>
+  <!-- ===== TOC TAB (post / page only) ===== -->
+  <% if (isPost) { %>
+  <div class="right-tab-content right-tab-hidden" data-rtab="toc">
+
     <nav class="toc-nav" id="toc-nav" aria-label="Table of contents">
       <!-- Populated by vaultex.js from post headings -->
       <span class="toc-empty">No headings found</span>
     </nav>
-  </div>
-  <% } %>
 
-  <!-- Tags cloud -->
-  <% if (theme.sidebar_right.show_tags_panel !== false && site.tags.length > 0) { %>
-  <div class="right-section" id="tags-section">
-    <div class="right-section-header">
-      <%- partial('_partial/icon', {name: 'tags', size: 13}) %>
-      <span>TAGS</span>
-    </div>
-    <div class="tag-cloud">
-      <% site.tags.toArray().sort(function(a,b){ return b.posts.length - a.posts.length; }).forEach(function(tag) { %>
-      <a href="<%- url_for(tag.path) %>" class="tag-pill">#<%= tag.name %></a>
-      <% }) %>
-    </div>
-  </div>
-  <% } %>
-
-  <!-- Related posts (shown on post pages) -->
-  <% if (theme.sidebar_right.show_related !== false && page.layout === 'post') { %>
-  <%
-    var relatedPosts = [];
-    if (page.tags && page.tags.length > 0) {
-      page.tags.each(function(tag) {
-        tag.posts.each(function(post) {
-          if (post.path !== page.path) {
-            var exists = relatedPosts.some(function(p) { return p.path === post.path; });
-            if (!exists && relatedPosts.length < 5) relatedPosts.push(post);
-          }
+    <!-- Related posts (anchored at bottom of TOC tab) -->
+    <% if (!theme.sidebar_right || theme.sidebar_right.show_related !== false) { %>
+    <%
+      var relatedPosts = [];
+      if (page.tags && page.tags.length > 0) {
+        page.tags.each(function(tag) {
+          tag.posts.each(function(post) {
+            if (post.path !== page.path) {
+              var exists = relatedPosts.some(function(p) { return p.path === post.path; });
+              if (!exists && relatedPosts.length < 5) relatedPosts.push(post);
+            }
+          });
         });
-      });
-    }
-  %>
-  <% if (relatedPosts.length > 0) { %>
-  <div class="right-section" id="related-section">
-    <div class="right-section-header">
-      <%- partial('_partial/icon', {name: 'layers-plus', size: 13}) %>
-      <span>RELATED</span>
+      }
+    %>
+    <% if (relatedPosts.length > 0) { %>
+    <div class="right-related">
+      <div class="right-related-header">
+        <%- partial('_partial/icon', {name: 'layers-plus', size: 12}) %>
+        <span>RELATED</span>
+      </div>
+      <div class="related-list">
+        <% relatedPosts.forEach(function(post) { %>
+        <a href="<%- url_for(post.path) %>" class="related-item">
+          <%- partial('_partial/icon', {name: 'file', size: 12}) %>
+          <span><%= post.title %></span>
+        </a>
+        <% }) %>
+      </div>
     </div>
-    <div class="related-list">
-      <% relatedPosts.forEach(function(post) { %>
-      <a href="<%- url_for(post.path) %>" class="related-item">
-        <%- partial('_partial/icon', {name: 'file', size: 12}) %>
-        <span><%= post.title %></span>
+    <% } %>
+    <% } %>
+
+  </div>
+  <% } %>
+
+  <!-- ===== TAGS TAB (always) ===== -->
+  <div class="right-tab-content right-tab-hidden" data-rtab="tags">
+
+    <div class="right-tab-actions">
+      <div class="tags-filter-wrap">
+        <%- partial('_partial/icon', {name: 'search', size: 13, cls: 'tags-filter-icon'}) %>
+        <input
+          type="text"
+          id="tags-filter-input"
+          class="tags-filter-input"
+          placeholder="Filter..."
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Filter tags"
+        >
+      </div>
+    </div>
+
+    <div class="tags-list" id="tags-list">
+      <% site.tags.toArray().sort(function(a,b){ return b.posts.length - a.posts.length; }).forEach(function(tag) { %>
+      <a href="<%- url_for(tag.path) %>" class="tags-list-item">
+        <span class="tags-list-name">#<%= tag.name %></span>
+        <span class="tags-list-count"><%= tag.posts.length %></span>
       </a>
       <% }) %>
     </div>
+
   </div>
-  <% } %>
-  <% } %>
 
 </div>
