@@ -847,10 +847,19 @@
   var clearBtn          = $('#search-clear');
   var searchSortBtn     = $('#search-sort-btn');
   var searchSortDropdown = $('#search-sort-dropdown');
+  var filterBtn          = $('#search-filter-btn');
+  var filterPanel        = $('#search-filter-panel');
+  var filterCollapseEl   = $('#filter-collapse-results');
+  var filterMoreCtxEl    = $('#filter-more-context');
+  var filterExplainEl    = $('#filter-explain-terms');
+  var explainBlock       = $('#search-explain');
   var searchSortValue   = 'name-asc';
   var searchData        = null;
   var searchTimeout = null;
-  var matchCase     = false;
+  var matchCase          = false;
+  var filterCollapse     = false;
+  var filterMoreCtx      = false;
+  var filterExplain      = false;
 
   /* --- Load search.xml once --- */
   fetch('/search.xml')
@@ -915,7 +924,7 @@
    * return at most maxN trimmed excerpts with leading/trailing ellipsis.
    */
   function extractExcerpts(plain, terms, cs, maxN) {
-    var CTX = 130;
+    var CTX = filterMoreCtx ? 260 : 130;
     var re  = makeRe(terms, cs);
     if (!re) return [plain.slice(0, 260)];
 
@@ -975,7 +984,7 @@
 
       if (!fold.every(function (t) { return hayTitle.includes(t) || hayBody.includes(t); })) return;
 
-      var excerpts = extractExcerpts(plain, terms, matchCase, 7);
+      var excerpts = extractExcerpts(plain, terms, matchCase, filterMoreCtx ? 14 : 7);
       groups.push({ title: decodeEntities(post.title), url: post.url, date: post.date,
                     excerpts: excerpts, count: excerpts.length });
     });
@@ -991,6 +1000,8 @@
       'created-asc':   function (a, b) { return new Date(a.date) - new Date(b.date); }
     };
     if (sortFns[sv]) groups.sort(sortFns[sv]);
+
+    /* Explain block — updated by updateExplain() */
 
     /* SearchToolbar */
     var total = groups.reduce(function (s, g) { return s + g.count; }, 0);
@@ -1008,11 +1019,11 @@
           '</a></div>';
       }).join('');
 
-      var chevronSvg = '<svg class="file-group-chevron" viewBox="0 0 24 24" width="10" height="10" ' +
+      var chevronSvg = '<svg class="file-group-chevron" viewBox="0 0 24 24" width="15" height="15" ' +
         'fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">' +
         '<polyline points="6 9 12 15 18 9"/></svg>';
 
-      return '<div class="file-group" data-open="true">' +
+      return '<div class="file-group" data-open="' + (filterCollapse ? 'false' : 'true') + '">' +
         '<div class="file-group-header">' +
           chevronSvg +
           '<a href="' + escHtml(g.url) + '" class="file-group-name">' + renderWithHighlight(g.title, terms, matchCase) + '</a>' +
@@ -1035,6 +1046,7 @@
   /* --- SearchHeader interactions --- */
   on(searchInput, 'input', function () {
     if (clearBtn) clearBtn.hidden = !searchInput.value;
+    updateExplain();
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(function () { doSearch(searchInput.value); }, 200);
   });
@@ -1046,6 +1058,7 @@
     if (resultsCount)  resultsCount.textContent = '';
     if (noResults)     noResults.hidden = false;
     if (searchToolbar) searchToolbar.hidden = true;
+    updateExplain();
   });
 
   on(matchCaseBtn, 'click', function () {
@@ -1054,6 +1067,42 @@
     matchCaseBtn.setAttribute('aria-pressed', String(matchCase));
     if (searchInput && searchInput.value) doSearch(searchInput.value);
   });
+
+  on(filterBtn, 'click', function () {
+    var open = filterPanel && !filterPanel.hidden;
+    if (filterPanel) filterPanel.hidden = open;
+    if (filterBtn) {
+      filterBtn.classList.toggle('active', !open);
+      filterBtn.setAttribute('aria-pressed', String(!open));
+    }
+  });
+
+  on(filterCollapseEl, 'change', function () {
+    filterCollapse = filterCollapseEl.checked;
+    if (searchInput && searchInput.value) doSearch(searchInput.value);
+  });
+
+  on(filterMoreCtxEl, 'change', function () {
+    filterMoreCtx = filterMoreCtxEl.checked;
+    if (searchInput && searchInput.value) doSearch(searchInput.value);
+  });
+
+  on(filterExplainEl, 'change', function () {
+    filterExplain = filterExplainEl.checked;
+    updateExplain();
+    if (searchInput && searchInput.value) doSearch(searchInput.value);
+  });
+
+  function updateExplain() {
+    if (!explainBlock) return;
+    var q = searchInput ? searchInput.value.trim() : '';
+    if (filterExplain && q) {
+      explainBlock.textContent = 'Matches text: \u201c' + q + '\u201d';
+      explainBlock.hidden = false;
+    } else {
+      explainBlock.hidden = true;
+    }
+  }
 
   on(searchSortBtn, 'click', function (e) {
     e.stopPropagation();

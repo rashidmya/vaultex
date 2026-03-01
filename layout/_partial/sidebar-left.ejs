@@ -179,9 +179,35 @@ function isActive(navPath) {
             <%- partial('_partial/icon', {name: 'circle-x', size: 14, sw: 2}) %>
           </button>
         </div>
-        <button class="search-btn-filter" title="Filter options" aria-label="Filter options">
+        <button class="search-btn-filter" id="search-filter-btn" title="Filter options" aria-label="Filter options" aria-pressed="false">
           <%- partial('_partial/icon', {name: 'sliders-horizontal', size: 18, sw: 1.875}) %>
         </button>
+      </div>
+
+      <!-- Filter panel (toggled by filter button) -->
+      <div class="search-filter-panel" id="search-filter-panel" hidden>
+        <div id="search-explain" class="search-explain" hidden></div>
+        <label class="search-filter-row">
+          <span class="search-filter-label">Collapse results</span>
+          <span class="toggle-wrap">
+            <input type="checkbox" id="filter-collapse-results" class="toggle-input" autocomplete="off">
+            <span class="toggle-track"></span>
+          </span>
+        </label>
+        <label class="search-filter-row">
+          <span class="search-filter-label">Show more context</span>
+          <span class="toggle-wrap">
+            <input type="checkbox" id="filter-more-context" class="toggle-input" autocomplete="off">
+            <span class="toggle-track"></span>
+          </span>
+        </label>
+        <label class="search-filter-row">
+          <span class="search-filter-label">Explain search terms</span>
+          <span class="toggle-wrap">
+            <input type="checkbox" id="filter-explain-terms" class="toggle-input" autocomplete="off">
+            <span class="toggle-track"></span>
+          </span>
+        </label>
       </div>
 
       <!-- SearchToolbar: count + sort (hidden until there are results) -->

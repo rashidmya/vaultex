@@ -391,7 +391,64 @@
 }
 
 
+.search-btn-filter.active { color: var(--accent-color); }
 .search-btn-clear[hidden] { display: none !important; }
+
+/* --- Filter panel --- */
+.search-filter-panel {
+  padding: var(--sp-1) var(--sp-3) var(--sp-2);
+  flex-shrink: 0;
+}
+.search-filter-panel[hidden] { display: none; }
+
+.search-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 5px var(--sp-1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-filter-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+/* Toggle switch */
+.toggle-wrap { position: relative; flex-shrink: 0; }
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-track {
+  display: block;
+  width: 34px;
+  height: 19px;
+  background: var(--interactive-active);
+  border-radius: var(--radius-pill);
+  position: relative;
+  transition: background var(--t-fast);
+}
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: transform var(--t-fast), background var(--t-fast);
+}
+.toggle-input:checked ~ .toggle-track { background: var(--accent-color); }
+.toggle-input:checked ~ .toggle-track::after {
+  transform: translateX(15px);
+  background: #fff;
+}
 
 .search-btn-clear,
 .search-btn-filter {
