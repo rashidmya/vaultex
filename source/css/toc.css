@@ -71,16 +71,12 @@
 .toc-item[data-level="5"] { padding-left: 56px; font-size: 11px;  color: var(--text-faint); }
 .toc-item[data-level="6"] { padding-left: 68px; font-size: 11px;  color: var(--text-faint); }
 
-/* Chevron icon (12×12 SVG, rotates when collapsed) */
-.toc-chevron {
-  flex-shrink: 0;
-  color: var(--text-faint);
-  transition: transform var(--t-fast);
-}
-.toc-parent[data-toc-open="false"] .toc-chevron { transform: rotate(-90deg); }
+/* Chevron uses shared .tree-chevron from navigation.css; TOC-specific overrides */
+.toc-nav .tree-chevron { color: var(--text-faint); }
+.toc-parent[data-toc-open="false"] .tree-chevron { transform: rotate(-90deg); }
 
-/* Spacer keeps non-parent text aligned with parent text */
-.toc-chevron-spacer { display: inline-block; width: 12px; flex-shrink: 0; }
+/* Spacer keeps non-parent text aligned with parent text (matches .tree-chevron size) */
+.toc-chevron-spacer { display: inline-block; width: 15px; flex-shrink: 0; }
 
 /* Label clips overflowing text */
 .toc-label {
@@ -89,8 +85,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-
 
 /* --- Related posts (pinned below TOC) --- */
 .right-related {
@@ -125,31 +119,6 @@
 }
 .related-item:hover { background: var(--bg-hover); color: var(--text-normal); }
 .related-item svg { flex-shrink: 0; margin-top: 2px; opacity: 0.6; }
-
-/* --- Tags filter bar --- */
-.tags-filter-wrap {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--bg-active);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 0 8px;
-  height: 26px;
-}
-.tags-filter-icon { color: var(--text-faint); flex-shrink: 0; }
-.tags-filter-input {
-  flex: 1;
-  min-width: 0;
-  background: none;
-  border: none;
-  outline: none;
-  color: var(--text-normal);
-  font-size: 12px;
-  font-family: var(--font-ui);
-  padding: 0;
-}
-.tags-filter-input::placeholder { color: var(--text-faint); }
 
 /* --- Tags list (Obsidian flat list style) --- */
 .tags-list {

@@ -52,13 +52,12 @@ var isPost = page.layout === 'post' || page.layout === 'page';
   <div class="right-tab-content right-tab-hidden" data-rtab="tags">
 
     <div class="right-tab-actions">
-      <div class="tags-filter-wrap">
-        <%- partial('_partial/icon', {name: 'search', size: 13, cls: 'tags-filter-icon'}) %>
+      <div class="sidebar-search-box">
+        <%- partial('_partial/icon', {name: 'search', size: 18, cls: 'search-icon-svg'}) %>
         <input
           type="text"
           id="tags-filter-input"
-          class="tags-filter-input"
-          placeholder="Filter..."
+          placeholder="Search..."
           autocomplete="off"
           spellcheck="false"
           aria-label="Filter tags"

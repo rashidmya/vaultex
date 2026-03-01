@@ -605,10 +605,10 @@
       /* --- Pass 3: chevron / spacer + label --- */
       function makeTocChevron() {
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('class', 'toc-chevron');
+        svg.setAttribute('class', 'tree-chevron');
         svg.setAttribute('viewBox', '0 0 24 24');
-        svg.setAttribute('width', '12');
-        svg.setAttribute('height', '12');
+        svg.setAttribute('width', '15');
+        svg.setAttribute('height', '15');
         svg.setAttribute('fill', 'none');
         svg.setAttribute('stroke', 'currentColor');
         svg.setAttribute('stroke-width', '2.5');
@@ -652,7 +652,7 @@
         });
       }
 
-      $$('.toc-chevron', tocNav).forEach(function (chevron) {
+      $$('.tree-chevron', tocNav).forEach(function (chevron) {
         chevron.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
