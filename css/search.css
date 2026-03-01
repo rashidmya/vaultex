@@ -1,0 +1,401 @@
+/* ==========================================================================
+   VAULTEX THEME — Sidebar Search
+   Search panel, filter panel, options panel, toolbar, results, file groups.
+   ========================================================================== */
+
+/* ==========================================================================
+   Search panel shell
+   ========================================================================== */
+
+.sidebar-search-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* --- SearchHeader: input box + filter button --- */
+.search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 10px 10px 12px;
+  flex-shrink: 0;
+}
+
+.sidebar-search-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  padding: 0 8px;
+  height: 32px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+.search-icon-svg { color: var(--text-muted); flex-shrink: 0; }
+
+#search-input,
+#tags-filter-input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: var(--text-normal);
+  font-size: 13px;
+  font-family: var(--font-ui);
+  padding: 0;
+}
+#search-input::placeholder,
+#tags-filter-input::placeholder { color: var(--text-faint); }
+#search-input::-webkit-search-cancel-button { display: none; }
+
+/* Match case (Aa) button */
+.search-btn-aa {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 1px 3px;
+  line-height: 1.4;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+.search-btn-aa:hover { color: var(--text-normal); background-color: var(--bg-hover); }
+.search-btn-aa.active { color: var(--accent-color); }
+.search-btn-aa.active:hover { background: var(--bg-selected); }
+
+/* Clear + filter buttons */
+.search-btn-clear,
+.search-btn-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.search-btn-filter { width: 28px; height: 25px; }
+.search-btn-clear[hidden] { display: none !important; }
+.search-btn-filter.active { color: var(--accent-color); background: var(--bg-selected); }
+.search-btn-clear:hover,
+.search-btn-filter:not(.active):hover { color: var(--text-normal); background-color: var(--bg-hover); }
+
+/* ==========================================================================
+   Search options panel (shown on focus when input is empty)
+   ========================================================================== */
+
+.search-options-panel {
+  margin: 0 var(--sp-2) var(--sp-2);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.search-options-panel[hidden] { display: none; }
+
+.search-options-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-2) var(--sp-3) var(--sp-1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.search-option-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-1) var(--sp-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--t-fast);
+}
+.search-option-item:hover { background: var(--bg-hover); }
+
+.search-option-key {
+  font-size: var(--font-size-sm);
+  color: var(--text-normal);
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 72px;
+}
+.search-option-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.search-history-section { border-top: 1px solid var(--divider); padding-bottom: var(--sp-1); }
+.search-history-section[hidden] { display: none; }
+
+.search-history-clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.search-history-clear-btn:hover { color: var(--text-normal); background: var(--bg-hover); }
+
+.search-history-item {
+  display: block;
+  width: 100%;
+  padding: var(--sp-1) var(--sp-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-ui);
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.search-history-item:hover { background: var(--bg-hover); color: var(--text-normal); }
+
+/* ==========================================================================
+   Filter panel (collapse results, show more context)
+   ========================================================================== */
+
+.search-filter-panel {
+  padding: var(--sp-1) var(--sp-3) var(--sp-2);
+  flex-shrink: 0;
+}
+.search-filter-panel[hidden] { display: none; }
+
+.search-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 5px var(--sp-1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-filter-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-normal);
+}
+
+/* Toggle switch */
+.toggle-wrap { position: relative; flex-shrink: 0; }
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-track {
+  display: block;
+  width: 34px;
+  height: 19px;
+  background: var(--interactive-active);
+  border-radius: var(--radius-pill);
+  position: relative;
+  transition: background var(--t-fast);
+}
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: transform var(--t-fast), background var(--t-fast);
+}
+.toggle-input:checked ~ .toggle-track { background: var(--accent-color); }
+.toggle-input:checked ~ .toggle-track::after {
+  transform: translateX(15px);
+  background: var(--text-on-accent);
+}
+
+/* ==========================================================================
+   SearchToolbar: results count + sort
+   ========================================================================== */
+
+.search-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-1) 10px;
+  border-bottom: 1px solid var(--divider);
+  flex-shrink: 0;
+  min-height: 27px;
+  gap: 6px;
+}
+.search-toolbar[hidden] { display: none; }
+
+.search-count-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  margin: 0px 10px 10px;
+  gap: 5px;
+  line-height: 1;
+}
+.search-count-label:empty { display: none; }
+
+.search-sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  margin: 0 5px 10px;
+  white-space: nowrap;
+  transition: color var(--t-fast);
+}
+.search-sort-btn:hover { color: var(--text-normal); }
+.search-sort-btn span { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
+
+/* ==========================================================================
+   ResultsList
+   ========================================================================== */
+
+.sidebar-search-results {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.sidebar-search-results:has(#search-no-results[hidden]) #search-results {
+  padding-top: var(--sp-3);
+}
+
+/* ==========================================================================
+   FileGroup: one collapsible group per matching post
+   ========================================================================== */
+
+.file-group-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background var(--t-fast);
+}
+.file-group-header:hover::before {
+  content: '';
+  position: absolute;
+  inset: 1px var(--sp-2);
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  pointer-events: none;
+  z-index: 0;
+}
+.file-group-header:hover { background: none;  }
+.file-group-header > * { position: relative; z-index: 1; }
+
+.file-group-chevron {
+  flex-shrink: 0;
+  color: var(--text-faint);
+  transition: transform var(--t-fast);
+}
+.file-group[data-open="false"] .file-group-chevron { transform: rotate(-90deg); }
+
+.file-group-name {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text-normal);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-group-name:hover { color: var(--text-normal); }
+
+.file-group-count {
+  font-size: 11px;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  min-width: 12px;
+  text-align: right;
+  padding-right: var(--sp-2);
+}
+
+.file-group[data-open="false"] .file-group-body { display: none; }
+
+/* ==========================================================================
+   MatchCard: individual excerpt inside a FileGroup
+   ========================================================================== */
+
+.file-group-body {
+  margin: 0 8px 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.match-card + .match-card {
+  border-top: 1px solid var(--divider);
+}
+
+.match-card-link {
+  display: block;
+  padding: 6px 9px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  text-decoration: none;
+  word-break: break-word;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.match-card-link:hover {
+  background: var(--accent-interactive-hover);
+  color: var(--text-normal);
+}
+
+/* Amber highlight — Obsidian's exact colour */
+em.search-highlight {
+  background: var(--bg-search-highlight);
+  color: var(--text-normal);
+  font-style: normal;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+#search-no-results {
+  padding: var(--sp-1) var(--sp-6);
+  color: var(--text-faint);
+  font-size: var(--font-size-sm);
+}
