@@ -136,4 +136,6 @@
   font-weight: 100;
   line-height: 1;
   padding-left: 2px;
+  position: relative;
+  top: -2px;
 }
