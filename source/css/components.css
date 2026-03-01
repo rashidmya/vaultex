@@ -27,7 +27,7 @@
   justify-content: space-between;
   gap: var(--sp-4);
   width: 100%;
-  padding: 4px var(--sp-3);
+  padding: var(--sp-1) var(--sp-3);
   font-size: var(--font-size-sm);
   font-family: var(--font-ui);
   color: var(--text-muted);
@@ -47,14 +47,14 @@
 .vault-tooltip {
   position: fixed;
   z-index: 10000;
-  background: #000000;
+  background: var(--bg-tooltip);
   color: var(--text-normal);
   font-size: var(--font-size-xs);
   font-family: var(--font-ui);
   font-weight: 500;
   padding: 4px 6px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.09);
+  border: 1px solid var(--border-color);
   box-shadow: 0 2px 10px rgba(0,0,0,0.6);
   pointer-events: none;
   white-space: nowrap;
@@ -73,21 +73,21 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border-bottom-color: #000000;
+  border-bottom-color: var(--bg-tooltip);
 }
 /* arrow left — tooltip to the right of element */
 .vault-tooltip[data-dir="right"]::before {
   right: 100%;
   top: 50%;
   transform: translateY(-50%);
-  border-right-color: #000000;
+  border-right-color: var(--bg-tooltip);
 }
 /* arrow right — tooltip to the left of element */
 .vault-tooltip[data-dir="left"]::before {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  border-left-color: #000000;
+  border-left-color: var(--bg-tooltip);
 }
 
 /* --- Tag pills --- */
@@ -97,7 +97,7 @@
   padding: 2px var(--sp-2);
   background: var(--bg-tag);
   color: var(--text-accent);
-  border: 1px solid rgba(127, 109, 242, 0.22);
+  border: 1px solid var(--border-accent);
   border-radius: var(--radius-pill);
   font-size: var(--font-size-xs);
   font-weight: 500;
@@ -106,7 +106,7 @@
   white-space: nowrap;
 }
 .tag-pill:hover {
-  background: rgba(127, 109, 242, 0.25);
+  background: var(--bg-tag-hover);
   color: var(--text-accent-hover);
   border-color: var(--accent-hover);
 }

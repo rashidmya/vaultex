@@ -277,7 +277,7 @@
   border-bottom: 1px solid var(--divider);
 }
 .breadcrumb-part { font-size: 11px; color: var(--text-faint); white-space: nowrap; }
-.breadcrumb-sep { color: var(--text-faint); opacity: 0.5; flex-shrink: 0; }
+.category-card-breadcrumb .breadcrumb-sep { opacity: 0.5; }
 .category-card:hover .breadcrumb-part,
 .category-card:hover .breadcrumb-sep { color: var(--text-muted); opacity: 1; }
 

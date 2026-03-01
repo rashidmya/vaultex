@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   z-index: 9000;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--bg-overlay-modal);
   align-items: flex-start;
   justify-content: center;
   padding-top: 4vh;
@@ -19,7 +19,7 @@
 .qs-modal {
   width: 100%;
   max-width: 760px;
-  background: #262626;
+  background: var(--bg-modal);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
@@ -90,7 +90,7 @@
 
 .qs-item.qs-selected,
 .qs-item:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--interactive-hover);
 }
 
 .qs-item strong {

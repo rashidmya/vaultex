@@ -18,7 +18,7 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: var(--bg-overlay);
   z-index: 99;
   opacity: 0;
   transition: opacity var(--t-slow);

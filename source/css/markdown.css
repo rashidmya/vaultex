@@ -54,7 +54,7 @@
   .markdown-body em { font-style: italic; }
   .markdown-body del { text-decoration: line-through; color: var(--text-muted); }
   .markdown-body mark {
-    background: rgba(127, 109, 242, 0.3);
+    background: var(--bg-mark);
     color: var(--text-normal);
     border-radius: 2px;
     padding: 0 2px;
@@ -85,12 +85,12 @@
   .markdown-body a.internal-link {
     color: var(--text-accent);
     text-decoration-color: rgba(127, 109, 242, 0.4);
-    background: rgba(127, 109, 242, 0.06);
+    background: var(--bg-internal-link);
     border-radius: 3px;
     padding: 0 2px;
   }
   .markdown-body a.internal-link:hover {
-    background: rgba(127, 109, 242, 0.14);
+    background: var(--bg-tag);
   }
   
   /* --- Horizontal rule --- */
@@ -143,7 +143,7 @@
     top: 1px;
     width: 4px;
     height: 8px;
-    border: 1.5px solid #fff;
+    border: 1.5px solid var(--text-on-accent);
     border-top: none;
     border-left: none;
     transform: rotate(45deg);

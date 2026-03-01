@@ -55,13 +55,24 @@
   transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
   line-height: 1.5;
   position: relative;
+  isolation: isolate;
 }
-.toc-item:hover { color: var(--text-normal); background: var(--bg-hover); }
+.toc-item:hover { color: var(--text-normal); }
 .toc-item.active {
   color: var(--text-accent);
   border-left-color: var(--accent-color);
-  background: var(--bg-selected);
 }
+.toc-item:hover::before,
+.toc-item.active::before {
+  content: '';
+  position: absolute;
+  inset: 1px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: -1;
+}
+.toc-item:hover::before { background: var(--bg-hover); }
+.toc-item.active::before { background: var(--bg-selected); }
 
 /* Indentation: 12 px steps. Chevron center = padding-left + 6 */
 .toc-item[data-level="1"] { padding-left: 8px;  font-weight: 600; }
@@ -162,10 +173,18 @@
   color: var(--text-muted);
   font-size: var(--font-size-sm);
   transition: color var(--t-fast), background var(--t-fast);
+  position: relative;
+  isolation: isolate;
 }
-.tags-list-item:hover {
-  color: var(--text-accent);
+.tags-list-item:hover { color: var(--text-accent); }
+.tags-list-item:hover::before {
+  content: '';
+  position: absolute;
+  inset: 1px 8px;
+  border-radius: 4px;
   background: var(--bg-hover);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .tags-list-name {

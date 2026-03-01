@@ -23,6 +23,23 @@
   --bg-callout-warn:   rgba(234, 179, 8, 0.08);
   --bg-callout-danger: rgba(239, 68, 68, 0.08);
 
+  /* --- Overlays --- */
+  --bg-overlay:          rgba(0, 0, 0, 0.65);   /* sidebar overlay */
+  --bg-overlay-modal:    rgba(0, 0, 0, 0.55);   /* modal/QS backdrop */
+
+  /* --- Modals & tooltips --- */
+  --bg-modal:            #262626;               /* modal/dialog surface */
+  --bg-tooltip:          #000000;               /* tooltip background */
+
+  /* --- Accent tints --- */
+  --bg-mark:             rgba(127, 109, 242, 0.30);  /* <mark> highlight */
+  --bg-internal-link:    rgba(127, 109, 242, 0.06);  /* internal link bg */
+  --bg-tag-hover:        rgba(127, 109, 242, 0.25);  /* tag pill hover */
+  --border-accent:       rgba(127, 109, 242, 0.22);  /* accent-color border */
+
+  /* --- Search --- */
+  --bg-search-highlight: rgba(255, 185, 0, 0.32);   /* search match highlight */
+
   /* --- Text --- */
   --text-normal:       #dcddde;
   --text-muted:        #999999;

@@ -40,7 +40,7 @@ pre code {
 .highlight table { border: none; margin: 0; }
 .highlight table td { border: none; padding: 0; }
 .highlight .gutter {
-  background: rgba(255,255,255,0.02);
+  background: var(--bg-table-alt);
   border-right: 1px solid var(--divider);
   user-select: none;
   min-width: 40px;
