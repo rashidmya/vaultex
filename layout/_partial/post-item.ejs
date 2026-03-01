@@ -30,7 +30,9 @@ var excerpt = p.excerpt || (p.content ? p.content.replace(/<[^>]+>/g, '').substr
 
     <!-- Excerpt -->
     <% if (theme.show_excerpt !== false && excerpt) { %>
-    <p class="post-item-excerpt"><%- excerpt %></p>
+    <div class="post-item-excerpt">
+      <%- excerpt %>
+    </div>
     <% } %>
 
     <!-- Footer: tags + read more -->

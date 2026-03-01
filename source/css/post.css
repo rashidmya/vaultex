@@ -86,7 +86,7 @@
 .post-item-title a { color: var(--text-normal); text-decoration: none; transition: color var(--t-fast); }
 .post-item-title a:hover { color: var(--text-accent-hover); }
 
-.post-item-excerpt {
+.post-item-excerpt, .post-item-excerpt p {
   font-size: var(--font-size-sm);
   color: var(--text-muted);
   line-height: 1.6;
