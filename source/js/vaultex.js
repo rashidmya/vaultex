@@ -924,7 +924,7 @@
    * return at most maxN trimmed excerpts with leading/trailing ellipsis.
    */
   function extractExcerpts(plain, terms, cs, maxN) {
-    var CTX = filterMoreCtx ? 260 : 130;
+    var CTX = filterMoreCtx ? 260 : 60;
     var re  = makeRe(terms, cs);
     if (!re) return [plain.slice(0, 260)];
 
@@ -985,8 +985,10 @@
       if (!fold.every(function (t) { return hayTitle.includes(t) || hayBody.includes(t); })) return;
 
       var excerpts = extractExcerpts(plain, terms, matchCase, filterMoreCtx ? 14 : 7);
+      var re = makeRe(terms, matchCase);
+      var hitCount = re ? ((plain.match(re) || []).length + (post.title.match(re) || []).length) : 0;
       groups.push({ title: decodeEntities(post.title), url: post.url, date: post.date,
-                    excerpts: excerpts, count: excerpts.length });
+                    excerpts: excerpts, count: hitCount });
     });
 
     /* Sort */
