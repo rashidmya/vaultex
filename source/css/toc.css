@@ -90,6 +90,7 @@
 .right-related {
   border-top: 1px solid var(--divider);
   flex-shrink: 0;
+  padding-bottom: var(--sp-2);
 }
 
 .right-related-header {
