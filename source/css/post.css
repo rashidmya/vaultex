@@ -203,8 +203,8 @@
 .archive-year-count {
   font-size: var(--font-size-xs);
   font-weight: 400;
-  color: var(--text-faint);
-  background: var(--bg-active);
+  color: var(--text-muted);
+  background: var(--bg-secondary-alt);
   border-radius: var(--radius-pill);
   padding: 1px var(--sp-2);
 }
@@ -233,8 +233,8 @@
 .archive-item-cats { display: flex; gap: var(--sp-1); flex-shrink: 0; }
 .archive-cat-badge {
   font-size: 11px;
-  color: var(--text-faint);
-  background: var(--bg-active);
+  color: var(--text-muted);
+  background: var(--bg-secondary-alt);
   border-radius: var(--radius-pill);
   padding: 0 var(--sp-2);
   white-space: nowrap;
