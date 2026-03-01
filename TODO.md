@@ -1,5 +1,1 @@
-need to fix: highlightjs not change all background of codeblock
-
-# to do
-- enhance post markdown
-- back/forward buttons fix
+need to fix: highlightjs doesnt change the whole background of code blocks

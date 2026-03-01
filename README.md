@@ -7,16 +7,21 @@ A dark Hexo theme inspired by the Obsidian.md UI/UX. Features a two-sidebar app 
 ## Features
 
 - **App shell layout** — tab bar, activity bar, left file explorer sidebar, right outline sidebar
-- **File explorer** — collapsible sections (Navigation, Categories, Recent Notes, Links) with category tree
+- **File explorer** — collapsible sections (Navigation, Categories, Links) with a nested category tree
+- **Explorer actions** — auto-reveal current file, expand/collapse all sections
+- **Navigation history** — back/forward buttons with sessionStorage-based history tracking
 - **Table of contents** — auto-generated from post headings with active heading tracking via IntersectionObserver
-- **Full-text search** — instant sidebar search powered by `search.xml` with keyword highlighting and context excerpts
+- **Full-text search** — sidebar search powered by `search.xml` with match-case toggle, filter panel, sort options, and keyword-highlighted context excerpts
+- **Quick switcher** — `Ctrl+O` / `Cmd+O` popup to jump to any post by URL
 - **Tag cloud & related posts** — displayed in the right sidebar on post pages
 - **Vault switcher** — Obsidian-style vault name button with dropdown in the sidebar footer
+- **Help modal** — theme info and links, opened via the `?` button in the sidebar footer
 - **Self-hosted fonts** — Inter (variable) + Source Code Pro, no Google Fonts
 - **Syntax highlighting** — configurable highlight.js theme via CSS
 - **Two post list layouts** — list view or 2-column card grid
 - **Mobile responsive** — collapsible sidebars, overlay drawer on small screens
-- **Keyboard shortcut** — `Ctrl+K` / `Cmd+K` opens search
+- **Keyboard shortcuts** — `Ctrl+O` / `Cmd+O` opens the quick switcher; `Ctrl+Shift+F` / `Cmd+Shift+F` focuses sidebar search
+- **Vercel Analytics** — optional, enabled via config
 - **Print styles** — clean print layout
 - **Accessible** — ARIA roles, focus management, reduced-motion support
 
@@ -32,7 +37,7 @@ A dark Hexo theme inspired by the Obsidian.md UI/UX. Features a two-sidebar app 
 1. Clone or download this theme into your Hexo blog's `themes/` directory:
 
 ```bash
-git clone https://github.com/username/vaultex themes/vaultex
+git clone https://github.com/rashidmya/vaultex themes
 ```
 
 2. Set the theme in your root `_config.yml`:
@@ -89,6 +94,9 @@ All options live in `themes/vaultex/_config.yml`.
 # Name displayed in the sidebar vault switcher
 vault_name: My Blog
 
+# Label shown in the tab bar and breadcrumb on the homepage
+homepage_subtitle: Recent Notes
+
 # Vault title position:
 #   1 = top of left sidebar (header)
 #   2 = bottom of left sidebar (Obsidian-style footer)
@@ -114,12 +122,17 @@ highlight: obsidian
 
 ```yaml
 # Section label style:
-#   1 = classic  (NAVIGATION, CATEGORIES, RECENT NOTES, LINKS — uppercase + dividers)
-#   2 = modern   (Navigation, Categories, Recent Notes, Links — no dividers)
+#   1 = classic  (NAVIGATION, CATEGORIES, LINKS — uppercase + dividers)
+#   2 = modern   (Navigation, Categories, Links — no dividers)
 sidebar_explorer_style: 2
 
-# Prefix section labels with numbers (00, 10, 20, 30) — style 2 only
-sidebar_explorer_numbers: true
+# Prefix section labels with numbers (00, 10, 30) — style 2 only
+sidebar_explorer_numbers: false
+
+# Icon visibility per section
+nav_icons: true        # Show icons in the Navigation section
+category_icons: true   # Show folder/file icons in the Categories tree
+links_icons: true      # Show icons in the Links section
 ```
 
 ### Right Sidebar
@@ -144,35 +157,23 @@ show_excerpt: true # Show post excerpt
 
 ### Navigation
 
-Customize the links shown in the left sidebar navigation section:
+Customize the links shown in the left sidebar Navigation section:
 
 ```yaml
 nav_items:
   - label: Home
     path: /
-    icon: home
+    icon: house
   - label: Archive
     path: /archives/
     icon: archive
-  - label: Categories
-    path: /categories/
-    icon: folder
-  - label: Tags
-    path: /tags/
-    icon: tags
 ```
 
 Available icons match filenames in `source/icons/` (without the `.svg` extension).
 
-### Search
-
-```yaml
-search_placeholder: Search...
-```
-
 ### Social Links
 
-Shown in the activity bar (left edge of the screen):
+Shown in the left sidebar Links section:
 
 ```yaml
 social_links:
@@ -184,26 +185,22 @@ social_links:
     icon: twitter
 ```
 
----
+### Analytics
 
-## Source Pages
-
-Create these pages in your Hexo `source/` directory to enable the search and tags widgets:
-**`source/tags.md`**
-```markdown
----
-title: Tags
-layout: _widget/tags
----
+```yaml
+# Vercel Analytics — set to true when deployed on Vercel
+vercel_analytics: false
 ```
 
-**`source/categories.md`**
-```markdown
 ---
-title: Categories
-layout: categories
----
-```
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl+O` / `Cmd+O` | Open quick switcher |
+| `Ctrl+Shift+F` / `Cmd+Shift+F` | Focus sidebar search |
+| `Esc` | Close quick switcher or help modal |
 
 ---
 
@@ -211,7 +208,7 @@ layout: categories
 
 ### Accent color
 
-Edit `source/css/variables.css` to retheme the accent site-wide.
+Edit `source/css/variables.css` to retheme the accent color site-wide.
 
 ### Custom icons
 
