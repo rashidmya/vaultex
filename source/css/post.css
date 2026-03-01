@@ -155,13 +155,13 @@
 
 /* --- Post navigation (prev/next) --- */
 .post-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: var(--sp-4);
   margin-top: var(--sp-10);
   padding-top: var(--sp-6);
   border-top: 1px solid var(--divider);
 }
+.post-nav-item { flex: 1; }
 .post-nav-item {
   display: flex;
   flex-direction: column;
