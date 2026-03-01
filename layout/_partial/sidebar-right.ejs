@@ -22,7 +22,7 @@
       <span>TAGS</span>
     </div>
     <div class="tag-cloud">
-      <% site.tags.sort('name').each(function(tag) { %>
+      <% site.tags.toArray().sort(function(a,b){ return b.posts.length - a.posts.length; }).forEach(function(tag) { %>
       <a href="<%- url_for(tag.path) %>" class="tag-pill">#<%= tag.name %></a>
       <% }) %>
     </div>
