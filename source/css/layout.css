@@ -334,7 +334,8 @@ a.breadcrumb-item:hover { color: var(--text-normal); }
 .categories-grid,
 .tags-page-cloud,
 .note-header + .post-list,
-.note-header + .archive-list {
+.note-header + .archive-list,
+.vault-footer-bar {
   max-width: var(--content-max-width);
   margin-left: auto;
   margin-right: auto;
