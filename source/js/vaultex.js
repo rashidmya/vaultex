@@ -627,6 +627,7 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && qsBackdrop && qsBackdrop.classList.contains('qs-open')) qsClose();
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 'o') { e.preventDefault(); qsOpen(); }
   });
 
   /* -----------------------------------------------------------------------
@@ -1071,9 +1072,9 @@
     if (searchInput && searchInput.value) doSearch(searchInput.value);
   });
 
-  /* Ctrl+K / Cmd+K */
+  /* Ctrl+Shift+F / Cmd+Shift+F */
   document.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
       e.preventDefault();
       openLeft();
       activateSidebarTab('search');
