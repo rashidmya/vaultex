@@ -24,7 +24,6 @@
 /* --- Action bar (sits above scrollable content inside a tab) --- */
 .right-tab-actions {
   padding: var(--sp-2) var(--sp-3);
-  border-bottom: 1px solid var(--divider);
   flex-shrink: 0;
 }
 
@@ -178,3 +177,4 @@
   color: var(--text-faint);
   flex-shrink: 0;
 }
+

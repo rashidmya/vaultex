@@ -445,40 +445,23 @@
 
 .search-count-label:empty { display: none; }
 
-/* Custom sort select wrapper (hides native arrow, shows SVG chevron) */
-.search-sort-wrap {
-  position: relative;
+.search-sort-btn {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  margin: 0px 5px 10px;
-}
-.search-sort-select {
-  -webkit-appearance: none;
-  appearance: none;
-  font-size: 12px;
-  color: var(--text-muted);
+  gap: 3px;
   background: none;
   border: none;
-  outline: none;
+  font-size: 12px;
   font-family: var(--font-ui);
-  cursor: pointer;
-  line-height: 1;
-  max-width: 130px;
-  padding-right: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: right;
-}
-.search-sort-select:hover { color: var(--text-normal); }
-.search-sort-select option { background: var(--bg-secondary); color: var(--text-normal); }
-.sort-chevron-svg {
-  position: absolute;
-  right: 0;
-  pointer-events: none;
   color: var(--text-muted);
-  padding: 1px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 5px 10px;
+  white-space: nowrap;
+  transition: color var(--t-fast);
 }
+.search-sort-btn:hover { color: var(--text-normal); }
+.search-sort-btn span { max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
 
 /* ==========================================================================
    ResultsList: scrollable container

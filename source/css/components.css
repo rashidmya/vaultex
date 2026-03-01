@@ -3,6 +3,47 @@
    Tag pills, pagination, callouts/admonitions.
    ========================================================================== */
 
+/* --- Dropdown menu ---
+   Usage: .dropdown-wrap > button[aria-expanded] + .dropdown > .dropdown-item* / .dropdown-sep
+   Add .dropdown-right to .dropdown to anchor to the right edge of the wrap. */
+.dropdown-wrap { position: relative; }
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 185px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  padding: var(--sp-1) 0;
+}
+.dropdown-right { left: auto; right: 0; }
+.dropdown[hidden] { display: none; }
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  width: 100%;
+  padding: 4px var(--sp-3);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-ui);
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.dropdown-item:hover { background: var(--bg-hover); color: var(--text-normal); }
+.dropdown-item.active { color: var(--text-accent); }
+.dropdown-check { visibility: hidden; flex-shrink: 0; }
+.dropdown-item.active .dropdown-check { visibility: visible; }
+.dropdown-sep { height: 1px; background: var(--divider); margin: var(--sp-1) 0; }
+
 /* --- Custom tooltip --- */
 .vault-tooltip {
   position: fixed;

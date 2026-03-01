@@ -58,7 +58,37 @@ var isPost = page.layout === 'post' || page.layout === 'page';
   <!-- ===== TAGS TAB (always) ===== -->
   <div class="right-tab-content right-tab-hidden" data-rtab="tags">
 
-    <div class="right-tab-actions">
+    <div class="explorer-actions">
+      <div class="dropdown-wrap">
+        <button class="explorer-action-btn" id="tags-sort-btn" title="Change sort order" aria-label="Change sort order" aria-expanded="false">
+          <%- partial('_partial/icon', {name: 'arrow-up-narrow-wide', size: 18}) %>
+        </button>
+        <div class="dropdown" id="tags-sort-dropdown" hidden>
+          <button class="dropdown-item active" data-sort="freq-desc">
+            <span>Frequency (high to low)</span>
+            <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+          </button>
+          <button class="dropdown-item" data-sort="freq-asc">
+            <span>Frequency (low to high)</span>
+            <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+          </button>
+          <div class="dropdown-sep"></div>
+          <button class="dropdown-item" data-sort="name-asc">
+            <span>Tag name (A to Z)</span>
+            <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+          </button>
+          <button class="dropdown-item" data-sort="name-desc">
+            <span>Tag name (Z to A)</span>
+            <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+          </button>
+        </div>
+      </div>
+      <button class="explorer-action-btn" id="tags-search-toggle" title="Search" aria-label="Toggle search" aria-pressed="false">
+        <%- partial('_partial/icon', {name: 'search', size: 18}) %>
+      </button>
+    </div>
+
+    <div class="right-tab-actions" id="tags-search-bar" hidden>
       <div class="sidebar-search-box">
         <%- partial('_partial/icon', {name: 'search', size: 18, cls: 'search-icon-svg'}) %>
         <input

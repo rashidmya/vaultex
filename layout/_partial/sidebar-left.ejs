@@ -187,16 +187,39 @@ function isActive(navPath) {
       <!-- SearchToolbar: count + sort (hidden until there are results) -->
       <div class="search-toolbar" id="search-toolbar" hidden>
         <span class="search-count-label" id="search-results-count"></span>
-        <div class="search-sort-wrap">
-          <select class="search-sort-select" id="search-sort" aria-label="Sort results">
-            <option value="name-asc">File name (A to Z)</option>
-            <option value="name-desc">File name (Z to A)</option>
-            <option value="modified-desc">Modified time (new to old)</option>
-            <option value="modified-asc">Modified time (old to new)</option>
-            <option value="created-desc">Created time (new to old)</option>
-            <option value="created-asc">Created time (old to new)</option>
-          </select>
-          <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 14, cls: 'sort-chevron-svg', sw: 2.2}) %>
+        <div class="dropdown-wrap">
+          <button class="search-sort-btn" id="search-sort-btn" aria-expanded="false" aria-label="Sort results">
+            <span id="search-sort-label">File name (A to Z)</span>
+            <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 14, sw: 2.2}) %>
+          </button>
+          <div class="dropdown dropdown-right" id="search-sort-dropdown" hidden>
+            <button class="dropdown-item active" data-sort="name-asc">
+              <span>File name (A to Z)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+            <button class="dropdown-item" data-sort="name-desc">
+              <span>File name (Z to A)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+            <div class="dropdown-sep"></div>
+            <button class="dropdown-item" data-sort="modified-desc">
+              <span>Modified time (new to old)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+            <button class="dropdown-item" data-sort="modified-asc">
+              <span>Modified time (old to new)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+            <div class="dropdown-sep"></div>
+            <button class="dropdown-item" data-sort="created-desc">
+              <span>Created time (new to old)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+            <button class="dropdown-item" data-sort="created-asc">
+              <span>Created time (old to new)</span>
+              <%- partial('_partial/icon', {name: 'check', size: 14, cls: 'dropdown-check'}) %>
+            </button>
+          </div>
         </div>
       </div>
 
