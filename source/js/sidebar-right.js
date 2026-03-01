@@ -91,10 +91,7 @@ rightActivityBtns.forEach(function (btn) {
 on(toggleRightBtn, 'click', function () {
   if (!sidebarRight) return;
   if (sidebarRight.classList.contains('collapsed')) {
-    /* Ensure a tab is active before opening */
-    var stored = recall('right-tab');
-    var tabOk  = stored && $$('.right-tab-content[data-rtab="' + stored + '"]').length > 0;
-    var tab    = tabOk ? stored : (rightActivityBtns.length ? rightActivityBtns[0].dataset.rtab : null);
+    var tab = defaultRightTab();
     if (tab) activateRightTab(tab);
     openRight();
   } else {
