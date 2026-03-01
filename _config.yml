@@ -6,9 +6,6 @@ vault_name: blog.keepalive.sh
 
 homepage_subtitle: Recent Notes          # Label shown in tab bar and breadcrumb on the homepage
 
-# Accent color (CSS hex)
-accent_color: '#7f6df2'   # Obsidian purple — override here or via CSS variable
-
 # Typography
 font_size: 16             # Base font size (px)
 code_font_size: 14        # Code block font size (px)

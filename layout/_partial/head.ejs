@@ -38,10 +38,6 @@
 <link rel="stylesheet" href="<%- url_for('/css/highlight/' + theme.highlight + '.css') %>">
 <% } %>
 
-<!-- Accent color override from theme config -->
-<% if (theme.accent_color) { %>
-<style>:root { --accent-color: <%= theme.accent_color %>; --interactive-accent: <%= theme.accent_color %>; }</style>
-<% } %>
 <% if (theme.font_size) { %>
 <style>:root { --font-size-base: <%= theme.font_size %>px; }</style>
 <% } %>

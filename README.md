@@ -89,9 +89,6 @@ All options live in `themes/vaultex/_config.yml`.
 # Name displayed in the sidebar vault switcher
 vault_name: My Blog
 
-# Accent color (any CSS hex value)
-accent_color: '#7f6df2'
-
 # Vault title position:
 #   1 = top of left sidebar (header)
 #   2 = bottom of left sidebar (Obsidian-style footer)
@@ -214,13 +211,7 @@ layout: categories
 
 ### Accent color
 
-Override the accent color site-wide via the theme config:
-
-```yaml
-accent_color: '#e05c5c'
-```
-
-Or override per-page with a `<style>` tag in your post front matter, or globally in `source/css/variables.css`.
+Edit `source/css/variables.css` to retheme the accent site-wide.
 
 ### Custom icons
 
