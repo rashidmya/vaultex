@@ -1,9 +1,9 @@
-<% page.title = page.title || 'Recent Notes'; %>
+<% page.title = theme.homepage_subtitle || 'Home'; %>
 
 <div class="note-header">
   <h1 class="note-title page-title">
     <%- partial('_partial/icon', {name: 'home', size: 22}) %>
-    Recent Notes
+    <%- config.title || 'Vaultex'; %>
   </h1>
   <p class="note-subtitle"><%= config.description %></p>
 </div>

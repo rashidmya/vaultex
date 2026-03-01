@@ -29,7 +29,7 @@
 
       <div class="tab-strip">
         <div class="tab tab-active" role="tab" aria-selected="true">
-          <span class="tab-title"><%= page.name || config.title %></span>
+          <span class="tab-title"><%= page.layout === 'index' ? (theme.homepage_subtitle || config.title) : (page.title || config.title) %></span>
           <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
             <%- partial('_partial/icon', {name: 'close', size: 16, sw: 2}) %>
           </a>

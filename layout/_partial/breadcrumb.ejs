@@ -46,7 +46,11 @@ if (page.layout === 'post') {
   crumbs.push({ label: 'Tags', url: null, muted: true });
   crumbs.push({ label: page.tag, url: null });
 
-} else if (page.layout !== 'index' && page.title) {
+} else if (page.layout === 'index') {
+  /* ── Homepage ── */
+  crumbs.push({ label: theme.homepage_subtitle || 'Home', url: null });
+
+} else if (page.title) {
   /* ── Generic page (categories overview, tags overview, custom pages) ── */
   crumbs.push({ label: page.title, url: null });
 }

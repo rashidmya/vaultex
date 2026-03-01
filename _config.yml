@@ -2,7 +2,9 @@
 # Vaultex Theme Configuration
 # ============================================================
 
-vault_name: blog
+vault_name: blog.keepalive.sh
+
+homepage_subtitle: Recent Notes          # Label shown in tab bar and breadcrumb on the homepage
 
 # Accent color (CSS hex)
 accent_color: '#7f6df2'   # Obsidian purple — override here or via CSS variable
@@ -30,12 +32,11 @@ vault_title_position: 2
 # Left sidebar icon toggles
 nav_icons: true            # Show icons in the Navigation section
 category_icons: true      # Show folder/file icons in the Categories tree
-recent_notes_icons: true   # Show file icon in Recent Notes
 links_icons: true          # Show icons in the Links section
 
 # Left sidebar explorer section style:
-#   1 = classic  (NAVIGATION / CATEGORIES / RECENT NOTES / LINKS — uppercase, bold, dividers)
-#   2 = modern   (Navigation / Categories / Recent Notes / Links — no dividers)
+#   1 = classic  (NAVIGATION / CATEGORIES / LINKS — uppercase, bold, dividers)
+#   2 = modern   (Navigation / Categories / Links — no dividers)
 sidebar_explorer_style: 2
 sidebar_explorer_numbers: false  # style 2 only — prefix labels with 00 / 10 / 20 / 30
 
@@ -56,8 +57,14 @@ sidebar_right:
 # Socials
 social_links:
   - label: GitHub
-    url: https://github.com/username
+    url: https://github.com
     icon: github
+  - label: LinkedIn
+    url: https://linkedin.com
+    icon: linkedin
+  - label: Twitter
+    url: https://twitter.com
+    icon: twitter
 
 # Code highlight theme
 highlight: obsidian
