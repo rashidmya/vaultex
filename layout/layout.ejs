@@ -31,7 +31,7 @@
         <div class="tab tab-active" role="tab" aria-selected="true">
           <span class="tab-title"><%= page.title || config.title %></span>
           <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
-            <%- partial('_partial/icon', {name: 'close', size: 18, sw: 2}) %>
+            <%- partial('_partial/icon', {name: 'close', size: 16, sw: 2}) %>
           </a>
         </div>
       </div>
@@ -67,10 +67,29 @@
         <%- partial('_partial/sidebar-left') %>
       </aside>
 
-      <!-- Main Note/Content Area -->
-      <main class="note-view" id="note-view" role="main">
-        <%- body %>
-      </main>
+      <!-- Main content column: nav bar + scrollable note view -->
+      <div class="content-col">
+
+        <div class="content-nav-bar">
+          <div class="content-nav-btns">
+            <button class="tab-nav-btn btn-icon" id="nav-back" title="Go back" aria-label="Go back" data-tooltip-pos="right">
+              <%- partial('_partial/icon', {name: 'chevron-left', size: 16, sw: 2.5}) %>
+            </button>
+            <button class="tab-nav-btn btn-icon" id="nav-forward" title="Go forward" aria-label="Go forward" data-tooltip-pos="right">
+              <%- partial('_partial/icon', {name: 'chevron-right', size: 16, sw: 2.5}) %>
+            </button>
+          </div>
+          <nav class="content-breadcrumb" aria-label="Breadcrumb">
+            <%- partial('_partial/breadcrumb') %>
+          </nav>
+          <div></div>
+        </div>
+
+        <main class="note-view" id="note-view" role="main">
+          <%- body %>
+        </main>
+
+      </div><!-- /.content-col -->
 
       <!-- ======= RIGHT SIDEBAR ======= -->
       <aside class="sidebar-right collapsed" id="sidebar-right" aria-label="Right panel">

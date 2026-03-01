@@ -1,0 +1,57 @@
+<%
+/*
+ * breadcrumb.ejs — Content nav bar breadcrumb
+ *
+ * Builds an ordered array of { label, url } crumbs based on the current page type.
+ * url === null means the crumb is the current (non-linked) segment.
+ */
+var crumbs = [];
+if (page.layout === 'post') {
+  /* ── Post: Category hierarchy + post title ── */
+  if (page.categories && page.categories.length > 0) {
+    page.categories.toArray().forEach(function (cat) {
+      crumbs.push({ label: cat.name, url: url_for('/' + cat.path) });
+    });
+  }
+  crumbs.push({ label: page.title, url: null });
+
+} else if (page.archive) {
+  /* ── Archive ── */
+  crumbs.push({ label: 'Archive', url: null });
+
+} else if (page.category) {
+  /* ── Specific category page: walk up parent chain ── */
+  crumbs.push({ label: 'Categories', url: null, muted: true });
+  var _allCats = site.categories.toArray();
+  var _normPath = page.path.replace(/\/?index\.html$/, '').replace(/\/$/, '');
+  var _cur = null;
+  for (var _i = 0; _i < _allCats.length; _i++) {
+    if (_allCats[_i].path.replace(/\/$/, '') === _normPath) { _cur = _allCats[_i]; break; }
+  }
+  var _hier = [];
+  var _c = _cur;
+  while (_c) {
+    _hier.unshift(_c);
+    if (_c.parent) {
+      var _pid = String(_c.parent);
+      _c = _allCats.find(function (x) { return String(x._id) === _pid; });
+    } else { _c = null; }
+  }
+  _hier.forEach(function (c, idx) {
+    crumbs.push({ label: c.name, url: idx < _hier.length - 1 ? url_for('/' + c.path) : null });
+  });
+
+} else if (page.tag) {
+  /* ── Specific tag page ── */
+  crumbs.push({ label: 'Tags', url: null, muted: true });
+  crumbs.push({ label: page.tag, url: null });
+
+} else if (page.layout !== 'index' && page.title) {
+  /* ── Generic page (categories overview, tags overview, custom pages) ── */
+  crumbs.push({ label: page.title, url: null });
+}
+%>
+<% crumbs.forEach(function (crumb, i) { %>
+  <% if (i > 0) { %><span class="breadcrumb-sep">/</span><% } %>
+  <% if (crumb.url) { %><a href="<%= crumb.url %>" class="breadcrumb-item"><%= crumb.label %></a><% } else if (crumb.muted) { %><span class="breadcrumb-item"><%= crumb.label %></span><% } else { %><span class="breadcrumb-item breadcrumb-current"><%= crumb.label %></span><% } %>
+<% }); %>
