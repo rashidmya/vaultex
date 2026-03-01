@@ -227,6 +227,7 @@
       parent.dataset.treeOpen = isOpen ? 'false' : 'true';
       updateCatVisibility();
       try { localStorage.setItem('obs-' + parent.dataset.treeId, isOpen ? '0' : '1'); } catch (_) {}
+      syncCollapseBtn();
     });
     // Restore persisted state
     try {
@@ -254,16 +255,23 @@
       var isCollapsed = header.classList.toggle('collapsed');
       if (tree) tree.classList.toggle('section-hidden', isCollapsed);
       store(key, isCollapsed ? '0' : '1');
-      if (!isCollapsed) {
-        var btn = $('#explorer-collapse-all');
-        if (btn) {
-          btn.classList.remove('is-expanded');
-          btn.title = 'Collapse all';
-          btn.setAttribute('aria-label', 'Collapse all');
-        }
-      }
+      syncCollapseBtn();
     });
   });
+
+  /* Sync collapse-all button to reflect actual expanded state on page load */
+  function syncCollapseBtn() {
+    var btn = $('#explorer-collapse-all');
+    if (!btn) return;
+    var allExpanded =
+      !$$('.explorer-section-header').some(function (h) { return h.classList.contains('collapsed'); }) &&
+      !$$('.nav-tree-parent').some(function (p) { return p.dataset.treeOpen === 'false'; });
+    btn.classList.toggle('is-expanded', !allExpanded);
+    var label = allExpanded ? 'Collapse all' : 'Expand all';
+    btn.title = label;
+    btn.setAttribute('aria-label', label);
+  }
+  syncCollapseBtn();
 
   /* -----------------------------------------------------------------------
      4.5. EXPLORER ACTION BAR
@@ -326,12 +334,7 @@
     updateCatVisibility();
 
     // 3. Sync collapse-all button state
-    var collapseBtn = $('#explorer-collapse-all');
-    if (collapseBtn) {
-      collapseBtn.classList.remove('is-expanded');
-      collapseBtn.title = 'Collapse all';
-      collapseBtn.setAttribute('aria-label', 'Collapse all');
-    }
+    syncCollapseBtn();
   });
 
   on($('#explorer-close'), 'click', closeLeft);
