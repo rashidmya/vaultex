@@ -520,44 +520,67 @@
         link.dataset.level = level;
         link.textContent = h.textContent;
 
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          h.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
         tocNav.appendChild(link);
       });
 
-      /* Active heading tracking via IntersectionObserver */
+      /* Active heading tracking via scroll */
       var tocLinks = $$('.toc-item', tocNav);
+      var headingMap = new WeakMap();
+      headings.forEach(function (h, i) { headingMap.set(h, tocLinks[i]); });
 
-      if ('IntersectionObserver' in window) {
-        var headingMap = new WeakMap();
-        headings.forEach(function (h, i) {
-          headingMap.set(h, tocLinks[i]);
-        });
+      var activeLink       = null;
+      var clickScrolling   = false;
+      var clickScrollTimer = null;
+      var tocTicking       = false;
 
-        var activeLink = null;
-
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            var link = headingMap.get(entry.target);
-            if (!link) return;
-            if (entry.isIntersecting) {
-              if (activeLink) activeLink.classList.remove('active');
-              activeLink = link;
-              link.classList.add('active');
-              /* Scroll toc to keep active item visible */
-              link.scrollIntoView({ block: 'nearest' });
-            }
-          });
-        }, {
-          rootMargin: '-10% 0px -80% 0px',
-          threshold: 0
-        });
-
-        headings.forEach(function (h) { observer.observe(h); });
+      function setActiveTocLink(link) {
+        if (link === activeLink) return;
+        if (activeLink) activeLink.classList.remove('active');
+        activeLink = link;
+        if (link) {
+          link.classList.add('active');
+          link.scrollIntoView({ block: 'nearest' });
+        }
       }
+
+      function updateActiveToc() {
+        tocTicking = false;
+        if (clickScrolling) return;
+        var threshold = 100;
+        var active = null;
+        for (var i = headings.length - 1; i >= 0; i--) {
+          if (headings[i].getBoundingClientRect().top <= threshold) {
+            active = headings[i];
+            break;
+          }
+        }
+        if (!active) active = headings[0];
+        setActiveTocLink(active ? headingMap.get(active) : null);
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!tocTicking) {
+          tocTicking = true;
+          requestAnimationFrame(updateActiveToc);
+        }
+      }, { passive: true });
+
+      headings.forEach(function (h, idx) {
+        var link = tocLinks[idx];
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          setActiveTocLink(link);
+          clickScrolling = true;
+          clearTimeout(clickScrollTimer);
+          clickScrollTimer = setTimeout(function () {
+            clickScrolling = false;
+            updateActiveToc();
+          }, 1000);
+          h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      updateActiveToc();
     }
   }
 
