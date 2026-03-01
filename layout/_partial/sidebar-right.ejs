@@ -7,6 +7,13 @@ var isPost = page.layout === 'post' || page.layout === 'page';
   <% if (isPost) { %>
   <div class="right-tab-content right-tab-hidden" data-rtab="toc">
 
+    <div class="explorer-actions">
+      <button class="explorer-action-btn is-expanded" id="toc-collapse-all" title="Expand all" aria-label="Expand all">
+        <%- partial('_partial/icon', {name: 'chevrons-down-up', size: 18, cls: 'icon-collapse-svg'}) %>
+        <%- partial('_partial/icon', {name: 'chevrons-up-down', size: 18, cls: 'icon-expand-svg'}) %>
+      </button>
+    </div>
+
     <nav class="toc-nav" id="toc-nav" aria-label="Table of contents">
       <!-- Populated by vaultex.js from post headings -->
       <span class="toc-empty">No headings found</span>

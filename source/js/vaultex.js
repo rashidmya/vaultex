@@ -655,6 +655,18 @@
         });
       }
 
+      function syncTocCollapseBtn() {
+        var btn = $('#toc-collapse-all');
+        if (!btn) return;
+        var allExpanded = !$$('.toc-parent', tocNav).some(function (p) {
+          return p.dataset.tocOpen === 'false';
+        });
+        btn.classList.toggle('is-expanded', !allExpanded);
+        var label = allExpanded ? 'Collapse all' : 'Expand all';
+        btn.title = label;
+        btn.setAttribute('aria-label', label);
+      }
+
       $$('.tree-chevron', tocNav).forEach(function (chevron) {
         chevron.addEventListener('click', function (e) {
           e.preventDefault();
@@ -663,8 +675,20 @@
           var isOpen = parentLink.dataset.tocOpen !== 'false';
           parentLink.dataset.tocOpen = isOpen ? 'false' : 'true';
           updateTocChildVisibility();
+          syncTocCollapseBtn();
         });
       });
+
+      on($('#toc-collapse-all'), 'click', function () {
+        var expanding = this.classList.contains('is-expanded');
+        $$('.toc-parent', tocNav).forEach(function (link) {
+          link.dataset.tocOpen = expanding ? 'true' : 'false';
+        });
+        updateTocChildVisibility();
+        syncTocCollapseBtn();
+      });
+
+      syncTocCollapseBtn();
 
       /* Active heading tracking via scroll */
       var tocLinks = tocLinkEls;
