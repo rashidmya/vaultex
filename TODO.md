@@ -8,5 +8,4 @@ need to fix: highlightjs not change all background of codeblock
 - right/left panels
   - toggle tooltips to "collapse/expand"
   - toggle icons for collapsed and expanded
-- add vertical line to toc
 - enhance post markdown
