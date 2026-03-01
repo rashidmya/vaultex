@@ -289,6 +289,7 @@
   transition: background var(--t-fast), color var(--t-fast);
 }
 .tab-nav-btn:hover { background: var(--bg-hover); color: var(--text-normal); }
+.tab-nav-btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
 
 .content-breadcrumb {
   display: flex;
