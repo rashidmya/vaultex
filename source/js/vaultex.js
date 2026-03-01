@@ -295,6 +295,45 @@
     btn.setAttribute('aria-label', label);
   });
 
+  on($('#explorer-auto-reveal'), 'click', function () {
+    var active = $('.nav-item.active');
+    if (!active) return;
+
+    // 1. Expand the section that contains the active item
+    var section = active.closest('.explorer-section');
+    if (section) {
+      var header = section.querySelector('.explorer-section-header');
+      var sectionId = header && header.dataset.section;
+      var tree = sectionId && $('#nav-' + sectionId);
+      if (header && header.classList.contains('collapsed')) {
+        header.classList.remove('collapsed');
+        if (tree) tree.classList.remove('section-hidden');
+        store('section-' + sectionId, '1');
+      }
+    }
+
+    // 2. Expand all ancestor tree-parent nodes
+    var pid = active.dataset.parentTreeId;
+    while (pid) {
+      var parentEl = navCategories && navCategories.querySelector('[data-tree-id="' + pid + '"]');
+      if (!parentEl) break;
+      if (parentEl.dataset.treeOpen === 'false') {
+        parentEl.dataset.treeOpen = 'true';
+        try { localStorage.setItem('obs-' + pid, '1'); } catch (_) {}
+      }
+      pid = parentEl.dataset.parentTreeId;
+    }
+    updateCatVisibility();
+
+    // 3. Sync collapse-all button state
+    var collapseBtn = $('#explorer-collapse-all');
+    if (collapseBtn) {
+      collapseBtn.classList.remove('is-expanded');
+      collapseBtn.title = 'Collapse all';
+      collapseBtn.setAttribute('aria-label', 'Collapse all');
+    }
+  });
+
   on($('#explorer-close'), 'click', closeLeft);
 
   /* -----------------------------------------------------------------------
