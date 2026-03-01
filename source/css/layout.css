@@ -272,12 +272,15 @@
   display: flex;
   align-items: center;
   gap: 2px;
+  padding-left: var(--sp-2);
 }
 
 .tab-nav-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 22px;
+  height: 22px;
   background: none;
   border: none;
   color: var(--text-muted);
