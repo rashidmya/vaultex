@@ -1,15 +1,8 @@
 <% page.title = page.title || 'Archive'; %>
 
-<div class="note-header">
-  <h1 class="note-title page-title">
-    <%- partial('_partial/icon', {name: 'archive', size: 22}) %>
-    Archive
-    <span class="page-title-count"><%= site.posts.length %> notes</span>
-  </h1>
-</div>
 
 <%
-// Build year-keyed structure
+// Build year-keyed structure from current page (for listing)
 var postsByYear = {};
 var yearOrder = [];
 page.posts.each(function(post) {
@@ -21,6 +14,15 @@ page.posts.each(function(post) {
   postsByYear[y].push(post);
 });
 yearOrder.sort(function(a, b) { return b - a; });
+
+// True totals per year, scoped to category if on a category page
+var totalByYear = {};
+var _catForCount = page.category && site.categories.findOne({ name: page.category });
+var _allPosts = _catForCount ? _catForCount.posts : site.posts;
+_allPosts.each(function(post) {
+  var y = post.date.year();
+  totalByYear[y] = (totalByYear[y] || 0) + 1;
+});
 %>
 
 <div class="archive-list">
@@ -29,7 +31,7 @@ yearOrder.sort(function(a, b) { return b - a; });
     <h2 class="archive-year">
       <%- partial('_partial/icon', {name: 'calendar', size: 16}) %>
       <%= year %>
-      <span class="archive-year-count"><%= postsByYear[year].length %></span>
+      <span class="archive-year-count"><%= totalByYear[year] || postsByYear[year].length %></span>
     </h2>
 
     <% postsByYear[year].forEach(function(post) { %>
