@@ -183,6 +183,34 @@
   </url>
   
   <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/css/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/frontend/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/design-tokens/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/theming/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://rashidmya.github.io/vaultex/tags/git/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -226,55 +254,6 @@
   
   <url>
     <loc>https://rashidmya.github.io/vaultex/tags/es2023/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/css/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/frontend/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/design-tokens/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/theming/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/vercel/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/deployment/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/devops/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -337,34 +316,6 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/web/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/performance/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/minimalism/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/philosophy/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://rashidmya.github.io/vaultex/tags/obsidian/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -393,21 +344,77 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/typography/</loc>
+    <loc>https://rashidmya.github.io/vaultex/tags/web/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/fonts/</loc>
+    <loc>https://rashidmya.github.io/vaultex/tags/performance/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/design/</loc>
+    <loc>https://rashidmya.github.io/vaultex/tags/minimalism/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/philosophy/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/search/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/navigation/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/vaultex/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/features/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/vercel/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/deployment/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/devops/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -449,35 +456,28 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/search/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/navigation/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/vaultex/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rashidmya.github.io/vaultex/tags/features/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://rashidmya.github.io/vaultex/tags/toc/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/typography/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/fonts/</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rashidmya.github.io/vaultex/tags/design/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -528,14 +528,14 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/categories/Thoughts/</loc>
+    <loc>https://rashidmya.github.io/vaultex/categories/Productivity/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/categories/Productivity/</loc>
+    <loc>https://rashidmya.github.io/vaultex/categories/Thoughts/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -549,7 +549,7 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/categories/Vaultex/Design/</loc>
+    <loc>https://rashidmya.github.io/vaultex/categories/Vaultex/Meta/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -563,7 +563,7 @@
   </url>
   
   <url>
-    <loc>https://rashidmya.github.io/vaultex/categories/Vaultex/Meta/</loc>
+    <loc>https://rashidmya.github.io/vaultex/categories/Vaultex/Design/</loc>
     <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
