@@ -11,7 +11,7 @@ vault_title_position: 2
 
 # Customize
 customize:
-  font_size: 16             # Base font size (px)
+  font_size: 15             # Base font size (px)
   code_font_size: 14        # Code block font size (px)
   max_content_width: 720    # Note content max-width (px)
   highlight: obsidian       # Code highlight theme
