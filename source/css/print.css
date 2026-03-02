@@ -1,0 +1,14 @@
+/* ==========================================================================
+   VAULTEX THEME — Print Styles
+   ========================================================================== */
+
+@media print {
+  .sidebar-left,
+  .sidebar-right,
+  .tab-bar,
+  .post-nav { display: none !important; }
+  body { background: white; color: black; overflow: auto; }
+  .note-view { overflow: visible; padding: 0; }
+  .markdown-body a { color: inherit; }
+  .markdown-body a[href]::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #666; }
+}

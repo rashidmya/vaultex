@@ -1,0 +1,19 @@
+<%
+/*
+ * activity-bar.ejs — Activity bar buttons
+ *
+ * To add a button, append an entry to the array:
+ *   { id: 'activity-foo', icon: '<icon-name>', title: 'Tooltip label' }
+ *
+ * icon must match a key in _partial/icon.ejs.
+ * Set action: true later when you want the button to do something.
+ */
+var activityButtons = [
+  { id: 'activity-quick-switcher', icon: 'file-search',   title: 'Open quick switcher (Ctrl+O)' },
+];
+%>
+<% activityButtons.forEach(function(btn) { %>
+<button class="activity-btn btn-icon" id="<%= btn.id %>" title="<%= btn.title %>" aria-label="<%= btn.title %>" data-tooltip-pos="right">
+  <%- partial('_partial/icon', {name: btn.icon, size: 18, sw: 1.7}) %>
+</button>
+<% }) %>

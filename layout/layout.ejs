@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'en' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> is-post<% } %><% if (theme.posts_per_row >= 2) { %> posts-grid<% } %>">
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-container" id="app-container">
+
+    <!-- ======= TAB BAR (full width, never resizes) ======= -->
+    <div class="tab-bar" role="tablist">
+
+      <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
+      <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
+        <button class="sidebar-toggle-btn btn-icon" id="toggle-left" aria-label="Toggle file explorer" title="Toggle file explorer" data-tooltip-pos="right">
+          <%- partial('_partial/icon', {name: 'panel-left', size: 20, cls: 'icon-sidebar-open'}) %>
+          <%- partial('_partial/icon', {name: 'panel-left-filled', size: 20, cls: 'icon-sidebar-close'}) %>
+        </button>
+        <button class="sidebar-view-btn btn-icon" data-tab="folder" aria-label="Files" title="Files">
+          <%- partial('_partial/icon', {name: 'folder-closed', size: 18}) %>
+        </button>
+        <button class="sidebar-view-btn btn-icon" data-tab="search" aria-label="Search" title="Search (Ctrl+Shift+F)">
+          <%- partial('_partial/icon', {name: 'search', size: 18, cls: 'sidebar-view-btn-svg'}) %>
+        </button>
+      </div>
+
+      <div class="tab-strip">
+        <div class="tab tab-active" role="tab" aria-selected="true">
+          <span class="tab-title"><%= page.layout === 'index' ? (theme.homepage_subtitle || config.title) : (page.name || page.title || config.title) %></span>
+          <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
+            <%- partial('_partial/icon', {name: 'close', size: 16, sw: 2}) %>
+          </a>
+        </div>
+      </div>
+
+      <!-- Toggle lives outside the sidebar zone (always at the content/sidebar boundary) -->
+      <button class="sidebar-toggle-btn btn-icon" id="toggle-right" aria-label="Toggle right panel" title="Toggle right panel" data-tooltip-pos="left">
+        <%- partial('_partial/icon', {name: 'panel-right', size: 20, cls: 'icon-sidebar-open'}) %>
+        <%- partial('_partial/icon', {name: 'panel-right-filled', size: 20, cls: 'icon-sidebar-close'}) %>
+      </button>
+      <!-- Right spacer: mirrors sidebar-right width; contains only tab buttons -->
+      <div class="tab-bar-right-spacer spacer-collapsed" id="tab-bar-right-spacer">
+        <% if (page.layout === 'post' || page.layout === 'page') { %>
+        <button class="right-tab-btn btn-icon" data-rtab="toc" id="rtab-btn-toc" title="Outline" aria-label="Outline" data-tooltip-pos="left">
+          <%- partial('_partial/icon', {name: 'list', size: 18, sw: 1.7}) %>
+        </button>
+        <% } %>
+        <button class="right-tab-btn btn-icon" data-rtab="tags" id="rtab-btn-tags" title="Tags" aria-label="Tags" data-tooltip-pos="left">
+          <%- partial('_partial/icon', {name: 'tags', size: 18, sw: 1.7}) %>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======= WORKSPACE ROW (sidebars + content, below tab bar) ======= -->
+    <div class="workspace-row">
+
+      <!-- Activity bar (always visible) -->
+      <div class="activity-bar" id="activity-bar">
+        <%- partial('_partial/activity-bar') %>
+      </div>
+
+      <!-- Left sidebar (file explorer) -->
+      <aside class="sidebar-left" id="sidebar-left" aria-label="File explorer">
+        <%- partial('_partial/sidebar-left') %>
+      </aside>
+
+      <!-- Main content column: nav bar + scrollable note view -->
+      <div class="content-col">
+
+        <div class="content-nav-bar">
+          <div class="content-nav-btns">
+            <button class="tab-nav-btn btn-icon" id="nav-back" title="Go back" aria-label="Go back" data-tooltip-pos="right">
+              <%- partial('_partial/icon', {name: 'arrow-left', size: 16, sw: 2}) %>
+            </button>
+            <button class="tab-nav-btn btn-icon" id="nav-forward" title="Go forward" aria-label="Go forward" data-tooltip-pos="right">
+              <%- partial('_partial/icon', {name: 'arrow-right', size: 16, sw: 2}) %>
+            </button>
+          </div>
+          <nav class="content-breadcrumb" aria-label="Breadcrumb">
+            <%- partial('_partial/breadcrumb') %>
+          </nav>
+          <div></div>
+        </div>
+
+        <main class="note-view" id="note-view" role="main">
+          <%- body %>
+        </main>
+
+      </div><!-- /.content-col -->
+
+      <!-- ======= RIGHT SIDEBAR ======= -->
+      <aside class="sidebar-right collapsed" id="sidebar-right" aria-label="Right panel">
+        <%- partial('_partial/sidebar-right') %>
+      </aside>
+
+    </div><!-- /.workspace-row -->
+
+  </div><!-- /.app-container -->
+
+  <%- partial('_partial/help-modal') %>
+  <%- partial('_partial/quick-switcher') %>
+  <%- partial('_partial/scripts') %>
+</body>
+</html>

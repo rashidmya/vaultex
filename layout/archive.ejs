@@ -1,0 +1,55 @@
+<% page.title = page.title || 'Archive'; %>
+
+
+<%
+// Build year-keyed structure from current page (for listing)
+var postsByYear = {};
+var yearOrder = [];
+page.posts.each(function(post) {
+  var y = post.date.year();
+  if (!postsByYear[y]) {
+    postsByYear[y] = [];
+    yearOrder.push(y);
+  }
+  postsByYear[y].push(post);
+});
+yearOrder.sort(function(a, b) { return b - a; });
+
+// True totals per year, scoped to category if on a category page
+var totalByYear = {};
+var _catForCount = page.category && site.categories.findOne({ name: page.category });
+var _allPosts = _catForCount ? _catForCount.posts : site.posts;
+_allPosts.each(function(post) {
+  var y = post.date.year();
+  totalByYear[y] = (totalByYear[y] || 0) + 1;
+});
+%>
+
+<div class="archive-list">
+  <% yearOrder.forEach(function(year) { %>
+  <div class="archive-year-group">
+    <h2 class="archive-year">
+      <%- partial('_partial/icon', {name: 'calendar', size: 16}) %>
+      <%= year %>
+      <span class="archive-year-count"><%= totalByYear[year] || postsByYear[year].length %></span>
+    </h2>
+
+    <% postsByYear[year].forEach(function(post) { %>
+    <a href="<%- url_for(post.path) %>" class="archive-item">
+      <span class="archive-item-date"><%= post.date.format('MMM DD') %></span>
+      <span class="archive-item-title"><%= post.title %></span>
+      <% if (post.categories && post.categories.length > 0) { %>
+      <span class="archive-item-cats">
+        <% post.categories.each(function(cat) { %>
+        <span class="archive-cat-badge"><%= cat.name %></span>
+        <% }) %>
+      </span>
+      <% } %>
+    </a>
+    <% }) %>
+
+  </div>
+  <% }) %>
+</div>
+
+<%- partial('_partial/pagination') %>

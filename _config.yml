@@ -1,0 +1,64 @@
+# ============================================================
+# Vaultex Theme Configuration
+# ============================================================
+
+vault_name: vaultex
+
+homepage_subtitle: Recent Notes          # Label shown in tab bar and breadcrumb on the homepage
+
+# Vault title position: 1 = top (header), 2 = bottom (footer, Obsidian-style)
+vault_title_position: 2
+
+# Typography
+font_size: 16             # Base font size (px)
+code_font_size: 14        # Code block font size (px)
+max_content_width: 720    # Note content max-width (px)
+
+# Navigation items shown in left sidebar
+nav_items:
+  - label: Home
+    path: /
+    icon: home
+  - label: Archive
+    path: /archives/
+    icon: archive
+  - label: RSS
+    path: /atom.xml
+    icon: rss
+
+# Left sidebar icon toggles
+nav_icons: true            # Show icons in the Navigation section
+category_icons: true      # Show folder/file icons in the Categories tree
+links_icons: true          # Show icons in the Links section
+
+# Left sidebar explorer section style:
+#   1 = classic  (NAVIGATION / CATEGORIES / LINKS — uppercase, bold, dividers)
+#   2 = modern   (Navigation / Categories / Links — no dividers)
+sidebar_explorer_style: 2
+sidebar_explorer_numbers: false  # style 2 only — prefix labels with 00 / 10 / 20 / 30
+
+# Post list settings
+posts_per_row: 1        # 1 = list, 2 = card grid
+show_date: true           # Show post date in list
+show_tags: true           # Show tags in post list items
+max_tags: 6               # Show tags in post list items
+show_excerpt: true        # Show post excerpt in list
+
+# Right sidebar settings
+sidebar_right:
+  toc: true                 # Generate TOC from post headings in right panel
+  toc_depth: 3              # Max heading depth (1=h1 only, 3=h1-h3, etc.)
+  show_related: true        # Related posts in right panel
+  show_tags_panel: true     # Tag cloud in right panel
+
+# Socials
+social_links:
+  - label: GitHub
+    url: https://github.com/rashidmya/vaultex
+    icon: github
+
+# Code highlight theme
+highlight: obsidian
+
+# Vercel Analytics (set to true when deployed on Vercel)
+vercel_analytics: false
