@@ -33,18 +33,14 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
 
-<!-- Highlight theme -->
-<% if (theme.highlight) { %>
-<link rel="stylesheet" href="<%- url_for('/css/highlight/' + theme.highlight + '.css') %>">
-<% } %>
 
-<% if (theme.font_size) { %>
-<style>:root { --font-size-base: <%= theme.font_size %>px; }</style>
+<% if (theme.customize && theme.customize.font_size) { %>
+<style>:root { --font-size-base: <%= theme.customize.font_size %>px; }</style>
 <% } %>
-<% if (theme.code_font_size) { %>
-<style>:root { --font-size-code: <%= theme.code_font_size %>px; }</style>
+<% if (theme.customize && theme.customize.code_font_size) { %>
+<style>:root { --font-size-code: <%= theme.customize.code_font_size %>px; }</style>
 <% } %>
-<% if (theme.max_content_width) { %>
-<style>:root { --content-max-width: <%= theme.max_content_width %>px; }</style>
+<% if (theme.customize && theme.customize.max_content_width) { %>
+<style>:root { --content-max-width: <%= theme.customize.max_content_width %>px; }</style>
 <% } %>
 <script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %>, searchXml: '<%- url_for('/search.xml') %>' };</script>
