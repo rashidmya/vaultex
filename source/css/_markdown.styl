@@ -23,6 +23,19 @@
     margin-bottom: 0.6em;
     scroll-margin-top: 20px;
   }
+  @keyframes toc-heading-flash
+    0%   { background: var(--bg-search-highlight); box-shadow: 0 0 0 4px var(--bg-search-highlight); }
+    100% { background: transparent; box-shadow: 0 0 0 4px transparent; }
+
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4,
+  .markdown-body h5,
+  .markdown-body h6
+    &.toc-heading-flash
+      animation: toc-heading-flash 1.5s ease-out forwards;
+
   .markdown-body h1 { font-size: 1.75rem; }
   .markdown-body h2 {
     font-size: 1.4rem;
