@@ -14,7 +14,7 @@ customize:
   font_size: 16             # Base font size (px)
   code_font_size: 14        # Code block font size (px)
   max_content_width: 720    # Note content max-width (px)
-  highlight: xcode      # Code highlight theme
+  highlight: obsidian       # Code highlight theme
 
 # Navigation items shown in left sidebar
 nav_items:
