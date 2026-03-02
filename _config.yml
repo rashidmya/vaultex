@@ -2,9 +2,12 @@
 # Vaultex Theme Configuration
 # ============================================================
 
-vault_name: blog.keepalive.sh
+vault_name: vaultex
 
 homepage_subtitle: Recent Notes          # Label shown in tab bar and breadcrumb on the homepage
+
+# Vault title position: 1 = top (header), 2 = bottom (footer, Obsidian-style)
+vault_title_position: 2
 
 # Typography
 font_size: 16             # Base font size (px)
@@ -22,9 +25,6 @@ nav_items:
   - label: RSS
     path: /atom.xml
     icon: rss
-
-# Vault title position: 1 = top (header), 2 = bottom (footer, Obsidian-style)
-vault_title_position: 2
 
 # Left sidebar icon toggles
 nav_icons: true            # Show icons in the Navigation section
@@ -54,14 +54,8 @@ sidebar_right:
 # Socials
 social_links:
   - label: GitHub
-    url: https://github.com
+    url: https://github.com/rashidmya/vaultex
     icon: github
-  - label: LinkedIn
-    url: https://linkedin.com
-    icon: linkedin
-  - label: Twitter
-    url: https://twitter.com
-    icon: twitter
 
 # Code highlight theme
 highlight: obsidian

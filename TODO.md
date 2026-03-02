@@ -1,1 +1,0 @@
-need to fix: highlightjs doesnt change the whole background of code blocks
