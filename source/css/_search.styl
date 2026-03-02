@@ -399,3 +399,13 @@ em.search-highlight {
   color: var(--text-faint);
   font-size: var(--font-size-sm);
 }
+
+/* Scroll-to-match highlight on post pages */
+@keyframes search-scroll-highlight {
+  0%, 60% { background: var(--bg-search-highlight); }
+  100%     { background: transparent; }
+}
+.search-scroll-highlight {
+  animation: search-scroll-highlight 2.5s ease forwards;
+  border-radius: var(--radius-sm);
+}

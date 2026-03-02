@@ -210,8 +210,13 @@ function doSearch(query) {
     var defaultOpen = filterCollapse ? 'false' : 'true';
     var isOpen = g.url in groupOpenState ? String(groupOpenState[g.url]) : defaultOpen;
     var cards = g.excerpts.map(function (ex) {
+      var clean = ex.replace(/^\u2026\s*/, '').replace(/\s*\u2026$/, '').trim();
+      var chunk = clean.slice(0, 120);
+      var lastSpace = chunk.lastIndexOf(' ');
+      if (lastSpace > 40) chunk = chunk.slice(0, lastSpace);
+      var scrollAttr = chunk.length >= 20 ? ' data-scroll-text="' + escHtml(chunk) + '"' : '';
       return '<div class="match-card">' +
-        '<a href="' + escHtml(g.url) + '" class="match-card-link">' +
+        '<a href="' + escHtml(g.url) + '" class="match-card-link"' + scrollAttr + '>' +
           renderWithHighlight(ex, terms, matchCase) +
         '</a></div>';
     }).join('');
@@ -237,6 +242,18 @@ function doSearch(query) {
     });
   });
 }
+
+/* Save scroll target when clicking a match-card with excerpt text */
+var SCROLL_TARGET_KEY = 'vaultex-scroll-target';
+on(searchResults, 'click', function (e) {
+  var link = e.target.closest('.match-card-link[data-scroll-text]');
+  if (!link) return;
+  sessionStorage.setItem(SCROLL_TARGET_KEY, JSON.stringify({
+    url:       link.getAttribute('href'),
+    text:      link.dataset.scrollText,
+    matchCase: matchCase
+  }));
+});
 
 /* SearchHeader interactions */
 on(searchInput, 'input', function () {
