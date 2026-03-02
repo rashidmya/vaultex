@@ -31,13 +31,12 @@ pre code {
 
 /* --- Hexo .highlight wrapper --- */
 .highlight {
-  background: var(--bg-code);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   margin: 1.2em 0;
   overflow: hidden;
 }
-.highlight table { border: none; margin: 0; }
+.highlight table { border: none; margin: 0; width: 100%; }
 .highlight table td { border: none; padding: 0; }
 .highlight .gutter {
   background: var(--bg-table-alt);
@@ -60,11 +59,15 @@ pre code {
   background: none;
   border: none;
   border-radius: 0;
-  padding: var(--sp-4) var(--sp-5);
+  padding: 0;
   font-size: var(--font-size-code);
   line-height: var(--line-height-code);
   margin: 0;
   overflow-x: auto;
+}
+.highlight .code pre code {
+  display: block;
+  padding: var(--sp-4) var(--sp-5);
 }
 /* Code block filename/language badge */
 .highlight .caption,
@@ -75,23 +78,4 @@ figcaption {
   font-size: var(--font-size-xs);
   color: var(--text-faint);
   font-family: var(--font-mono);
-}
-
-
-/* Ensure the hljs background fills the whole Hexo wrapper */
-.highlight,
-.highlight table,
-.highlight td,
-.highlight .gutter,
-.highlight .code,
-.highlight pre {
-  background: var(--bg-code);
-}
-
-/* Make sure code stretches */
-.highlight code,
-.highlight code.hljs {
-  display: block;
-  width: 100%;
-  background: transparent; /* wrapper controls bg */
 }

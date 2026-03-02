@@ -4,49 +4,54 @@
    ========================================================================== */
 
 /* 0. Web fonts (Inter + Source Code Pro) */
-@import 'fonts.css';
+@import '_fonts'
 
 /* 1. Design tokens */
-@import 'variables.css';
+@import '_variables'
 
 /* 2. Base reset & scrollbars */
-@import 'base.css';
+@import '_base'
 
 /* 3. App shell layout */
-@import 'layout.css';
+@import '_layout'
 
 /* 4. Sidebar navigation */
-@import 'navigation.css';
+@import '_navigation'
 
 /* 5. Right panel: TOC, tags, related */
-@import 'toc.css';
+@import '_toc'
 
 /* 6. Shared UI components: tag pills, pagination, callouts */
-@import 'components.css';
+@import '_components'
 
 /* 7. Post list, article, archive, categories, tags pages */
-@import 'post.css';
+@import '_post'
 
 /* 8. Markdown body: headings, text, links, lists, blockquotes, tables, images */
-@import 'markdown.css';
+@import '_markdown'
 
 /* 9. Code blocks & syntax highlighting */
-@import 'code.css';
+@import '_code'
 
 /* 10. Search page */
-@import 'search.css';
+@import '_search'
 
 /* 11. Utility classes */
-@import 'utilities.css';
+@import '_utilities'
 
 /* 12. Responsive breakpoints, focus/a11y, reduced-motion */
-@import 'responsive.css';
+@import '_responsive'
 
 /* 13. Print styles */
-@import 'print.css';
+@import '_print'
 
 /* 14. Help modal */
-@import 'help-modal.css';
+@import '_help-modal'
 
 /* 15. Quick switcher */
-@import 'quick-switcher.css';
+@import '_quick-switcher'
+
+/* 16. Syntax highlight theme */
+@import '_highlight/' + highlight-theme
+
+
