@@ -39,7 +39,6 @@ export function closeRight() {
   store('right-open', '0');
 }
 
-var activeRightTab = null; /* eslint-disable-line no-unused-vars */
 var hasTocTab   = $$('.right-tab-content[data-rtab="toc"]').length > 0;
 var rightTabKey = hasTocTab ? 'right-tab-post' : 'right-tab';
 var isReload    = (function () {
@@ -53,7 +52,6 @@ function activateRightTab(tabName) {
   rightTabContents.forEach(function (panel) {
     panel.classList.toggle('right-tab-hidden', panel.dataset.rtab !== tabName);
   });
-  activeRightTab = tabName;
   store(rightTabKey, tabName);
 }
 

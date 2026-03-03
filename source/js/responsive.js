@@ -4,7 +4,7 @@
  * Collapses sidebars at breakpoints and restores desktop state.
  */
 
-import { on, recall } from './helpers.js';
+import { recall } from './helpers.js';
 import { isMobile, isTablet, openLeft, closeLeft, sidebarLeft, toggleLeftBtn, overlay } from './sidebar-left.js';
 import { closeRight } from './sidebar-right.js';
 
