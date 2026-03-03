@@ -46,6 +46,7 @@ show_tags: true           # Show tags in post list items
 max_tags: 6               # Show tags in post list items
 show_excerpt: true        # Show post excerpt in list
 show_thumbnail: true      # Show thumbnail image in post list cards (requires thumbnail front-matter)
+thumbnail_style: left     # Thumbnail position in post list cards: left | right
 
 # Post Settings
 show_post_thumbnail: true # Show thumbnail as hero image on individual post pages
