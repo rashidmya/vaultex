@@ -54,7 +54,7 @@ show_post_thumbnail: true # Show thumbnail as hero image on individual post page
 # Right sidebar settings
 sidebar_right:
   toc: true                 # Generate TOC from post headings in right panel
-  toc_depth: 4              # Max heading depth (1=h1 only, 2=h1-h2,  3=h2-h4, etc.)
+  toc_depth: 3              # Max heading depth (1=h2 only, 3=h2-h4, etc.)
   show_related: true        # Related posts in right panel
   show_tags_panel: true     # Tag cloud in right panel
 
