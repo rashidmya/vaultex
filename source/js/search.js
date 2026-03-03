@@ -118,7 +118,7 @@ fetch((window.VAULTEX_CONFIG && window.VAULTEX_CONFIG.searchXml) || '/search.xml
 function extractExcerpts(plain, terms, cs, maxN) {
   var CTX = filterMoreCtx ? 260 : 50;
   var re  = makeRe(terms, cs);
-  if (!re) return [plain.slice(0, 150)];
+  if (!re) return [{ text: plain.slice(0, 150), hitIdx: 0 }];
 
   /* collect positions */
   var hits = [], m;
@@ -127,10 +127,12 @@ function extractExcerpts(plain, terms, cs, maxN) {
     hits.push(m.index);
     if (hits.length > 300) break; /* safety cap */
   }
-  if (!hits.length) return [plain.slice(0, 150)];
+  if (!hits.length) return [{ text: plain.slice(0, 150), hitIdx: 0 }];
 
-  /* split into new card only when windows have no overlap */
+  /* split into new card only when windows have no overlap.
+     Track firstHitIdx so post-utils can scroll to the correct occurrence. */
   var windows = [];
+  var firstHitIdx = 0;
   var wS = Math.max(0, hits[0] - CTX);
   var wE = Math.min(plain.length, hits[0] + CTX);
   for (var i = 1; i < hits.length; i++) {
@@ -138,16 +140,20 @@ function extractExcerpts(plain, terms, cs, maxN) {
     if (nS <= wE) {
       wE = Math.min(plain.length, hits[i] + CTX);
     } else {
-      windows.push([wS, wE]);
+      windows.push([wS, wE, firstHitIdx]);
       if (windows.length >= maxN) break;
+      firstHitIdx = i;
       wS = nS;
       wE = Math.min(plain.length, hits[i] + CTX);
     }
   }
-  windows.push([wS, wE]);
+  windows.push([wS, wE, firstHitIdx]);
 
   return windows.slice(0, maxN).map(function (w) {
-    return (w[0] > 0 ? '\u2026' : '') + plain.slice(w[0], w[1]) + (w[1] < plain.length ? '\u2026' : '');
+    return {
+      text:   (w[0] > 0 ? '\u2026' : '') + plain.slice(w[0], w[1]) + (w[1] < plain.length ? '\u2026' : ''),
+      hitIdx: w[2]
+    };
   });
 }
 
@@ -210,9 +216,7 @@ function doSearch(query) {
     var defaultOpen = filterCollapse ? 'false' : 'true';
     var isOpen = g.url in groupOpenState ? String(groupOpenState[g.url]) : defaultOpen;
     var cards = g.excerpts.map(function (ex) {
-      var clean = ex.replace(/^\u2026\s*/, '').replace(/\s*\u2026$/, '').trim();
-      /* Centre the anchor on the first match so post-utils finds the correct
-         block, not the pre-match context that may live in a different element. */
+      var clean = ex.text.replace(/^\u2026\s*/, '').replace(/\s*\u2026$/, '').trim();
       var re0 = makeRe(terms, matchCase);
       var matchIdx = 0;
       if (re0) { re0.lastIndex = 0; var m0 = re0.exec(clean); if (m0) matchIdx = m0.index; }
@@ -220,10 +224,12 @@ function doSearch(query) {
       var chunk = clean.slice(aStart, aStart + 120);
       var lastSpace = chunk.lastIndexOf(' ');
       if (lastSpace > 40) chunk = chunk.slice(0, lastSpace);
-      var scrollAttr = chunk.length >= 20 ? ' data-scroll-text="' + escHtml(chunk) + '"' : '';
+      var scrollAttr = chunk.length >= 20
+        ? ' data-scroll-text="' + escHtml(chunk) + '" data-hit-idx="' + ex.hitIdx + '"'
+        : '';
       return '<div class="match-card">' +
         '<a href="' + escHtml(g.url) + '" class="match-card-link"' + scrollAttr + '>' +
-          renderWithHighlight(ex, terms, matchCase) +
+          renderWithHighlight(ex.text, terms, matchCase) +
         '</a></div>';
     }).join('');
     return '<div class="file-group" data-url="' + escHtml(g.url) + '" data-open="' + isOpen + '">' +
@@ -258,6 +264,7 @@ on(searchResults, 'click', function (e) {
     url:       link.getAttribute('href'),
     text:      link.dataset.scrollText,
     query:     searchInput ? searchInput.value.trim() : '',
+    hitIdx:    link.dataset.hitIdx ? +link.dataset.hitIdx : 0,
     matchCase: matchCase
   }));
 });
