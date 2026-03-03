@@ -200,6 +200,8 @@ if (markdownBody && tocNav && tocEnabled) {
           updateActiveToc();
         }, 1000);
         h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        h.classList.add('toc-heading-flash');
+        setTimeout(function () { h.classList.remove('toc-heading-flash'); }, 1500);
       });
     });
 
