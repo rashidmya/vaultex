@@ -306,3 +306,63 @@
 .tag-pill-weighted { transition: opacity var(--t-fast), color var(--t-fast), background var(--t-fast); }
 .tag-pill-weighted:hover { opacity: 1 !important; }
 .tag-count { font-size: 0.7em; color: var(--text-faint); margin-left: 3px; vertical-align: super; }
+
+/* --- Post-item thumbnail (list view) --- */
+
+.post-item--has-thumb
+  display: flex
+  align-items: stretch
+  overflow: hidden
+
+.post-item-thumb
+  display: block
+  flex: 0 0 140px
+  width: 140px
+  overflow: hidden
+  border-right: 1px solid var(--border-color)
+
+.post-item-thumb img
+  display: block
+  width: 100%
+  height: 100%
+  aspect-ratio: 4 / 3
+  object-fit: cover
+  transition: transform var(--t-normal)
+
+.post-item--has-thumb:hover .post-item-thumb img
+  transform: scale(1.03)
+
+.post-item--has-thumb .post-item-inner
+  flex: 1
+  min-width: 0
+
+/* --- Post hero image (post page) --- */
+
+.post-hero
+  width: 100%
+  border-radius: var(--radius-md)
+  overflow: hidden
+  border: 1px solid var(--border-color)
+  margin-bottom: var(--sp-6)
+
+.post-hero-img
+  display: block
+  width: 100%
+  max-height: 360px
+  object-fit: cover
+  object-position: center
+
+/* Thumbnail stacks on mobile */
+@media (max-width: 768px)
+  .post-item--has-thumb
+    flex-direction: column
+
+  .post-item-thumb
+    flex: none
+    width: 100%
+    border-right: none
+    border-bottom: 1px solid var(--border-color)
+
+  .post-item-thumb img
+    height: auto
+    aspect-ratio: 4 / 3

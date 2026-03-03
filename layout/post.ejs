@@ -30,6 +30,12 @@
     <% } %>
   </header>
 
+  <% if (theme.show_post_thumbnail !== false && page.thumbnail) { %>
+  <div class="post-hero">
+    <img src="<%- url_for(page.thumbnail) %>" alt="" class="post-hero-img" loading="lazy">
+  </div>
+  <% } %>
+
   <!-- <hr class="note-divider"> -->
 
   <!-- Note content (markdown rendered) -->
