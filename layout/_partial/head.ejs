@@ -47,4 +47,4 @@
 <% if (theme.max_content_width) { %>
 <style>:root { --content-max-width: <%= theme.max_content_width %>px; }</style>
 <% } %>
-<script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %> };</script>
+<script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %>, searchXml: '<%- url_for('/search.xml') %>' };</script>

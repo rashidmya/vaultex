@@ -31,7 +31,7 @@ var filterCollapse     = false;
 var filterMoreCtx      = false;
 
 /* Load search.xml once */
-fetch('/search.xml')
+fetch((window.VAULTEX_CONFIG && window.VAULTEX_CONFIG.searchXml) || '/search.xml')
   .then(function (r) { if (!r.ok) throw 0; return r.text(); })
   .then(function (xml) {
     var doc = new DOMParser().parseFromString(xml, 'text/xml');
