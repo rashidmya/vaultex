@@ -336,6 +336,37 @@
   flex: 1
   min-width: 0
 
+/* --- Post-item thumbnail right variant --- */
+
+.post-item--has-thumb-right
+  display: flex
+  align-items: stretch
+  overflow: hidden
+
+.post-item--has-thumb-right .post-item-thumb
+  display: block
+  flex: 0 0 140px
+  width: 140px
+  overflow: hidden
+  border-left: 1px solid var(--border-color)
+  order: 2
+
+.post-item--has-thumb-right .post-item-thumb img
+  display: block
+  width: 100%
+  height: 100%
+  aspect-ratio: 4 / 3
+  object-fit: cover
+  transition: transform var(--t-normal)
+
+.post-item--has-thumb-right:hover .post-item-thumb img
+  transform: scale(1.03)
+
+.post-item--has-thumb-right .post-item-inner
+  flex: 1
+  min-width: 0
+  order: 1
+
 /* --- Post hero image (post page) --- */
 
 .post-hero
@@ -354,13 +385,21 @@
 
 /* Thumbnail stacks on mobile */
 @media (max-width: 768px)
-  .post-item--has-thumb
+  .post-item--has-thumb,
+  .post-item--has-thumb-right
     flex-direction: column
+
+  .post-item--has-thumb-right .post-item-thumb
+    order: 0
+
+  .post-item--has-thumb-right .post-item-inner
+    order: 1
 
   .post-item-thumb
     flex: none
     width: 100%
     border-right: none
+    border-left: none
     border-bottom: 1px solid var(--border-color)
 
   .post-item-thumb img
