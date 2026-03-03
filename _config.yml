@@ -35,7 +35,7 @@ links_icons: true          # Show icons in the Links section
 
 # Left sidebar explorer section style:
 #   1 = classic  (NAVIGATION / CATEGORIES / LINKS — uppercase, bold, dividers)
-#   2 = modern   (Navigation / Categories / Links — no dividers)
+#   2 = Obsidian-style   (Navigation / Categories / Links — no dividers)
 sidebar_explorer_style: 2
 sidebar_explorer_numbers: false  # style 2 only — prefix labels with 00 / 10 / 20 / 30
 
@@ -45,6 +45,10 @@ show_date: true           # Show post date in list
 show_tags: true           # Show tags in post list items
 max_tags: 6               # Show tags in post list items
 show_excerpt: true        # Show post excerpt in list
+show_thumbnail: true      # Show thumbnail image in post list cards (requires thumbnail front-matter)
+
+# Post Settings
+show_post_thumbnail: true # Show thumbnail as hero image on individual post pages
 
 # Right sidebar settings
 sidebar_right:

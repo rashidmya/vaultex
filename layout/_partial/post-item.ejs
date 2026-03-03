@@ -3,7 +3,12 @@
 var p = post || page;
 var excerpt = p.excerpt || (p.content ? p.content.replace(/<[^>]+>/g, '').substring(0, 180) + '…' : '');
 %>
-<article class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post-item<% if (theme.show_thumbnail !== false && p.thumbnail) { %> post-item--has-thumb<% } %>" itemscope itemtype="http://schema.org/BlogPosting">
+  <% if (theme.show_thumbnail !== false && p.thumbnail) { %>
+  <a href="<%- url_for(p.path) %>" class="post-item-thumb" aria-hidden="true" tabindex="-1">
+    <img src="<%- url_for(p.thumbnail) %>" alt="" loading="lazy">
+  </a>
+  <% } %>
   <div class="post-item-inner">
 
     <!-- Post meta row -->
