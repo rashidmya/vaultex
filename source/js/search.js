@@ -29,6 +29,73 @@ var searchTimeout      = null;
 var matchCase          = false;
 var filterCollapse     = false;
 var filterMoreCtx      = false;
+var groupOpenState     = {}; /* url → true/false, tracks manual expand/collapse */
+
+/* ── Session state persistence ── */
+var SEARCH_STATE_KEY = 'vaultex-search-state';
+var pendingRestore   = null;
+
+function saveSearchState() {
+  if (!searchInput) return;
+  sessionStorage.setItem(SEARCH_STATE_KEY, JSON.stringify({
+    q:              searchInput.value,
+    matchCase:      matchCase,
+    sort:           searchSortValue,
+    filterCollapse: filterCollapse,
+    filterMoreCtx:  filterMoreCtx,
+    groupOpenState: groupOpenState
+  }));
+}
+
+function restoreSearchState() {
+  var navType = ((performance.getEntriesByType('navigation') || [])[0] || {}).type;
+  if (navType === 'reload') {
+    sessionStorage.removeItem(SEARCH_STATE_KEY);
+    return;
+  }
+  var raw = sessionStorage.getItem(SEARCH_STATE_KEY);
+  if (!raw) return;
+  try {
+    var s = JSON.parse(raw);
+
+    if (s.q && searchInput) {
+      searchInput.value = s.q;
+      if (clearBtn) clearBtn.hidden = false;
+      pendingRestore = s.q;
+    }
+    if (s.matchCase && matchCaseBtn) {
+      matchCase = true;
+      matchCaseBtn.classList.add('active');
+      matchCaseBtn.setAttribute('aria-pressed', 'true');
+    }
+    if (s.sort && s.sort !== searchSortValue) {
+      searchSortValue = s.sort;
+      if (searchSortDropdown) {
+        var sortItem = searchSortDropdown.querySelector('[data-sort="' + s.sort + '"]');
+        if (sortItem) {
+          $$('.dropdown-item', searchSortDropdown).forEach(function (o) { o.classList.remove('active'); });
+          sortItem.classList.add('active');
+          var lbl = $('#search-sort-label');
+          var sp  = sortItem.querySelector('span');
+          if (lbl && sp) lbl.textContent = sp.textContent;
+        }
+      }
+    }
+    if (s.filterCollapse && filterCollapseEl) {
+      filterCollapse = true;
+      filterCollapseEl.checked = true;
+    }
+    if (s.filterMoreCtx && filterMoreCtxEl) {
+      filterMoreCtx = true;
+      filterMoreCtxEl.checked = true;
+    }
+    if (s.groupOpenState && typeof s.groupOpenState === 'object') {
+      groupOpenState = s.groupOpenState;
+    }
+  } catch (e) {}
+}
+
+restoreSearchState();
 
 /* Load search.xml once */
 fetch((window.VAULTEX_CONFIG && window.VAULTEX_CONFIG.searchXml) || '/search.xml')
@@ -39,6 +106,7 @@ fetch((window.VAULTEX_CONFIG && window.VAULTEX_CONFIG.searchXml) || '/search.xml
       function txt(tag) { return (e.querySelector(tag) || {}).textContent || ''; }
       return { title: txt('title'), url: txt('url'), content: txt('content'), date: txt('published') };
     });
+    if (pendingRestore) { doSearch(pendingRestore); pendingRestore = null; }
   })
   .catch(function () {});
 
@@ -139,13 +207,20 @@ function doSearch(query) {
     '<polyline points="6 9 12 15 18 9"/></svg>';
 
   searchResults.innerHTML = groups.map(function (g) {
+    var defaultOpen = filterCollapse ? 'false' : 'true';
+    var isOpen = g.url in groupOpenState ? String(groupOpenState[g.url]) : defaultOpen;
     var cards = g.excerpts.map(function (ex) {
+      var clean = ex.replace(/^\u2026\s*/, '').replace(/\s*\u2026$/, '').trim();
+      var chunk = clean.slice(0, 120);
+      var lastSpace = chunk.lastIndexOf(' ');
+      if (lastSpace > 40) chunk = chunk.slice(0, lastSpace);
+      var scrollAttr = chunk.length >= 20 ? ' data-scroll-text="' + escHtml(chunk) + '"' : '';
       return '<div class="match-card">' +
-        '<a href="' + escHtml(g.url) + '" class="match-card-link">' +
+        '<a href="' + escHtml(g.url) + '" class="match-card-link"' + scrollAttr + '>' +
           renderWithHighlight(ex, terms, matchCase) +
         '</a></div>';
     }).join('');
-    return '<div class="file-group" data-open="' + (filterCollapse ? 'false' : 'true') + '">' +
+    return '<div class="file-group" data-url="' + escHtml(g.url) + '" data-open="' + isOpen + '">' +
       '<div class="file-group-header">' +
         chevronSvg +
         '<a href="' + escHtml(g.url) + '" class="file-group-name">' + renderWithHighlight(g.title, terms, matchCase) + '</a>' +
@@ -160,16 +235,32 @@ function doSearch(query) {
     on(header, 'click', function (e) {
       if (e.target.closest('a')) return;
       var grp = header.closest('.file-group');
-      grp.dataset.open = grp.dataset.open !== 'false' ? 'false' : 'true';
+      var nowOpen = grp.dataset.open !== 'false' ? 'false' : 'true';
+      grp.dataset.open = nowOpen;
+      groupOpenState[grp.dataset.url] = nowOpen === 'true';
+      saveSearchState();
     });
   });
 }
 
+/* Save scroll target when clicking a match-card with excerpt text */
+var SCROLL_TARGET_KEY = 'vaultex-scroll-target';
+on(searchResults, 'click', function (e) {
+  var link = e.target.closest('.match-card-link[data-scroll-text]');
+  if (!link) return;
+  sessionStorage.setItem(SCROLL_TARGET_KEY, JSON.stringify({
+    url:       link.getAttribute('href'),
+    text:      link.dataset.scrollText,
+    matchCase: matchCase
+  }));
+});
+
 /* SearchHeader interactions */
 on(searchInput, 'input', function () {
   if (clearBtn) clearBtn.hidden = !searchInput.value;
+  groupOpenState = {};
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(function () { doSearch(searchInput.value); }, 200);
+  searchTimeout = setTimeout(function () { doSearch(searchInput.value); saveSearchState(); }, 200);
 });
 
 on(clearBtn, 'click', function () {
@@ -179,6 +270,7 @@ on(clearBtn, 'click', function () {
   if (resultsCount)  resultsCount.textContent = '';
   if (noResults)     noResults.hidden = false;
   if (searchToolbar) searchToolbar.hidden = true;
+  sessionStorage.removeItem(SEARCH_STATE_KEY);
 });
 
 on(matchCaseBtn, 'click', function () {
@@ -186,6 +278,7 @@ on(matchCaseBtn, 'click', function () {
   matchCaseBtn.classList.toggle('active', matchCase);
   matchCaseBtn.setAttribute('aria-pressed', String(matchCase));
   if (searchInput && searchInput.value) doSearch(searchInput.value);
+  saveSearchState();
 });
 
 on(filterBtn, 'click', function () {
@@ -198,11 +291,13 @@ on(filterBtn, 'click', function () {
 on(filterCollapseEl, 'change', function () {
   filterCollapse = filterCollapseEl.checked;
   if (searchInput && searchInput.value) doSearch(searchInput.value);
+  saveSearchState();
 });
 
 on(filterMoreCtxEl, 'change', function () {
   filterMoreCtx = filterMoreCtxEl.checked;
   if (searchInput && searchInput.value) doSearch(searchInput.value);
+  saveSearchState();
 });
 
 on(searchSortBtn, 'click', function (e) {
@@ -220,6 +315,7 @@ on(searchSortDropdown, 'click', function (e) {
   if (label) label.textContent = opt.querySelector('span').textContent;
   closeDropdown(searchSortDropdown, searchSortBtn);
   if (searchInput && searchInput.value) doSearch(searchInput.value);
+  saveSearchState();
 });
 
 /* Ctrl+Shift+F / Cmd+Shift+F — focus search sidebar */

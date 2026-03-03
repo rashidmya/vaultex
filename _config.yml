@@ -9,10 +9,12 @@ homepage_subtitle: Recent Notes          # Label shown in tab bar and breadcrumb
 # Vault title position: 1 = top (header), 2 = bottom (footer, Obsidian-style)
 vault_title_position: 2
 
-# Typography
-font_size: 16             # Base font size (px)
-code_font_size: 14        # Code block font size (px)
-max_content_width: 720    # Note content max-width (px)
+# Customize
+customize:
+  font_size: 15             # Base font size (px)
+  code_font_size: 14        # Code block font size (px)
+  max_content_width: 720    # Note content max-width (px)
+  highlight: obsidian       # Code highlight theme
 
 # Navigation items shown in left sidebar
 nav_items:
@@ -56,9 +58,6 @@ social_links:
   - label: GitHub
     url: https://github.com/rashidmya/vaultex
     icon: github
-
-# Code highlight theme
-highlight: obsidian
 
 # Vercel Analytics (set to true when deployed on Vercel)
 vercel_analytics: false
