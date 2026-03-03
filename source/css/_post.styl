@@ -367,6 +367,34 @@
   min-width: 0
   order: 1
 
+/* --- Post-item thumbnail inline variant (floats left of meta/title/excerpt, footer full-width below) --- */
+
+.post-item--has-thumb-inline .post-item-inner
+  display: block
+  overflow: hidden
+
+.post-item--has-thumb-inline .post-item-thumb
+  float: left
+  width: 110px
+  margin-right: var(--sp-4)
+  margin-bottom: var(--sp-2)
+  border-radius: var(--radius-sm)
+  overflow: hidden
+  border: 1px solid var(--border-color)
+
+.post-item--has-thumb-inline .post-item-thumb img
+  display: block
+  width: 100%
+  aspect-ratio: 4 / 3
+  object-fit: cover
+  transition: transform var(--t-normal)
+
+.post-item--has-thumb-inline:hover .post-item-thumb img
+  transform: scale(1.03)
+
+.post-item--has-thumb-inline .post-item-footer
+  clear: left
+
 /* --- Post hero image (post page) --- */
 
 .post-hero
@@ -405,3 +433,15 @@
   .post-item-thumb img
     height: auto
     aspect-ratio: 4 / 3
+
+  .post-item--has-thumb-inline .post-item-thumb
+    float: none
+    width: 100%
+    margin-right: 0
+    margin-bottom: 0
+    border-radius: 0
+    border: none
+    border-bottom: 1px solid var(--border-color)
+
+  .post-item--has-thumb-inline .post-item-footer
+    clear: none

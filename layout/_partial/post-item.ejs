@@ -2,14 +2,23 @@
 // Accepts: post (post object)
 var p = post || page;
 var excerpt = p.excerpt || (p.content ? p.content.replace(/<[^>]+>/g, '').substring(0, 180) + '…' : '');
+var showThumb = theme.show_thumbnail !== false && p.thumbnail;
+var thumbStyle = theme.thumbnail_style || 'left';
+var thumbModifier = showThumb ? (thumbStyle === 'right' ? ' post-item--has-thumb-right' : thumbStyle === 'inline' ? ' post-item--has-thumb-inline' : ' post-item--has-thumb') : '';
 %>
-<article class="post-item<% if (theme.show_thumbnail !== false && p.thumbnail) { %> post-item--has-thumb<% if (theme.thumbnail_style === 'right') { %>-right<% } %><% } %>" itemscope itemtype="http://schema.org/BlogPosting">
-  <% if (theme.show_thumbnail !== false && p.thumbnail) { %>
+<article class="post-item<%= thumbModifier %>" itemscope itemtype="http://schema.org/BlogPosting">
+  <% if (showThumb && thumbStyle !== 'inline') { %>
   <a href="<%- url_for(p.path) %>" class="post-item-thumb" aria-hidden="true" tabindex="-1">
     <img src="<%- url_for(p.thumbnail) %>" alt="" loading="lazy">
   </a>
   <% } %>
   <div class="post-item-inner">
+
+    <% if (showThumb && thumbStyle === 'inline') { %>
+    <a href="<%- url_for(p.path) %>" class="post-item-thumb" aria-hidden="true" tabindex="-1">
+      <img src="<%- url_for(p.thumbnail) %>" alt="" loading="lazy">
+    </a>
+    <% } %>
 
     <!-- Post meta row -->
     <div class="post-item-meta">
