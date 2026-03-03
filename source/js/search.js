@@ -211,7 +211,13 @@ function doSearch(query) {
     var isOpen = g.url in groupOpenState ? String(groupOpenState[g.url]) : defaultOpen;
     var cards = g.excerpts.map(function (ex) {
       var clean = ex.replace(/^\u2026\s*/, '').replace(/\s*\u2026$/, '').trim();
-      var chunk = clean.slice(0, 120);
+      /* Centre the anchor on the first match so post-utils finds the correct
+         block, not the pre-match context that may live in a different element. */
+      var re0 = makeRe(terms, matchCase);
+      var matchIdx = 0;
+      if (re0) { re0.lastIndex = 0; var m0 = re0.exec(clean); if (m0) matchIdx = m0.index; }
+      var aStart = Math.max(0, matchIdx - 30);
+      var chunk = clean.slice(aStart, aStart + 120);
       var lastSpace = chunk.lastIndexOf(' ');
       if (lastSpace > 40) chunk = chunk.slice(0, lastSpace);
       var scrollAttr = chunk.length >= 20 ? ' data-scroll-text="' + escHtml(chunk) + '"' : '';
@@ -251,6 +257,7 @@ on(searchResults, 'click', function (e) {
   sessionStorage.setItem(SCROLL_TARGET_KEY, JSON.stringify({
     url:       link.getAttribute('href'),
     text:      link.dataset.scrollText,
+    query:     searchInput ? searchInput.value.trim() : '',
     matchCase: matchCase
   }));
 });
