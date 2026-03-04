@@ -36,7 +36,7 @@ links_icons: true          # Show icons in the Links section
 # Left sidebar explorer section style:
 #   1 = classic  (NAVIGATION / CATEGORIES / LINKS — uppercase, bold, dividers)
 #   2 = Obsidian-style   (Navigation / Categories / Links — no dividers)
-sidebar_explorer_style: 2
+sidebar_explorer_style: 1
 sidebar_explorer_numbers: false  # style 2 only — prefix labels with 00 / 10 / 20 / 30
 
 # Post list settings

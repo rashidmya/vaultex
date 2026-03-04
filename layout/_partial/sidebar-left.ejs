@@ -87,7 +87,7 @@ function isActive(navPath) {
         <%
           var cat = item.cat;
           var depth = item.depth;
-          var indent = 32 + depth * 16;
+          var indent = explorerStyle === 1 ? 16 + depth * 20 : 32 + depth * 16;
           var tid = 'ct-' + cat._id;
           var pid = cat.parent ? 'ct-' + cat.parent : '';
         %>
