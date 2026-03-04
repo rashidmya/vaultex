@@ -106,14 +106,8 @@ sidebarViewBtns.forEach(function (btn) {
 
     if (isCollapsed) {
       openLeft();
-      activateSidebarTab(tabName);
-    } else if (currentTab === tabName) {
-      /* Re-clicking the active tab closes the sidebar */
-      closeLeft();
-      return;
-    } else {
-      activateSidebarTab(tabName);
     }
+    activateSidebarTab(tabName);
 
     if (tabName === 'search') {
       var si = $('#search-input');
