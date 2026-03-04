@@ -214,6 +214,7 @@
 .nav-item.active::before { background: var(--bg-selected); }
 
 .nav-icon-svg { flex-shrink: 0; color: inherit; opacity: 0.7; }
+
 .nav-item.active .nav-icon-svg { opacity: 1; }
 
 .nav-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
@@ -233,10 +234,31 @@
 .nav-item.active .folder-icon { opacity: 1; }
 
 /* --- Category tree --- */
-.nav-tree-parent { cursor: pointer; user-select: none; }
+.nav-tree-parent { user-select: none; }
+.tree-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-tree-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
 .tree-chevron { flex-shrink: 0; transition: transform var(--t-fast); }
 .nav-tree-parent[data-tree-open="false"] .tree-chevron { transform: rotate(-90deg); }
-.nav-leaf-icon { color: var(--accent-color); opacity: 0.75; margin-left: 20px; }
+.nav-leaf-icon { opacity: 0.75; margin-left: 20px; }
 .nav-tree-leaf:hover .nav-leaf-icon { opacity: 1; }
 .nav-tree-leaf.active .nav-leaf-icon { opacity: 1; }
 
