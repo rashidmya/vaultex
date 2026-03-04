@@ -1,0 +1,86 @@
+/* ==========================================================================
+   VAULTEX THEME — Article (Single Post / Page Reading View)
+   Note article header, meta, nav, hero image.
+   ========================================================================== */
+
+/* --- Note article (post/page view) --- */
+.note-article { padding-bottom: var(--sp-12); }
+.note-header { margin-bottom: var(--sp-6); }
+
+.note-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-normal);
+  margin-bottom: var(--sp-4);
+  letter-spacing: -0.01em;
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  font-size: var(--font-size-sm);
+  color: var(--text-faint);
+  margin-bottom: var(--sp-3);
+}
+.note-meta-item { display: flex; align-items: center; gap: 5px; }
+.note-meta-updated { font-style: italic; }
+.note-category { color: var(--text-muted); text-decoration: none; }
+.note-category:hover { color: var(--text-accent); }
+.note-tags { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+
+.note-divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin: var(--sp-6) 0;
+}
+
+/* --- Post navigation (prev/next) --- */
+.post-nav {
+  display: flex;
+  gap: var(--sp-4);
+  margin-top: var(--sp-10);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--divider);
+}
+.post-nav-item { flex: 1; }
+.post-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--t-normal), background var(--t-normal);
+}
+.post-nav-item:hover { border-color: var(--border-strong); background: var(--bg-hover); }
+.post-nav-next { text-align: right; }
+.post-nav-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--text-faint);
+  font-weight: 500;
+}
+.post-nav-next .post-nav-label { justify-content: flex-end; }
+.post-nav-title { font-size: var(--font-size-sm); color: var(--text-muted); font-weight: 500; line-height: 1.4; }
+
+/* --- Post hero image (post page) --- */
+
+.post-hero
+  width: 100%
+  border-radius: var(--radius-md)
+  overflow: hidden
+  border: 1px solid var(--border-color)
+  margin-bottom: var(--sp-6)
+
+.post-hero-img
+  display: block
+  width: 100%
+  max-height: 360px
+  object-fit: cover
+  object-position: center

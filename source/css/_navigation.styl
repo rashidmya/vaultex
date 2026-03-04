@@ -281,36 +281,4 @@
   box-shadow: -16px 0 0 var(--tree-guide);
 }
 
-/* ==========================================================================
-   Sidebar view buttons (in top tab-bar)
-   ========================================================================== */
-
-.sidebar-view-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  margin: 2px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background var(--t-fast), color var(--t-fast);
-}
-.sidebar-view-btn:hover { background: var(--bg-hover); }
-.sidebar-view-btn.active { background: var(--bg-hover); color: var(--text-normal); }
-
-/* ==========================================================================
-   Sidebar tab content panels
-   ========================================================================== */
-
-.sidebar-tab-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-.sidebar-tab-hidden { display: none !important; }
 
