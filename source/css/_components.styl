@@ -168,55 +168,6 @@
 }
 .pagination-ellipsis { color: var(--text-faint); width: 24px; text-align: center; }
 
-/* --- Vault footer bar (homepage archive link) --- */
-.vault-footer-bar {
-  margin-top: var(--sp-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-}
-.vault-footer-sep {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-}
-.vault-footer-sep-line {
-  flex: 1;
-  height: 1px;
-  background: var(--divider);
-}
-.vault-footer-sep-icon { color: var(--text-faint); flex-shrink: 0; }
-.vault-footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--sp-1);
-}
-.vault-footer-count {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-  font-size: var(--font-size-xs);
-  color: var(--text-faint);
-}
-.vault-footer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  text-decoration: none;
-  padding: 5px var(--sp-3);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  transition: color var(--t-normal), background var(--t-normal), border-color var(--t-normal), box-shadow var(--t-normal);
-}
-.vault-footer-link:hover {
-  color: var(--text-accent);
-  background: var(--bg-selected);
-  border-color: var(--accent-interactive);
-}
-
 /* --- Callouts / Admonitions ---
    Usage: <div class="callout callout-note">
             <div class="callout-title">NOTE</div>
@@ -251,9 +202,3 @@
 .callout-danger  .callout-title { color: var(--text-danger); }
 .callout-info    { border-left-color: var(--text-link);    background: rgba(127, 142, 242, 0.08); }
 .callout-info    .callout-title { color: var(--text-link); }
-
-/* Obsidian-style blockquote callout */
-.markdown-body blockquote.callout-note {
-  border-left-color: var(--accent-color);
-  background: var(--bg-callout-note);
-}

@@ -96,6 +96,30 @@
 
   .pagination { gap: var(--sp-1); }
   .pagination-btn { padding: var(--sp-2); font-size: var(--font-size-xs); }
+
+  /* Thumbnails stack vertically */
+  .post-item--has-thumb,
+  .post-item--has-thumb-right { flex-direction: column; }
+  .post-item--has-thumb-right .post-item-thumb { order: 0; }
+  .post-item--has-thumb-right .post-item-inner { order: 1; }
+  .post-item-thumb {
+    flex: none;
+    width: 100%;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .post-item-thumb img { height: auto; aspect-ratio: 4 / 3; }
+  .post-item--has-thumb-inline .post-item-thumb {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .post-item--has-thumb-inline .post-item-footer { clear: none; }
 }
 
 /* --- Breakpoint: 480px (small mobile) --- */

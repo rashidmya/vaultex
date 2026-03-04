@@ -11,16 +11,6 @@
   overflow: hidden;
 }
 
-/* --- Right tab panels --- */
-.right-tab-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-.right-tab-hidden { display: none !important; }
-
 /* --- Action bar (sits above scrollable content inside a tab) --- */
 .right-tab-actions {
   padding: var(--sp-2) var(--sp-3);
@@ -199,3 +189,16 @@
   flex-shrink: 0;
 }
 
+/* --- TOC heading flash (visual feedback on click-to-scroll) --- */
+@keyframes toc-heading-flash {
+  0%   { background: var(--bg-search-highlight); box-shadow: 0 0 0 4px var(--bg-search-highlight); }
+  100% { background: transparent; box-shadow: 0 0 0 4px transparent; }
+}
+.markdown-body h1.toc-heading-flash,
+.markdown-body h2.toc-heading-flash,
+.markdown-body h3.toc-heading-flash,
+.markdown-body h4.toc-heading-flash,
+.markdown-body h5.toc-heading-flash,
+.markdown-body h6.toc-heading-flash {
+  animation: toc-heading-flash 1.5s ease-out forwards;
+}
