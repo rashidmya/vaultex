@@ -141,5 +141,3 @@ on($('#explorer-auto-reveal'), 'click', function () {
   /* 3. Sync collapse-all button state */
   syncCollapseBtn();
 });
-
-on($('#explorer-close'), 'click', closeLeft);
