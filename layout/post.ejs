@@ -14,7 +14,7 @@
 
       <% if (page.updated && page.updated.valueOf() !== page.date.valueOf()) { %>
       <span class="note-meta-item note-meta-updated">
-        <%- partial('_partial/icon', {name: 'refresh', size: 13}) %>
+        <%- partial('_partial/icon', {name: 'refresh-cw', size: 13}) %>
         Updated <%= page.updated.format(config.date_format || 'DD-MM-YYYY') %>
       </span>
       <% } %>

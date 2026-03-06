@@ -4,7 +4,6 @@
  * icons.js — Hexo helper: theme_icon(name, opts)
  *
  * Loads SVG inner content from themes/vaultex/source/icons/<name>.svg.
- * Falls back to an inline path registry for icons without files.
  * Results are cached in memory for the lifetime of the build.
  */
 
@@ -13,21 +12,12 @@ const path = require('path');
 
 const ICONS_DIR = path.join(__dirname, '../source/icons');
 
-/* Icon key → svg filename (only for names that differ from the filename) */
-const FILE_MAP = {
-  'home':        'house',
-  'chevron':     'chevron-down',
-  'close':       'x',
-  'circle-help': 'circle-question-mark',
-  'refresh':     'refresh-cw',
-};
-
 const cache = {};
 
 function getInner(name) {
   if (cache[name] !== undefined) return cache[name];
 
-  const fileName = FILE_MAP[name] || name;
+  const fileName = name;
   try {
     const raw   = fs.readFileSync(path.join(ICONS_DIR, fileName + '.svg'), 'utf8');
     const inner = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>[\s\S]*$/, '').trim();

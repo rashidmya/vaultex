@@ -41,7 +41,7 @@ function isActive(navPath) {
     <% if (theme.nav_items && theme.nav_items.length) { %>
     <div class="explorer-section">
       <div class="explorer-section-header" data-section="nav">
-        <%- partial('_partial/icon', {name: 'chevron', size: 16, cls: 'chevron', sw: 2.5}) %>
+        <%- partial('_partial/icon', {name: 'chevron-down', size: 16, cls: 'chevron', sw: 2.5}) %>
         <span><%= explorerStyle === 1 ? 'NAVIGATION' : (explorerNumbers ? '00 Navigation' : 'Navigation') %></span>
       </div>
       <nav class="nav-tree" id="nav-nav">
@@ -59,7 +59,7 @@ function isActive(navPath) {
     <% if (site.categories.length > 0) { %>
     <div class="explorer-section">
       <div class="explorer-section-header" data-section="categories">
-        <%- partial('_partial/icon', {name: 'chevron', size: 15, cls: 'chevron', sw: 2.5}) %>
+        <%- partial('_partial/icon', {name: 'chevron-down', size: 15, cls: 'chevron', sw: 2.5}) %>
         <span><%= explorerStyle === 1 ? 'CATEGORIES' : (explorerNumbers ? '10 Categories' : 'Categories') %></span>
       </div>
       <div class="nav-tree" id="nav-categories">
@@ -99,7 +99,7 @@ function isActive(navPath) {
              data-tree-open="true"
              style="padding-left:<%= indent %>px">
           <button class="tree-toggle-btn" aria-label="Toggle <%= cat.name %>">
-            <%- partial('_partial/icon', {name: 'chevron', size: 15, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
+            <%- partial('_partial/icon', {name: 'chevron-down', size: 15, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
           </button>
           <a href="<%- url_for(cat.path) %>" class="nav-tree-label">
             <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %><% } %>
@@ -128,7 +128,7 @@ function isActive(navPath) {
     <% if (theme.social_links && theme.social_links.length) { %>
     <div class="explorer-section">
       <div class="explorer-section-header" data-section="social">
-        <%- partial('_partial/icon', {name: 'chevron', size: 15, cls: 'chevron', sw: 2.5}) %>
+        <%- partial('_partial/icon', {name: 'chevron-down', size: 15, cls: 'chevron', sw: 2.5}) %>
         <span><%= explorerStyle === 1 ? 'LINKS' : (explorerNumbers ? '30 Links' : 'Links') %></span>
       </div>
       <div class="nav-tree" id="nav-social">
