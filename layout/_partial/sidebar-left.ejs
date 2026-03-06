@@ -5,11 +5,11 @@ var explorerNumbers = theme.sidebar_explorer_numbers !== false;
 var navIcons = theme.nav_icons !== false;
 var categoryIcons = theme.category_icons !== false;
 var linksIcons = theme.links_icons !== false;
-function isActive(navPath) {
+function isActive(navPath, exact) {
   var p = navPath.replace(/^\/|\/$/g, '');
-  var c = currentPath.replace(/^\/|\/$/g, '').replace(/index\.html$/, '');
+  var c = currentPath.replace(/index\.html$/, '').replace(/^\/|\/$/g, '');
   if (p === '' && c === '') return true;
-  if (p !== '' && c.startsWith(p)) return true;
+  if (p !== '') return exact ? p === c : c.startsWith(p);
   return false;
 }
 %>
@@ -92,7 +92,7 @@ function isActive(navPath) {
           var pid = cat.parent ? 'ct-' + cat.parent : '';
         %>
         <% if (item.hasChildren) { %>
-        <div class="nav-item nav-tree-parent<% if (isActive('/' + cat.path)) { %> active<% } %>"
+        <div class="nav-item nav-tree-parent<% if (isActive('/' + cat.path, true)) { %> active<% } %>"
              data-tree-id="<%= tid %>"
              data-parent-tree-id="<%= pid %>"
              data-depth="<%= depth %>"
@@ -129,7 +129,7 @@ function isActive(navPath) {
     <div class="explorer-section">
       <div class="explorer-section-header" data-section="social">
         <%- partial('_partial/icon', {name: 'chevron-down', size: 15, cls: 'chevron', sw: 2.5}) %>
-        <span><%= explorerStyle === 1 ? 'LINKS' : (explorerNumbers ? '30 Links' : 'Links') %></span>
+        <span><%= explorerStyle === 1 ? 'LINKS' : (explorerNumbers ? '20 Links' : 'Links') %></span>
       </div>
       <div class="nav-tree" id="nav-social">
         <% theme.social_links.forEach(function(link) { %>
