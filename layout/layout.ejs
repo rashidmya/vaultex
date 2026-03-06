@@ -11,7 +11,7 @@
   <div class="app-container" id="app-container">
 
     <!-- ======= TAB BAR (full width, never resizes) ======= -->
-    <div class="tab-bar" role="tablist">
+    <div class="tab-bar">
 
       <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
       <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
@@ -27,7 +27,7 @@
         </button>
       </div>
 
-      <div class="tab-strip">
+      <div class="tab-strip" role="tablist">
         <div class="tab tab-active" role="tab" aria-selected="true">
           <span class="tab-title"><%= page.layout === 'index' ? (theme.homepage_subtitle || config.title) : (page.name || page.title || config.title) %></span>
           <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
