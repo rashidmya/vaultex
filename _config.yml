@@ -20,7 +20,7 @@ customize:
 nav_items:
   - label: Home
     path: /
-    icon: home
+    icon: house
   - label: Archive
     path: /archives/
     icon: archive
