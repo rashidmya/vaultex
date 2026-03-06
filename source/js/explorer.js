@@ -24,7 +24,7 @@ function updateCatVisibility() {
       if (parentEl.dataset.treeOpen === 'false') { visible = false; break; }
       pid = parentEl.dataset.parentTreeId;
     }
-    item.style.display = visible ? '' : 'none';
+    item.style.display = visible ? 'flex' : 'none';
   });
 }
 
@@ -49,7 +49,8 @@ $$('.nav-tree-parent').forEach(function (parent) {
     if (saved === '0') parent.dataset.treeOpen = 'false';
   } catch (_) {}
   var toggleBtn = parent.querySelector('.tree-toggle-btn');
-  on(toggleBtn, 'click', function () {
+  on(toggleBtn, 'click', function (e) {
+    e.stopPropagation();
     var isOpen = parent.dataset.treeOpen === 'true';
     parent.dataset.treeOpen = isOpen ? 'false' : 'true';
     updateCatVisibility();

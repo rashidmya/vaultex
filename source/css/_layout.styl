@@ -3,6 +3,16 @@
    Structural containers: app grid, sidebars, workspace, content row.
    ========================================================================== */
 
+/* --- FOUC prevention: initial sidebar state from inline script in <head> ---
+   These rules mirror the .collapsed / .spacer-collapsed / .sidebar-collapsed
+   classes and are applied before JS runs via data-vx-* attrs on <html>.
+   JS removes the attrs after taking over, so these only fire during init. */
+html[data-vx-left="closed"] .sidebar-left       { width: 0; min-width: 0; border-right-width: 0; overflow: hidden; }
+html[data-vx-left="closed"] .tab-bar-left-spacer { width: var(--activity-bar-width); min-width: var(--activity-bar-width); border-right-color: transparent; }
+html[data-vx-left="closed"] .activity-bar        { background: var(--bg-primary); }
+html[data-vx-right="open"]  .sidebar-right        { width: var(--sidebar-right-width); min-width: var(--sidebar-right-width); border-left-width: 1px; }
+html[data-vx-right="open"]  .tab-bar-right-spacer { width: var(--sidebar-right-width); min-width: var(--sidebar-right-width); padding: 0 var(--sp-1); }
+
 /* --- App container --- */
 .app-container {
   display: flex;

@@ -101,3 +101,4 @@ on(toggleRightBtn, 'click', function () {
 var rTab = defaultRightTab();
 if (rTab) activateRightTab(rTab);
 if (!isTablet() && recall('right-open') === '1') openRight();
+document.documentElement.removeAttribute('data-vx-right');

@@ -65,6 +65,7 @@ if (!isMobile()) {
   tabBarSpacer && tabBarSpacer.classList.add('spacer-collapsed');
   activityBar && activityBar.classList.add('sidebar-collapsed');
 }
+document.documentElement.removeAttribute('data-vx-left');
 
 /* ---- Vault switcher dropdown ---- */
 var vaultSwitcher = $('#vault-switcher');

@@ -261,6 +261,8 @@
 .nav-item.active .folder-icon { opacity: 1; }
 
 /* --- Category tree --- */
+/* All depth items hidden by default; JS explicitly shows visible ones (prevents FOUC) */
+#nav-categories [data-depth] { display: none; }
 .nav-tree-parent { user-select: none; }
 .tree-toggle-btn {
   display: flex;

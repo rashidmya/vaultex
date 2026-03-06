@@ -43,4 +43,18 @@
 <% if (theme.customize && theme.customize.max_content_width) { %>
 <style>:root { --content-max-width: <%= theme.customize.max_content_width %>px; }</style>
 <% } %>
+<script>
+/* FOUC prevention: read localStorage before first paint and set data attrs on <html>.
+   CSS rules below use these attrs to apply correct initial sidebar state.
+   JS removes them after taking over. */
+(function () {
+  try {
+    var w = window.innerWidth;
+    var l = localStorage.getItem('obs-left-open');
+    var r = localStorage.getItem('obs-right-open');
+    if (w <= 768 || l === '0') document.documentElement.setAttribute('data-vx-left', 'closed');
+    if (w > 900  && r === '1') document.documentElement.setAttribute('data-vx-right', 'open');
+  } catch (_) {}
+}());
+</script>
 <script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %>, searchXml: '<%- url_for('/search.xml') %>' };</script>
