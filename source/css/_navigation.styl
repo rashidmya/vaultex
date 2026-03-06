@@ -260,6 +260,10 @@
 
 .nav-item.active .folder-icon { opacity: 1; }
 
+/* Disable chevron transitions during page init (data-vx-init removed by JS after state restore) */
+html[data-vx-init] .tree-chevron,
+html[data-vx-init] .explorer-section-header .chevron { transition: none !important; }
+
 /* --- Category tree --- */
 /* All depth items hidden by default; JS explicitly shows visible ones (prevents FOUC) */
 #nav-categories [data-depth] { display: none; }

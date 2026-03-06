@@ -80,6 +80,11 @@ $$('.explorer-section-header').forEach(function (header) {
   });
 });
 
+/* Remove FOUC-prevention overrides injected by the inline script in <head> */
+var sectionsInitStyle = document.getElementById('vx-sections-init');
+if (sectionsInitStyle) sectionsInitStyle.remove();
+document.documentElement.removeAttribute('data-vx-init');
+
 syncCollapseBtn();
 
 /* ---- Explorer action bar ---- */
