@@ -90,51 +90,41 @@ sitemap:
 
 All options live in `themes/vaultex/_config.yml`.
 
-### General
+### Customize
+
+General appearance and identity settings:
 
 ```yaml
-# Name displayed in the sidebar vault switcher
-vault_name: My Blog
+customize:
+  vault_name: My Blog            # Name shown in the sidebar vault switcher
+  homepage_subtitle: Recent Notes # Label in the tab bar and breadcrumb on the homepage
+  vault_title_position: 2        # 1 = top of sidebar (header), 2 = bottom (Obsidian-style footer)
 
-# Label shown in the tab bar and breadcrumb on the homepage
-homepage_subtitle: Recent Notes
+  favicon: /images/favicon.ico   # Path to favicon (omit to show no favicon)
 
-# Vault title position:
-#   1 = top of left sidebar (header)
-#   2 = bottom of left sidebar (Obsidian-style footer)
-vault_title_position: 2
+  logo:
+    enabled: true                # Show logo on the homepage instead of the house icon
+    url: /images/logo.png        # Path to logo image
+    width: 32                    # Display width in px
+    height: 32                   # Display height in px
+
+  font_size: 15                  # Base font size in px
+  code_font_size: 14             # Code block font size in px
+  max_content_width: 720         # Max width of post content area in px
+  highlight: obsidian            # Highlight.js theme (must match a file in source/css/_highlight/)
 ```
 
-### Typography
+### Left Sidebar
 
 ```yaml
-font_size: 16           # Base font size in px
-code_font_size: 14      # Code block font size in px
-max_content_width: 720  # Max width of post content area in px
-```
+left_sidebar:
+  show_nav_icons: true        # Show icons in the Navigation section
+  show_category_icons: true   # Show folder/file icons in the Categories tree
+  show_links_icons: true      # Show icons in the Links section
 
-### Syntax Highlighting
-
-```yaml
-# Highlight.js theme name — must match a CSS file in source/css/highlight/
-highlight: obsidian
-```
-
-### Left Sidebar Explorer
-
-```yaml
-# Section label style:
-#   1 = classic  (NAVIGATION, CATEGORIES, LINKS — uppercase + dividers)
-#   2 = modern   (Navigation, Categories, Links — no dividers)
-sidebar_explorer_style: 2
-
-# Prefix section labels with numbers (00, 10, 30) — style 2 only
-sidebar_explorer_numbers: false
-
-# Icon visibility per section
-nav_icons: true        # Show icons in the Navigation section
-category_icons: true   # Show folder/file icons in the Categories tree
-links_icons: true      # Show icons in the Links section
+  explorer:
+    style: 2                  # 1 = classic (NAVIGATION — uppercase, bold, dividers), 2 = Obsidian-style
+    numbers: false            # style 2 only — prefix labels with 00 / 10 / 20 / 30
 ```
 
 ### Right Sidebar
@@ -150,11 +140,21 @@ sidebar_right:
 ### Post List
 
 ```yaml
-posts_per_row: 1   # 1 = single-column list, 2 = two-column card grid
-show_date: true    # Show post date
-show_tags: true    # Show tag pills
-max_tags: 6        # Max tags shown per post in list
-show_excerpt: true # Show post excerpt
+post_list:
+  posts_per_row: 1        # 1 = single-column list, 2 = two-column card grid
+  show_date: true         # Show post date
+  show_tags: true         # Show tag pills
+  max_tags: 6             # Max tags shown per post
+  show_excerpt: true      # Show post excerpt
+  show_thumbnail: true    # Show thumbnail image (requires thumbnail or banner front-matter)
+  thumbnail_style: inline # Thumbnail position: left | right | inline
+```
+
+### Post
+
+```yaml
+post:
+  show_thumbnail: true  # Show thumbnail as hero image on individual post pages
 ```
 
 ### Navigation
