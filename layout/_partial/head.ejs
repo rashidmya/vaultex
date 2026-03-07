@@ -29,7 +29,7 @@
 <% } %>
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="<%- url_for('/favicon.svg') %>">
+<% if (theme.customize && theme.customize.favicon) { %><link rel="icon" href="<%- url_for(theme.customize.favicon) %>"><% } %>
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
@@ -81,4 +81,4 @@
   } catch (_) {}
 }());
 </script>
-<script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= theme.posts_per_row || 1 %>, searchXml: '<%- url_for('/search.xml') %>' };</script>
+<script>window.VAULTEX_CONFIG = { toc: <%= (theme.sidebar_right && theme.sidebar_right.toc) !== false %>, tocDepth: <%= (theme.sidebar_right && theme.sidebar_right.toc_depth) || 3 %>, postsPerRow: <%= (theme.post_list && theme.post_list.posts_per_row) || 1 %>, searchXml: '<%- url_for('/search.xml') %>' };</script>

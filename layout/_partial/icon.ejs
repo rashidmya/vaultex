@@ -8,7 +8,10 @@
  *
  * Icon loading logic lives in themes/vaultex/scripts/icons.js.
  */
-var _size = typeof size !== 'undefined' ? size : 16;
-var _cls  = typeof cls  !== 'undefined' ? cls  : '';
-var _sw   = typeof sw   !== 'undefined' ? sw   : 2;
-%><%- theme_icon(name, {size: _size, cls: _cls, sw: _sw}) %>
+var _size = typeof size    !== 'undefined' ? size    : 16;
+var _cls  = typeof cls     !== 'undefined' ? cls     : '';
+var _sw   = typeof sw      !== 'undefined' ? sw      : 2;
+var _vb   = typeof viewBox !== 'undefined' ? viewBox : null;
+var _opts = {size: _size, cls: _cls, sw: _sw};
+if (_vb) _opts.viewBox = _vb;
+%><%- theme_icon(name, _opts) %>

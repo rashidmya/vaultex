@@ -2,8 +2,9 @@
 // Accepts: post (post object)
 var p = post || page;
 var excerpt = p.excerpt || (p.content ? p.content.replace(/<[^>]+>/g, '').substring(0, 180) + '…' : '');
-var showThumb = theme.show_thumbnail !== false && thumbnail(p);
-var thumbStyle = theme.thumbnail_style || 'left';
+var postList = theme.post_list || {};
+var showThumb = postList.show_thumbnail !== false && thumbnail(p);
+var thumbStyle = postList.thumbnail_style || 'left';
 var thumbModifier = showThumb ? (thumbStyle === 'right' ? ' post-item--has-thumb-right' : thumbStyle === 'inline' ? ' post-item--has-thumb-inline' : ' post-item--has-thumb') : '';
 %>
 <article class="post-item<%= thumbModifier %>" itemscope itemtype="http://schema.org/BlogPosting">
@@ -39,7 +40,7 @@ var thumbModifier = showThumb ? (thumbStyle === 'right' ? ' post-item--has-thumb
     </h2>
 
     <!-- Excerpt -->
-    <% if (theme.show_excerpt !== false && excerpt) { %>
+    <% if (postList.show_excerpt !== false && excerpt) { %>
     <div class="post-item-excerpt">
       <%- excerpt %>
     </div>
@@ -47,8 +48,8 @@ var thumbModifier = showThumb ? (thumbStyle === 'right' ? ' post-item--has-thumb
 
     <!-- Footer: tags + read more -->
     <div class="post-item-footer">
-      <% if (theme.show_tags !== false && p.tags && p.tags.length > 0) { %>
-      <% var maxTags = theme.max_tags; var tagList = p.tags.toArray(); var extra = tagList.length - maxTags; %>
+      <% if (postList.show_tags !== false && p.tags && p.tags.length > 0) { %>
+      <% var maxTags = postList.max_tags; var tagList = p.tags.toArray(); var extra = tagList.length - maxTags; %>
       <div class="post-item-tags">
         <% tagList.slice(0, maxTags).forEach(function(tag) { %>
         <a href="<%- url_for(tag.path) %>" class="tag-pill">#<%= tag.name %></a>

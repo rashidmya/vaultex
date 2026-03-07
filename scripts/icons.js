@@ -34,7 +34,8 @@ hexo.extend.helper.register('theme_icon', function (name, opts) {
   const size  = opts.size != null ? opts.size : 16;
   const cls   = opts.cls  || '';
   const sw    = opts.sw   != null ? opts.sw   : 2;
+  const vb    = opts.viewBox || '0 0 24 24';
   const inner = getInner(name);
   const clsAttr = cls ? ` class="${cls}"` : '';
-  return `<svg${clsAttr} viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+  return `<svg${clsAttr} viewBox="${vb}" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
 });

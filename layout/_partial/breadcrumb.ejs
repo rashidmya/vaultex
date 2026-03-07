@@ -48,7 +48,7 @@ if (page.layout === 'post') {
 
 } else if (page.layout === 'index') {
   /* ── Homepage ── */
-  crumbs.push({ label: theme.homepage_subtitle || 'Home', url: null });
+  crumbs.push({ label: (theme.customize && theme.customize.homepage_subtitle) || 'Home', url: null });
 
 } else if (page.title) {
   /* ── Generic page (categories overview, tags overview, custom pages) ── */

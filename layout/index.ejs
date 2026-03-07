@@ -1,8 +1,8 @@
-<% page.title = theme.homepage_subtitle || 'Home'; %>
+<% page.title = (theme.customize && theme.customize.homepage_subtitle) || 'Home'; %>
 
 <div class="note-header">
   <h1 class="note-title page-title">
-    <%- partial('_partial/icon', {name: 'house', size: 22}) %>
+    <% var logo = theme.customize && theme.customize.logo; %><% if (logo && logo.enabled && logo.url) { %><img src="<%- url_for(logo.url) %>" class="note-title-logo" width="<%= logo.width || 22 %>" height="<%= logo.height || 22 %>" alt="" aria-hidden="true"><% } else { %><%- partial('_partial/icon', {name: 'house', size: 22}) %><% } %>
     <%- config.title || 'Vaultex'; %>
   </h1>
   <p class="note-subtitle"><%= config.description %></p>

@@ -30,7 +30,7 @@
     <% } %>
   </header>
 
-  <% if (theme.show_post_thumbnail !== false && thumbnail(page)) { %>
+  <% if (theme.post && theme.post.show_thumbnail !== false && thumbnail(page)) { %>
   <div class="post-hero">
     <img src="<%- url_for(thumbnail(page)) %>" alt="" class="post-hero-img" loading="lazy">
   </div>

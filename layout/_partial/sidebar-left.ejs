@@ -1,10 +1,12 @@
 <%
 var currentPath = page.path || '';
-var explorerStyle = theme.sidebar_explorer_style || 2;
-var explorerNumbers = theme.sidebar_explorer_numbers !== false;
-var navIcons = theme.nav_icons !== false;
-var categoryIcons = theme.category_icons !== false;
-var linksIcons = theme.links_icons !== false;
+var sidebar = theme.left_sidebar || {};
+var explorer = sidebar.explorer || {};
+var explorerStyle = explorer.style || 2;
+var explorerNumbers = explorer.numbers !== false;
+var navIcons = sidebar.show_nav_icons !== false;
+var categoryIcons = sidebar.show_category_icons !== false;
+var linksIcons = sidebar.show_links_icons !== false;
 function isActive(navPath, exact) {
   var p = navPath.replace(/^\/|\/$/g, '');
   var c = currentPath.replace(/index\.html$/, '').replace(/^\/|\/$/g, '');
@@ -19,7 +21,7 @@ function isActive(navPath, exact) {
   <!-- ============ FOLDER TAB ============ -->
   <div class="sidebar-tab-content<% if (explorerStyle === 1) { %> explorer-style-1<% } %>" data-tab="folder">
 
-    <% if (theme.vault_title_position !== 2) { %>
+    <% if (theme.customize && theme.customize.vault_title_position !== 2) { %>
     <!-- Vault Header (vault_title_position: 1 or unset) -->
     <div class="vault vault-header">
       <%- partial('_partial/vault') %>
@@ -236,7 +238,7 @@ function isActive(navPath, exact) {
     </div>
   </div><!-- /.sidebar-tab-content[search] -->
 
-  <% if (theme.vault_title_position === 2) { %>
+  <% if (theme.customize && theme.customize.vault_title_position === 2) { %>
   <!-- Vault Footer (vault_title_position: 2) — persists across folder/search tabs -->
   <div class="vault vault-footer">
     <%- partial('_partial/vault') %>

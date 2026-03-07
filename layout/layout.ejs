@@ -3,7 +3,7 @@
 <head>
   <%- partial('_partial/head') %>
 </head>
-<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> is-post<% } %><% if (theme.posts_per_row >= 2) { %> posts-grid<% } %>">
+<body class="vaultex-app<% if (page.layout === 'post' || page.layout === 'page') { %> is-post<% } %><% if (theme.post_list && theme.post_list.posts_per_row >= 2) { %> posts-grid<% } %>">
 
   <!-- Mobile sidebar overlay -->
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -29,7 +29,7 @@
 
       <div class="tab-strip" role="tablist">
         <div class="tab tab-active" role="tab" aria-selected="true">
-          <span class="tab-title"><%= page.layout === 'index' ? (theme.homepage_subtitle || config.title) : (page.name || page.title || config.title) %></span>
+          <span class="tab-title"><%= page.layout === 'index' ? ((theme.customize && theme.customize.homepage_subtitle) || config.title) : (page.name || page.title || config.title) %></span>
           <a href="<%- url_for('/') %>" class="tab-close" title="Close" aria-label="Close">
             <%- partial('_partial/icon', {name: 'x', size: 16, sw: 2}) %>
           </a>
