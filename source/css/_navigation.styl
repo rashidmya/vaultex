@@ -226,7 +226,7 @@
   min-height: 26px;
 }
 .nav-item:hover { background: transparent; color: var(--text-normal); }
-.nav-item.active { background: transparent; color: var(--text-accent); }
+.nav-item.active { background: transparent; color: var(--text-normal); }
 .nav-item:hover::before,
 .nav-item.active::before {
   content: '';
@@ -238,7 +238,7 @@
   z-index: -1;
 }
 .nav-item:hover::before { background: var(--bg-hover); }
-.nav-item.active::before { background: var(--bg-selected); }
+.nav-item.active::before { background: var(--bg-hover); }
 
 .nav-icon-svg { flex-shrink: 0; color: inherit; opacity: 0.7; }
 
