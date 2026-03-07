@@ -234,6 +234,7 @@ Hexo scripts in `themes/vaultex/scripts/` run at build time. Each file has a sin
 | `index-co-located-assets.js` | Generator | Serves images and other local files that are referenced inside a post but stored in a shared `assets/` folder next to it, rather than the post-specific asset directory Hexo expects by default. |
 | `meta.js` | Helper | Registers `meta(post)` — converts a post's `meta` front-matter array (key=value pairs) into `<meta>` HTML tags for the `<head>`. |
 | `thumbnail.js` | Helper | Registers `thumbnail(post)` — returns the post's `thumbnail` or `banner` front-matter value, or an empty string if neither is set. |
+| `reading-time.js` | Helper | Registers `reading_time(post)` — strips HTML from `post.content`, counts words, and returns a human-readable estimate (e.g. `"5 min read"`) based on 220 wpm. Minimum value is `"1 min read"`. |
 
 ---
 

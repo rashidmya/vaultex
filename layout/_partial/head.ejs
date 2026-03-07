@@ -11,6 +11,7 @@
 <meta name="keywords" content="<%= config.keywords %>">
 <% } %>
 <meta name="author" content="<%= config.author %>">
+<% if (page.meta && page.meta.length) { %><%- meta(page) %><% } %>
 
 <!-- Open Graph -->
 <meta property="og:title" content="<% if (page.title) { %><%= page.title %><% } else { %><%= config.title %><% } %>">
