@@ -105,7 +105,6 @@ function isActive(navPath, exact) {
             <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %><% } %>
             <span class="nav-label"><%= cat.name %></span>
           </a>
-          <span class="nav-count"><%= cat.posts.length %></span>
         </div>
         <% } else { %>
         <a href="<%- url_for(cat.path) %>"
@@ -116,7 +115,6 @@ function isActive(navPath, exact) {
            style="padding-left:<%= indent %>px">
           <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'file-text', size: 14, cls: 'nav-icon-svg nav-leaf-icon'}) %><% } else { %><span style="width:14px;flex-shrink:0"></span><% } %>
           <span class="nav-label"><%= cat.name %></span>
-          <span class="nav-count"><%= cat.posts.length %></span>
         </a>
         <% } %>
         <% }) %>

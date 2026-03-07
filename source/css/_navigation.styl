@@ -189,10 +189,6 @@
 /* Solid accent fill on active item */
 .explorer-style-1 .nav-item.active { color: var(--text-on-accent); }
 .explorer-style-1 .nav-item.active::before { background: var(--accent-interactive); }
-.explorer-style-1 .nav-item.active .nav-count {
-  color: rgba(255,255,255,0.8);
-  background: rgba(255,255,255,0.15);
-}
 .explorer-style-1 .nav-item.active .nav-icon-svg { opacity: 1; }
 /* Tighter indentation — no guide lines or section chevrons to align to */
 .explorer-style-1 .nav-tree .nav-item:not([data-depth]) { padding-left: var(--sp-4); }
@@ -246,18 +242,6 @@
 
 .nav-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
 
-.nav-count {
-  font-size: 11px;
-  color: var(--text-faint);
-  background: var(--bg-active);
-  border-radius: var(--radius-pill);
-  padding: 0 var(--sp-2);
-  min-width: 20px;
-  text-align: center;
-  flex-shrink: 0;
-}
-.nav-item.active .nav-count { color: var(--text-accent); background: var(--bg-selected); }
-
 .nav-item.active .folder-icon { opacity: 1; }
 
 /* Disable chevron transitions during page init (data-vx-init removed by JS after state restore) */
@@ -267,7 +251,7 @@ html[data-vx-init] .explorer-section-header .chevron { transition: none !importa
 /* --- Category tree --- */
 /* All depth items hidden by default; JS explicitly shows visible ones (prevents FOUC) */
 #nav-categories [data-depth] { display: none; }
-.nav-tree-parent { user-select: none; }
+.nav-tree-parent { user-select: none;  }
 .tree-toggle-btn {
   display: flex;
   align-items: center;
@@ -275,6 +259,7 @@ html[data-vx-init] .explorer-section-header .chevron { transition: none !importa
   background: none;
   border: none;
   padding: 0;
+  margin-right: -3px;
   color: inherit;
   cursor: pointer;
   flex-shrink: 0;
@@ -288,6 +273,9 @@ html[data-vx-init] .explorer-section-header .chevron { transition: none !importa
   text-decoration: none;
   color: inherit;
   overflow: hidden;
+}
+.nav-tree-label:hover {
+  color: inherit;
 }
 .tree-chevron { flex-shrink: 0; transition: transform var(--t-fast); }
 .nav-tree-parent[data-tree-open="false"] .tree-chevron { transform: rotate(-90deg); }
