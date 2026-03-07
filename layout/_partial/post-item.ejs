@@ -26,15 +26,11 @@ var thumbModifier = showThumb ? (thumbStyle === 'right' ? ' post-item--has-thumb
         <%- partial('_partial/icon', {name: 'calendar', size: 12}) %>
         <%= p.date.format(config.date_format || 'DD-MM-YYYY') %>
       </time>
-      <% if (p.categories && p.categories.length > 0) { %>
       <span class="post-category-sep">/</span>
-      <% p.categories.each(function(cat) { %>
-      <a href="<%- url_for(cat.path) %>" class="post-category">
-        <%- partial('_partial/icon', {name: 'folder', size: 12}) %>
-        <%= cat.name %>
-      </a>
-      <% }) %>
-      <% } %>
+      <span class="post-reading-time">
+        <%- partial('_partial/icon', {name: 'clock', size: 12}) %>
+        <%- reading_time(p) %>
+      </span>
     </div>
 
     <!-- Post title -->
