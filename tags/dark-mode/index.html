@@ -15,6 +15,7 @@
 
 <meta name="author" content="Vaultex">
 
+
 <!-- Open Graph -->
 <meta property="og:title" content="Archive">
 <meta property="og:type" content="website">
@@ -31,7 +32,7 @@
 
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/vaultex/favicon.svg">
+<link rel="icon" href="/vaultex/images/favicon.ico">
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/vaultex/css/style.css">
@@ -46,7 +47,44 @@
 
 <style>:root { --content-max-width: 720px; }</style>
 
-<script>window.VAULTEX_CONFIG = { toc: true, tocDepth: 4, postsPerRow: 1, searchXml: '/vaultex/search.xml' };</script>
+<script>
+/* FOUC prevention: read localStorage before first paint and set data attrs on <html>.
+   CSS rules below use these attrs to apply correct initial sidebar state.
+   JS removes them after taking over. */
+(function () {
+  try {
+    var w = window.innerWidth;
+    var l = localStorage.getItem('obs-left-open');
+    var r = localStorage.getItem('obs-right-open');
+    if (w <= 768 || l === '0') document.documentElement.setAttribute('data-vx-left', 'closed');
+    if (w > 900  && r === '1') document.documentElement.setAttribute('data-vx-right', 'open');
+    /* Disable transitions during init to prevent chevron animations on load */
+    document.documentElement.setAttribute('data-vx-init', '');
+    /* Collapsed explorer sections + pre-rotate their chevrons */
+    var hidden = [], sectionChevrons = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (!k) continue;
+      var v = localStorage.getItem(k);
+      if (k.startsWith('obs-section-') && v === '0') {
+        var sid = k.slice('obs-section-'.length);
+        hidden.push('#nav-' + sid);
+        sectionChevrons.push('.explorer-section-header[data-section="' + sid + '"] .chevron');
+      }
+    }
+    var css = '';
+    if (hidden.length)          css += hidden.join(',')          + '{display:none}';
+    if (sectionChevrons.length) css += sectionChevrons.join(',') + '{transform:rotate(-90deg)}';
+    if (css) {
+      var st = document.createElement('style');
+      st.id = 'vx-sections-init';
+      st.textContent = css;
+      document.head.appendChild(st);
+    }
+  } catch (_) {}
+}());
+</script>
+<script>window.VAULTEX_CONFIG = { toc: true, tocDepth: 3, postsPerRow: 1, searchXml: '/vaultex/search.xml' };</script>
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 <body class="vaultex-app">
@@ -57,7 +95,7 @@
   <div class="app-container" id="app-container">
 
     <!-- ======= TAB BAR (full width, never resizes) ======= -->
-    <div class="tab-bar" role="tablist">
+    <div class="tab-bar">
 
       <!-- Sidebar zone: mirrors sidebar width, collapses with it -->
       <div class="tab-bar-left-spacer" id="tab-bar-left-spacer">
@@ -77,7 +115,7 @@
         </button>
       </div>
 
-      <div class="tab-strip">
+      <div class="tab-strip" role="tablist">
         <div class="tab tab-active" role="tab" aria-selected="true">
           <span class="tab-title">Archive</span>
           <a href="/vaultex/" class="tab-close" title="Close" aria-label="Close">
@@ -160,16 +198,16 @@
           <span class="nav-label">Home</span>
         </a>
         
+        <a href="/vaultex/about/" class="nav-item">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+
+          <span class="nav-label">About</span>
+        </a>
+        
         <a href="/vaultex/archives/" class="nav-item">
           <svg class="nav-icon-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
 
           <span class="nav-label">Archive</span>
-        </a>
-        
-        <a href="/vaultex/atom.xml" class="nav-item">
-          <svg class="nav-icon-svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-
-          <span class="nav-label">RSS</span>
         </a>
         
       </nav>
@@ -191,14 +229,13 @@
         
         <a href="/vaultex/categories/Design/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuid-xnQbLH7vX2Mqs2Fr4byF"
+           data-tree-id="ct-cuidysBOtdRN2-U0Enj_PuWwx"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Design</span>
-          <span class="nav-count">1</span>
         </a>
         
         
@@ -206,14 +243,13 @@
         
         <a href="/vaultex/categories/Development/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidfHr-XoqXTt8uQqed3x6Ql"
+           data-tree-id="ct-cuidoxK3Aj3qKbje8I-4NkwDF"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Development</span>
-          <span class="nav-count">3</span>
         </a>
         
         
@@ -221,14 +257,13 @@
         
         <a href="/vaultex/categories/Guides/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuid7tRmND_wuxENs9Kngi6Rh"
+           data-tree-id="ct-cuidazwND2ywtM2y1asno1Ctk"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Guides</span>
-          <span class="nav-count">2</span>
         </a>
         
         
@@ -236,14 +271,13 @@
         
         <a href="/vaultex/categories/Linux/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidGtWoLdMcVQvdcaQUKROgo"
+           data-tree-id="ct-cuiddjIAjlU9g5L2loapsK_2V"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Linux</span>
-          <span class="nav-count">1</span>
         </a>
         
         
@@ -251,14 +285,13 @@
         
         <a href="/vaultex/categories/Productivity/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuid6MWV7Wwf4vHycmJijA_nG"
+           data-tree-id="ct-cuidrnQaCEOfj6bFBdKDTjwIa"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Productivity</span>
-          <span class="nav-count">2</span>
         </a>
         
         
@@ -266,31 +299,33 @@
         
         <a href="/vaultex/categories/Thoughts/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidmd1cNGRiSYtJfqLC21Lus"
+           data-tree-id="ct-cuid1cxcgEg8Wfo9zDdTh2PID"
            data-parent-tree-id=""
            data-depth="0"
            style="padding-left:32px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Thoughts</span>
-          <span class="nav-count">1</span>
         </a>
         
         
         
         
         <div class="nav-item nav-tree-parent"
-             data-tree-id="ct-cuidBv7QwH-7_c8y0rkc5nWnf"
+             data-tree-id="ct-cuidjt5bEmIGhEEe7mwLsgLdd"
              data-parent-tree-id=""
              data-depth="0"
              data-tree-open="true"
              style="padding-left:32px">
-          <svg class="nav-icon-svg tree-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          <button class="tree-toggle-btn" aria-label="Toggle Vaultex">
+            <svg class="nav-icon-svg tree-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
 
-          <svg class="nav-icon-svg folder-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+          </button>
+          <a href="/vaultex/categories/Vaultex/" class="nav-tree-label">
+            <svg class="nav-icon-svg folder-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
 
-          <span class="nav-label">Vaultex</span>
-          <span class="nav-count">6</span>
+            <span class="nav-label">Vaultex</span>
+          </a>
         </div>
         
         
@@ -298,14 +333,13 @@
         
         <a href="/vaultex/categories/Vaultex/Design/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidNgrDf5YPmpJRQJgPXqNGl"
-           data-parent-tree-id="ct-cuidBv7QwH-7_c8y0rkc5nWnf"
+           data-tree-id="ct-cuidp2GPaK_L0Rre5BNBy8LJF"
+           data-parent-tree-id="ct-cuidjt5bEmIGhEEe7mwLsgLdd"
            data-depth="1"
            style="padding-left:48px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Design</span>
-          <span class="nav-count">2</span>
         </a>
         
         
@@ -313,14 +347,13 @@
         
         <a href="/vaultex/categories/Vaultex/Development/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidLNSoIzWDjwaaGHwZFe2PF"
-           data-parent-tree-id="ct-cuidBv7QwH-7_c8y0rkc5nWnf"
+           data-tree-id="ct-cuidL9x5RaOuJ1PxEUc3UG8jA"
+           data-parent-tree-id="ct-cuidjt5bEmIGhEEe7mwLsgLdd"
            data-depth="1"
            style="padding-left:48px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Development</span>
-          <span class="nav-count">1</span>
         </a>
         
         
@@ -328,14 +361,13 @@
         
         <a href="/vaultex/categories/Vaultex/Meta/"
            class="nav-item nav-tree-leaf"
-           data-tree-id="ct-cuidJvTqRvXsleaBKXgtqfi3G"
-           data-parent-tree-id="ct-cuidBv7QwH-7_c8y0rkc5nWnf"
+           data-tree-id="ct-cuidgl2U_QoYNL7KOIQQKCXQ7"
+           data-parent-tree-id="ct-cuidjt5bEmIGhEEe7mwLsgLdd"
            data-depth="1"
            style="padding-left:48px">
           <svg class="nav-icon-svg nav-leaf-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
 
           <span class="nav-label">Meta</span>
-          <span class="nav-count">3</span>
         </a>
         
         
@@ -476,11 +508,11 @@
   <button class="vault-switcher" id="vault-switcher" aria-haspopup="true" aria-expanded="false">
     <svg class="vault-switcher-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
 
-    <span class="vault-switcher-name">vaultex</span>
+    <span class="vault-switcher-name">vaultex preview</span>
   </button>
   <div class="vault-dropdown" id="vault-dropdown" hidden>
     <div class="vault-dropdown-item vault-dropdown-manage vault-dropdown-current">
-      <span>vaultex</span>
+      <span>vaultex preview</span>
       <svg class="vault-dropdown-check" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
 
     </div>
@@ -641,23 +673,23 @@
 
     <div class="tags-list" id="tags-list">
       
-      <a href="/vaultex/tags/showcase/" class="tags-list-item">
-        <span class="tags-list-name">showcase</span>
-        <span class="tags-list-count">4</span>
-      </a>
-      
       <a href="/vaultex/tags/vaultex/" class="tags-list-item">
         <span class="tags-list-name">vaultex</span>
         <span class="tags-list-count">4</span>
       </a>
       
-      <a href="/vaultex/tags/hexo/" class="tags-list-item">
-        <span class="tags-list-name">hexo</span>
-        <span class="tags-list-count">3</span>
+      <a href="/vaultex/tags/showcase/" class="tags-list-item">
+        <span class="tags-list-name">showcase</span>
+        <span class="tags-list-count">4</span>
       </a>
       
       <a href="/vaultex/tags/development/" class="tags-list-item">
         <span class="tags-list-name">development</span>
+        <span class="tags-list-count">3</span>
+      </a>
+      
+      <a href="/vaultex/tags/hexo/" class="tags-list-item">
+        <span class="tags-list-name">hexo</span>
         <span class="tags-list-count">3</span>
       </a>
       
@@ -676,8 +708,8 @@
         <span class="tags-list-count">2</span>
       </a>
       
-      <a href="/vaultex/tags/reference/" class="tags-list-item">
-        <span class="tags-list-name">reference</span>
+      <a href="/vaultex/tags/pkm/" class="tags-list-item">
+        <span class="tags-list-name">pkm</span>
         <span class="tags-list-count">2</span>
       </a>
       
@@ -686,19 +718,9 @@
         <span class="tags-list-count">2</span>
       </a>
       
-      <a href="/vaultex/tags/pkm/" class="tags-list-item">
-        <span class="tags-list-name">pkm</span>
+      <a href="/vaultex/tags/reference/" class="tags-list-item">
+        <span class="tags-list-name">reference</span>
         <span class="tags-list-count">2</span>
-      </a>
-      
-      <a href="/vaultex/tags/static-site/" class="tags-list-item">
-        <span class="tags-list-name">static-site</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/nodejs/" class="tags-list-item">
-        <span class="tags-list-name">nodejs</span>
-        <span class="tags-list-count">1</span>
       </a>
       
       <a href="/vaultex/tags/javascript/" class="tags-list-item">
@@ -716,18 +738,43 @@
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/git/" class="tags-list-item">
-        <span class="tags-list-name">git</span>
+      <a href="/vaultex/tags/static-site/" class="tags-list-item">
+        <span class="tags-list-name">static-site</span>
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/internals/" class="tags-list-item">
-        <span class="tags-list-name">internals</span>
+      <a href="/vaultex/tags/nodejs/" class="tags-list-item">
+        <span class="tags-list-name">nodejs</span>
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/version-control/" class="tags-list-item">
-        <span class="tags-list-name">version-control</span>
+      <a href="/vaultex/tags/css/" class="tags-list-item">
+        <span class="tags-list-name">css</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/design-tokens/" class="tags-list-item">
+        <span class="tags-list-name">design-tokens</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/theming/" class="tags-list-item">
+        <span class="tags-list-name">theming</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/vercel/" class="tags-list-item">
+        <span class="tags-list-name">vercel</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/deployment/" class="tags-list-item">
+        <span class="tags-list-name">deployment</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/devops/" class="tags-list-item">
+        <span class="tags-list-name">devops</span>
         <span class="tags-list-count">1</span>
       </a>
       
@@ -751,26 +798,6 @@
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/css/" class="tags-list-item">
-        <span class="tags-list-name">css</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/design-tokens/" class="tags-list-item">
-        <span class="tags-list-name">design-tokens</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/theming/" class="tags-list-item">
-        <span class="tags-list-name">theming</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/markdown/" class="tags-list-item">
-        <span class="tags-list-name">markdown</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
       <a href="/vaultex/tags/web/" class="tags-list-item">
         <span class="tags-list-name">web</span>
         <span class="tags-list-count">1</span>
@@ -791,31 +818,6 @@
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/vercel/" class="tags-list-item">
-        <span class="tags-list-name">vercel</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/deployment/" class="tags-list-item">
-        <span class="tags-list-name">deployment</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/devops/" class="tags-list-item">
-        <span class="tags-list-name">devops</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/search/" class="tags-list-item">
-        <span class="tags-list-name">search</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/features/" class="tags-list-item">
-        <span class="tags-list-name">features</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
       <a href="/vaultex/tags/obsidian/" class="tags-list-item">
         <span class="tags-list-name">obsidian</span>
         <span class="tags-list-count">1</span>
@@ -831,6 +833,36 @@
         <span class="tags-list-count">1</span>
       </a>
       
+      <a href="/vaultex/tags/search/" class="tags-list-item">
+        <span class="tags-list-name">search</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/features/" class="tags-list-item">
+        <span class="tags-list-name">features</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/git/" class="tags-list-item">
+        <span class="tags-list-name">git</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/internals/" class="tags-list-item">
+        <span class="tags-list-name">internals</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/version-control/" class="tags-list-item">
+        <span class="tags-list-name">version-control</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/markdown/" class="tags-list-item">
+        <span class="tags-list-name">markdown</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
       <a href="/vaultex/tags/second-brain/" class="tags-list-item">
         <span class="tags-list-name">second-brain</span>
         <span class="tags-list-count">1</span>
@@ -843,6 +875,16 @@
       
       <a href="/vaultex/tags/writing/" class="tags-list-item">
         <span class="tags-list-name">writing</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/code/" class="tags-list-item">
+        <span class="tags-list-name">code</span>
+        <span class="tags-list-count">1</span>
+      </a>
+      
+      <a href="/vaultex/tags/syntax-highlighting/" class="tags-list-item">
+        <span class="tags-list-name">syntax-highlighting</span>
         <span class="tags-list-count">1</span>
       </a>
       
@@ -866,16 +908,6 @@
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/theme/" class="tags-list-item">
-        <span class="tags-list-name">theme</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
-      <a href="/vaultex/tags/dark-mode/" class="tags-list-item">
-        <span class="tags-list-name">dark-mode</span>
-        <span class="tags-list-count">1</span>
-      </a>
-      
       <a href="/vaultex/tags/config/" class="tags-list-item">
         <span class="tags-list-name">config</span>
         <span class="tags-list-count">1</span>
@@ -886,13 +918,13 @@
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/code/" class="tags-list-item">
-        <span class="tags-list-name">code</span>
+      <a href="/vaultex/tags/theme/" class="tags-list-item">
+        <span class="tags-list-name">theme</span>
         <span class="tags-list-count">1</span>
       </a>
       
-      <a href="/vaultex/tags/syntax-highlighting/" class="tags-list-item">
-        <span class="tags-list-name">syntax-highlighting</span>
+      <a href="/vaultex/tags/dark-mode/" class="tags-list-item">
+        <span class="tags-list-name">dark-mode</span>
         <span class="tags-list-count">1</span>
       </a>
       
@@ -963,7 +995,7 @@
       <div class="hm-row-sep"></div>
 
       <div class="hm-row">
-        <div class="hm-row-icon"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" d="M16 .011L2.093 8.074v15.995L16 31.996l13.907-8.068V7.939zm6.396 22.806l-1.251.693l-1.249-.693v-5.563h-7.792v5.563l-1.249.693l-1.251-.693V9.188l1.251-.699l1.249.699v5.561h7.792V9.188l1.249-.699l1.251.699z"/></svg>
+        <div class="hm-row-icon"><svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="none" d="M16 .011L2.093 8.074v15.995L16 31.996l13.907-8.068V7.939zm6.396 22.806l-1.251.693l-1.249-.693v-5.563h-7.792v5.563l-1.249.693l-1.251-.693V9.188l1.251-.699l1.249.699v5.561h7.792V9.188l1.249-.699l1.251.699z"/></svg>
 </div>
         <div class="hm-row-body">
           <div class="hm-row-title">Hexo framework</div>

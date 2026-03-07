@@ -24,7 +24,7 @@ function updateCatVisibility() {
       if (parentEl.dataset.treeOpen === 'false') { visible = false; break; }
       pid = parentEl.dataset.parentTreeId;
     }
-    item.style.display = visible ? '' : 'none';
+    item.style.display = visible ? 'flex' : 'none';
   });
 }
 
@@ -48,7 +48,9 @@ $$('.nav-tree-parent').forEach(function (parent) {
     var saved = localStorage.getItem('obs-' + parent.dataset.treeId);
     if (saved === '0') parent.dataset.treeOpen = 'false';
   } catch (_) {}
-  on(parent, 'click', function () {
+  var toggleBtn = parent.querySelector('.tree-toggle-btn');
+  on(toggleBtn, 'click', function (e) {
+    e.stopPropagation();
     var isOpen = parent.dataset.treeOpen === 'true';
     parent.dataset.treeOpen = isOpen ? 'false' : 'true';
     updateCatVisibility();
@@ -77,6 +79,11 @@ $$('.explorer-section-header').forEach(function (header) {
     syncCollapseBtn();
   });
 });
+
+/* Remove FOUC-prevention overrides injected by the inline script in <head> */
+var sectionsInitStyle = document.getElementById('vx-sections-init');
+if (sectionsInitStyle) sectionsInitStyle.remove();
+document.documentElement.removeAttribute('data-vx-init');
 
 syncCollapseBtn();
 
@@ -141,5 +148,3 @@ on($('#explorer-auto-reveal'), 'click', function () {
   /* 3. Sync collapse-all button state */
   syncCollapseBtn();
 });
-
-on($('#explorer-close'), 'click', closeLeft);
