@@ -2,6 +2,9 @@ nav_items:
   - label: Home
     path: /
     icon: house
+  - label: About
+    path: /about
+    icon: user
   - label: Archive
     path: /archives/
     icon: archive
