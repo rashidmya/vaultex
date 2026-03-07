@@ -122,6 +122,27 @@ function isActive(navPath, exact) {
         <% }) %>
       </div>
     </div>
+    <script>
+    /* Synchronously hide category items whose ancestors are collapsed.
+       Runs inline (no defer/module delay) to prevent the flash caused by
+       the module script restoring state after first paint. */
+    (function () {
+      try {
+        var cats = document.getElementById('nav-categories');
+        if (!cats) return;
+        cats.querySelectorAll('[data-depth]').forEach(function (item) {
+          var pid = item.dataset.parentTreeId;
+          while (pid) {
+            var saved = localStorage.getItem('obs-' + pid);
+            if (saved === '0') { item.style.display = 'none'; return; }
+            var parentEl = cats.querySelector('[data-tree-id="' + pid + '"]');
+            if (!parentEl) break;
+            pid = parentEl.dataset.parentTreeId;
+          }
+        });
+      } catch (_) {}
+    }());
+    </script>
     <% } %>
 
     <!-- Social links -->
