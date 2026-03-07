@@ -10,7 +10,7 @@ nav_items:
     icon: rss
 
 customize:
-  vault_name: a
+  vault_name: vaultex
   homepage_subtitle: Recent Notes   # Label shown in tab bar and breadcrumb on the homepage
   vault_title_position: 2           # 1 = top (header), 2 = bottom (footer, Obsidian-style)
 
