@@ -940,9 +940,6 @@ html[data-vx-init] .tree-chevron,
 html[data-vx-init] .explorer-section-header .chevron {
   transition: none !important;
 }
-#nav-categories [data-depth] {
-  display: none;
-}
 .nav-tree-parent {
   user-select: none;
 }
