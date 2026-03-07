@@ -22,17 +22,29 @@ var isPost = page.layout === 'post' || page.layout === 'page';
     <!-- Related posts (anchored at bottom of TOC tab) -->
     <% if (!theme.sidebar_right || theme.sidebar_right.show_related !== false) { %>
     <%
-      var relatedPosts = [];
+      var scores = {};
       if (page.tags && page.tags.length > 0) {
         page.tags.each(function(tag) {
+          var weight = 1 / tag.posts.length;
           tag.posts.each(function(post) {
-            if (post.path !== page.path) {
-              var exists = relatedPosts.some(function(p) { return p.path === post.path; });
-              if (!exists && relatedPosts.length < 5) relatedPosts.push(post);
-            }
+            if (post.path === page.path) return;
+            if (!scores[post.path]) scores[post.path] = { post: post, score: 0 };
+            scores[post.path].score += weight;
           });
         });
       }
+      if (page.categories && page.categories.length > 0) {
+        page.categories.each(function(cat) {
+          cat.posts.each(function(post) {
+            if (post.path === page.path) return;
+            if (scores[post.path]) scores[post.path].score += 0.5;
+          });
+        });
+      }
+      var relatedPosts = Object.values(scores)
+        .sort(function(a, b) { return b.score - a.score; })
+        .slice(0, 5)
+        .map(function(e) { return e.post; });
     %>
     <% if (relatedPosts.length > 0) { %>
     <div class="right-related">
