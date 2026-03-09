@@ -3,7 +3,7 @@
    Vault header, search bar, explorer sections, nav tree, category tree.
    ========================================================================== */
 
-/* --- Vault header --- */
+/* --- Vault footer --- */
 .vault {
   display: flex;
   align-items: center;
@@ -11,10 +11,6 @@
   padding: var(--sp-2) var(--sp-2);
   flex-shrink: 0;
   min-height: var(--tab-bar-height);
-}
-.vault-header {
-  border-bottom: 1px solid var(--divider);
-
 }
 .vault-footer {
   border-top: 1px solid var(--divider);
@@ -84,10 +80,6 @@
   z-index: 200;
 
 }
-.vault-header .vault-dropdown {
-  bottom: auto;
-  top: calc(100% + var(--sp-2));
-}
 .vault-dropdown[hidden] { display: none; }
 
 .vault-dropdown-item {
@@ -112,6 +104,44 @@
   height: 1px;
   background: var(--divider);
   margin: var(--sp-1) 0;
+}
+
+/* --- Sidebar site identity (logo + title + description) --- */
+.sidebar-site-header {
+  display: block;
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  border-bottom: 1px solid var(--divider);
+  flex-shrink: 0;
+}
+.sidebar-site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: 3px;
+  text-decoration: none;
+}
+.sidebar-site-logo {
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+.sidebar-site-logo-icon {
+  flex-shrink: 0;
+  color: var(--text-accent);
+}
+.sidebar-site-name {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+.sidebar-site-description {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* --- Explorer sections --- */

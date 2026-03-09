@@ -21,12 +21,21 @@ function isActive(navPath, exact) {
   <!-- ============ FOLDER TAB ============ -->
   <div class="sidebar-tab-content<% if (explorerStyle === 1) { %> explorer-style-1<% } %>" data-tab="folder">
 
-    <% if (theme.customize && theme.customize.vault_title_position !== 2) { %>
-    <!-- Vault Header (vault_title_position: 1 or unset) -->
-    <div class="vault vault-header">
-      <%- partial('_partial/vault') %>
+    <!-- Site identity: logo, title, description -->
+    <div class="sidebar-site-header">
+      <a href="<%- url_for('/') %>" class="sidebar-site-title" aria-label="Go to homepage">
+        <% var logo = theme.customize && theme.customize.logo; %>
+        <% if (logo && logo.enabled && logo.url) { %>
+        <img src="<%- url_for(logo.url) %>" class="sidebar-site-logo" width="<%= logo.width || 20 %>" height="<%= logo.height || 20 %>" alt="" aria-hidden="true">
+        <% } else { %>
+        <%- partial('_partial/icon', {name: 'house', size: 18, cls: 'sidebar-site-logo-icon'}) %>
+        <% } %>
+        <span class="sidebar-site-name"><%- config.title || 'Vaultex' %></span>
+      </a>
+      <% if (config.description) { %>
+      <p class="sidebar-site-description"><%= config.description %></p>
+      <% } %>
     </div>
-    <% } %>
 
     <!-- Explorer action bar -->
     <div class="explorer-actions">
@@ -259,11 +268,9 @@ function isActive(navPath, exact) {
     </div>
   </div><!-- /.sidebar-tab-content[search] -->
 
-  <% if (theme.customize && theme.customize.vault_title_position === 2) { %>
-  <!-- Vault Footer (vault_title_position: 2) — persists across folder/search tabs -->
+  <!-- Vault Footer — persists across folder/search tabs -->
   <div class="vault vault-footer">
     <%- partial('_partial/vault') %>
   </div>
-  <% } %>
 
 </div>
