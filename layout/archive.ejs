@@ -17,7 +17,9 @@ yearOrder.sort(function(a, b) { return b - a; });
 
 // True totals per year, scoped to category if on a category page
 var totalByYear = {};
-var _catForCount = page.category && site.categories.findOne({ name: page.category });
+var _catForCount = page.category && site.categories.toArray().find(function(c) {
+  return c.name === page.category && c.path && page.path.startsWith(c.path);
+});
 var _allPosts = _catForCount ? _catForCount.posts : site.posts;
 _allPosts.each(function(post) {
   var y = post.date.year();
