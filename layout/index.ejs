@@ -6,20 +6,4 @@
   <% }) %>
 </div>
 
-<div class="vault-footer-bar">
-  <div class="vault-footer-sep">
-    <span class="vault-footer-sep-line"></span>
-    <%- partial('_partial/icon', {name: 'archive', size: 13, cls: 'vault-footer-sep-icon'}) %>
-    <span class="vault-footer-sep-line"></span>
-  </div>
-  <div class="vault-footer-row">
-    <span class="vault-footer-count">
-      <%- partial('_partial/icon', {name: 'file-text', size: 12}) %>
-      <%= site.posts.length %> notes in vault
-    </span>
-    <a href="<%- url_for('/archives/') %>" class="vault-footer-link">
-      Open archive
-      <%- partial('_partial/icon', {name: 'arrow-right', size: 13}) %>
-    </a>
-  </div>
-</div>
+<%- partial('_partial/pagination') %>

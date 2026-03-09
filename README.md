@@ -139,6 +139,13 @@ sidebar_right:
 
 ### Post List
 
+To control how many posts appear per page, set `per_page` in your **root** `_config.yml` (not the theme config):
+
+```yaml
+index_generator:
+  per_page: 10
+```
+
 ```yaml
 post_list:
   posts_per_row: 1        # 1 = single-column list, 2 = two-column card grid

@@ -27,8 +27,6 @@ function isActive(navPath, exact) {
         <% var logo = theme.customize && theme.customize.logo; %>
         <% if (logo && logo.enabled && logo.url) { %>
         <img src="<%- url_for(logo.url) %>" class="sidebar-site-logo" width="<%= logo.width || 20 %>" height="<%= logo.height || 20 %>" alt="" aria-hidden="true">
-        <% } else { %>
-        <%- partial('_partial/icon', {name: 'house', size: 18, cls: 'sidebar-site-logo-icon'}) %>
         <% } %>
         <span class="sidebar-site-name"><%- config.title || 'Vaultex' %></span>
       </a>
