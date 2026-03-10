@@ -29,6 +29,26 @@ pre code {
   padding: 0;
 }
 
+/* --- Hexo wrap:false — emits <pre><code class="highlight lang">...</code></pre> --- */
+pre:has(> code.highlight) {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0;
+  margin: 1.2em 0;
+  overflow: hidden;
+}
+pre > code.highlight {
+  display: block;
+  padding: var(--sp-4) var(--sp-5);
+  font-size: var(--font-size-code);
+  line-height: var(--line-height-code);
+  overflow-x: auto;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  color: inherit;
+}
+
 /* --- Hexo .highlight wrapper --- */
 .highlight {
   border: 1px solid var(--border-color);
@@ -59,7 +79,7 @@ pre code {
   background: none;
   border: none;
   border-radius: 0;
-  padding: 0;
+  padding: var(--sp-4) var(--sp-5);
   font-size: var(--font-size-code);
   line-height: var(--line-height-code);
   margin: 0;
@@ -68,7 +88,7 @@ pre code {
 .highlight .code pre code {
   display: block;
   min-width: 100%;
-  padding: var(--sp-4) var(--sp-5);
+  padding: 0;
   box-sizing: border-box;
 }
 /* Code block filename/language badge */
