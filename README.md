@@ -72,7 +72,20 @@ feed:
 # hexo-generator-sitemap
 sitemap:
   path: sitemap.xml
+
+# Syntax highlighting — hljs: true is required for token colors to work with this theme
+syntax_highlighter: highlight.js
+highlight:
+  hljs: true
+  line_number: false
+  wrap: true
+
+# Index posts per page
+index_generator:
+  per_page: 10
 ```
+
+> **Note:** The theme's highlight CSS uses `hljs-` prefixed classes (e.g. `.hljs-keyword`). Setting `hljs: true` tells Hexo to emit those classes. Without it, code blocks will render but individual token colors won't apply.
 
 ---
 
@@ -138,13 +151,6 @@ sidebar_right:
 ```
 
 ### Post List
-
-To control how many posts appear per page, set `per_page` in your **root** `_config.yml` (not the theme config):
-
-```yaml
-index_generator:
-  per_page: 10
-```
 
 ```yaml
 post_list:
