@@ -170,13 +170,40 @@
 .explorer-action-btn.is-expanded .icon-expand-svg { display: block; }
 
 /* --- Explorer style 1: classic (uppercase, bold, dividers) --- */
-.explorer-style-1 .explorer-section { margin-bottom: var(--sp-2); }
-.explorer-style-1 .explorer-section + .explorer-section { border-top: 1px solid var(--divider); }
+.explorer-style-1 .explorer-actions { display: none; }
 .explorer-style-1 .explorer-section-header {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   color: var(--text-faint);
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-1);
+  cursor: default;
+  pointer-events: none;
 }
+.explorer-style-1 .explorer-section-header .chevron { display: none; }
+.explorer-style-1 .nav-tree { padding-top: 0; }
+/* Hide vertical guide lines */
+.explorer-style-1 .nav-item::after { display: none !important; }
+/* Solid accent fill on active item */
+.explorer-style-1 .nav-item.active { color: var(--text-on-accent); }
+.explorer-style-1 .nav-item.active::before { background: var(--accent-interactive); }
+.explorer-style-1 .nav-item.active .nav-count {
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.15);
+}
+.explorer-style-1 .nav-item.active .nav-icon-svg { opacity: 1; }
+/* Tighter indentation — no guide lines or section chevrons to align to */
+.explorer-style-1 .nav-tree .nav-item:not([data-depth]) { padding-left: var(--sp-4); }
+.explorer-style-1 .nav-item[data-depth="0"] { padding-left: 16px !important; }
+.explorer-style-1 .nav-item[data-depth="1"] { padding-left: 36px !important; }
+.explorer-style-1 .nav-item[data-depth="2"] { padding-left: 56px !important; }
+.explorer-style-1 .nav-item[data-depth="3"] { padding-left: 76px !important; }
+/* Hide folder toggle chevrons — categories are always expanded in style 1 */
+.explorer-style-1 .tree-toggle-btn { display: none; }
+/* Remove leaf-icon alignment offset used to match toggle-btn width in style 2 */
+.explorer-style-1 .nav-leaf-icon { margin-left: 0; }
 .explorer-section-header.collapsed .chevron { transform: rotate(-90deg); }
 
 /* --- Nav tree --- */
@@ -214,10 +241,10 @@
 .nav-item.active::before { background: var(--bg-selected); }
 
 .nav-icon-svg { flex-shrink: 0; color: inherit; opacity: 0.7; }
+
 .nav-item.active .nav-icon-svg { opacity: 1; }
 
 .nav-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-.nav-file-label { font-size: 12.5px; }
 
 .nav-count {
   font-size: 11px;
@@ -231,14 +258,34 @@
 }
 .nav-item.active .nav-count { color: var(--text-accent); background: var(--bg-selected); }
 
-.nav-folder .folder-icon { color: var(--accent-color); opacity: 0.7; }
 .nav-item.active .folder-icon { opacity: 1; }
 
 /* --- Category tree --- */
-.nav-tree-parent { cursor: pointer; user-select: none; }
+.nav-tree-parent { user-select: none; }
+.tree-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-tree-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
 .tree-chevron { flex-shrink: 0; transition: transform var(--t-fast); }
 .nav-tree-parent[data-tree-open="false"] .tree-chevron { transform: rotate(-90deg); }
-.nav-leaf-icon { color: var(--accent-color); opacity: 0.75; margin-left: 20px; }
+.nav-leaf-icon { opacity: 0.75; margin-left: 20px; }
 .nav-tree-leaf:hover .nav-leaf-icon { opacity: 1; }
 .nav-tree-leaf.active .nav-leaf-icon { opacity: 1; }
 
@@ -270,7 +317,7 @@
    Indent to 48px (depth-1 equivalent) so items align with category children.
    Two guide lines: x=22 (section header chevron) and x=38 (depth-0 chevron). */
 .nav-tree .nav-item:not([data-depth]) {
-  padding-left: 48px;
+  padding-left: 52px;
 }
 .nav-tree .nav-item:not([data-depth])::after {
   content: '';
@@ -283,36 +330,4 @@
   box-shadow: -16px 0 0 var(--tree-guide);
 }
 
-/* ==========================================================================
-   Sidebar view buttons (in top tab-bar)
-   ========================================================================== */
-
-.sidebar-view-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  margin: 2px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background var(--t-fast), color var(--t-fast);
-}
-.sidebar-view-btn:hover { background: var(--bg-hover); }
-.sidebar-view-btn.active { background: var(--bg-hover); color: var(--text-normal); }
-
-/* ==========================================================================
-   Sidebar tab content panels
-   ========================================================================== */
-
-.sidebar-tab-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-}
-.sidebar-tab-hidden { display: none !important; }
 

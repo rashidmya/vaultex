@@ -48,7 +48,6 @@ on(toggleLeftBtn, 'click', function () {
   if (!sidebarLeft) return;
   if (sidebarLeft.classList.contains('collapsed')) { openLeft(); } else { closeLeft(); }
 });
-on($('#sidebar-left-close'), 'click', closeLeft);
 
 /* Restore sidebar state (desktop only) */
 if (!isMobile()) {
@@ -107,14 +106,8 @@ sidebarViewBtns.forEach(function (btn) {
 
     if (isCollapsed) {
       openLeft();
-      activateSidebarTab(tabName);
-    } else if (currentTab === tabName) {
-      /* Re-clicking the active tab closes the sidebar */
-      closeLeft();
-      return;
-    } else {
-      activateSidebarTab(tabName);
     }
+    activateSidebarTab(tabName);
 
     if (tabName === 'search') {
       var si = $('#search-input');

@@ -87,20 +87,24 @@ function isActive(navPath) {
         <%
           var cat = item.cat;
           var depth = item.depth;
-          var indent = 32 + depth * 16;
+          var indent = explorerStyle === 1 ? 16 + depth * 20 : 32 + depth * 16;
           var tid = 'ct-' + cat._id;
           var pid = cat.parent ? 'ct-' + cat.parent : '';
         %>
         <% if (item.hasChildren) { %>
-        <div class="nav-item nav-tree-parent"
+        <div class="nav-item nav-tree-parent<% if (isActive('/' + cat.path)) { %> active<% } %>"
              data-tree-id="<%= tid %>"
              data-parent-tree-id="<%= pid %>"
              data-depth="<%= depth %>"
              data-tree-open="true"
              style="padding-left:<%= indent %>px">
-          <%- partial('_partial/icon', {name: 'chevron', size: 15, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
-          <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %><% } %>
-          <span class="nav-label"><%= cat.name %></span>
+          <button class="tree-toggle-btn" aria-label="Toggle <%= cat.name %>">
+            <%- partial('_partial/icon', {name: 'chevron', size: 15, cls: 'nav-icon-svg tree-chevron', sw: 2.5}) %>
+          </button>
+          <a href="<%- url_for(cat.path) %>" class="nav-tree-label">
+            <% if (categoryIcons) { %><%- partial('_partial/icon', {name: 'folder', size: 14, cls: 'nav-icon-svg folder-icon'}) %><% } %>
+            <span class="nav-label"><%= cat.name %></span>
+          </a>
           <span class="nav-count"><%= cat.posts.length %></span>
         </div>
         <% } else { %>
